@@ -1,0 +1,9 @@
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+?><?$APPLICATION->IncludeComponent(
+	"linemedia.auto:search.get.price",
+	"",
+	Array(
+	),
+false
+);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
