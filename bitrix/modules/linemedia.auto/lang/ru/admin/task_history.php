@@ -1,0 +1,22 @@
+<?php
+$MESS['LM_AUTO_MODELS_NAV'] = 'Страницы';
+$MESS['LM_AUTO_IMPORT_HISTORY_ID'] = 'ID';
+$MESS['LM_AUTO_IMPORT_HISTORY_SUPPLIER_ID'] = 'Поставщик';
+$MESS['LM_AUTO_IMPORT_HISTORY_TASK_ID'] = 'Задача';
+$MESS['LM_AUTO_IMPORT_HISTORY_PARTS_COUNT'] = 'Кол-во деталей';
+$MESS['LM_AUTO_IMPORT_HISTORY_SUM_PRICE'] = 'Сумма цен';
+$MESS['LM_AUTO_IMPORT_HISTORY_PARTS_DIFF'] = 'Изменение кол-ва';
+$MESS['LM_AUTO_IMPORT_HISTORY_SUM_DIFF'] = 'Изменение цен';
+$MESS['LM_AUTO_IMPORT_HISTORY_DATE'] = 'Дата';
+$MESS['LM_AUTO_IMPORT_HISTORY_PAGE_TITLE'] = 'История импорта';
+$MESS['LM_AUTO_IMPORT_HISTORY_CORRECT_IMPORT_HEADER'] = 'Корректность импорта';
+$MESS['LM_AUTO_IMPORT_HISTORY_CORRECT_IMPORT'] = 'Корректный';
+$MESS['LM_AUTO_IMPORT_HISTORY_INCORRECT_IMPORT'] = 'Некорректный';
+$MESS['LM_AUTO_STATUS_IMPORT_CHANGE_CORRECT'] = 'Сделать корректным';
+$MESS['LM_AUTO_STATUS_IMPORT_CHANGE_INCORRECT'] = 'Сделать некорректным';
+$MESS[''] = '';
+$MESS[''] = '';
+$MESS[''] = '';
+$MESS[''] = '';
+$MESS[''] = '';
+$MESS[''] = '';

@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `b_lm_tecdoc_api_modifications`;

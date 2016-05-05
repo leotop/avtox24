@@ -1,0 +1,6 @@
+#linemedia\.autogarage                     {background-image:url(icons/linemedia.autogarage/menu_manager.png);}
+#linemedia\.autogarage_menu_icon_manager   {background-image:url(icons/linemedia.autogarage/menu_manager.png);}
+#linemedia\.autogarage_page_icon_manager   {background-image:url(icons/linemedia.autogarage/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autogarage_menu_icon_manager {background-image:url(icons/linemedia.autogarage/menu_manager.png)!important;background-position: 50% 50% !important;}

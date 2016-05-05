@@ -1,0 +1,164 @@
+/* Have ideas for improving this CSS for the general community? Submit your changes at: https://github.com/Valums-File-Uploader/file-uploader */
+/*
+.qq-uploader {
+    position: relative;
+    width: 100%;
+}
+.qq-upload-button {
+    display: block;
+
+    width: 105px;
+    padding: 7px 0;
+    text-align: center;
+    background: #880000;
+    border-bottom: 1px solid #DDD;
+    color: #FFF;
+}
+
+.qq-upload-button-hover {
+    background: #CC0000;
+}
+.qq-upload-button-focus {
+    outline: 1px dotted #000000;
+}
+*/
+.qq-upload-drop-area, .qq-upload-extra-drop-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 30px;
+    z-index: 2;
+    background: #FF9797;
+    text-align: center;
+}
+.qq-upload-drop-area span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -8px;
+    font-size: 16px;
+}
+.qq-upload-extra-drop-area {
+    position: relative;
+    margin-top: 50px;
+    font-size: 16px;
+    padding-top: 30px;
+    height: 20px;
+    min-height: 40px;
+}
+.qq-upload-drop-area-active {
+    background: #FF7171;
+}
+.qq-upload-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.qq-upload-list li {
+    margin: 0;
+    padding: 9px;
+    line-height: 15px;
+    font-size: 16px;
+    background-color: #FFF0BD;
+}
+.qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-failed-text {
+    margin-right: 12px;
+}
+.qq-upload-file {
+}
+.qq-upload-spinner {
+    display: inline-block;
+    background: url("loading.gif");
+    width: 15px;
+    height: 15px;
+    vertical-align: text-bottom;
+}
+.qq-upload-size, .qq-upload-cancel {
+    font-size: 12px;
+    font-weight: normal;
+}
+.qq-upload-failed-text {
+    display: none;
+}
+.qq-upload-fail .qq-upload-failed-text {
+    display: inline;
+}
+.qq-upload-list li.qq-upload-success {
+    background-color: #5DA30C;
+    color: #FFFFFF;
+}
+.qq-upload-list li.qq-upload-fail {
+    background-color: #D60000;
+    color: #FFFFFF;
+}
+
+.percentage-filling-content-block {
+    position: relative;
+    height: 24px;
+    padding: 2px 4px 2px 2px;
+    border-top: solid 1px #BED3DF;
+    border-left: solid 1px #BED3DF;
+    border-right: solid 1px #BED3DF;
+    border-bottom: solid 1px #BED3DF;
+    background-color: #fff;
+    -webkit-box-shadow: inset 0 2px 2px rgba(236,236,236,0.9), 0 1px 0px rgba(255,255,255,0.9);
+    -moz-box-shadow: inset 0 2px 2px rgba(236,236,236,0.9), 0 1px 0px rgba(255,255,255,0.9);
+    box-shadow: inset 0 2px 2px rgba(236,236,236,0.9), 0 1px 0px rgba(255,255,255,0.9);
+    -webkit-box-shadow: inset 0 2px 2px rgba(236,236,236,0.9), 0 1px 0px rgba(255,255,255,0.9) 0 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0 2px 2px rgba(236,236,236,0.9), 0 1px 0px rgba(255,255,255,0.9) 0 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0 2px 2px rgba(236,236,236,0.9), 0 1px 0px rgba(255,255,255,0.9) 0 3px rgba(0,0,0,0.3);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.percentage-filling-content-block .filling-line {
+    height: 22px;
+    width: 0;
+    border-top: solid 1px #BED3DF;
+    border-left: solid 1px #BED3DF;
+    border-right: solid 1px #BED3DF;
+    border-bottom: solid 1px #BED3DF;
+    -webkit-border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -webkit-border-bottom-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-topleft: 4px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #dcedf6;
+    background-image: -moz-linear-gradient(top,#E5F2F8,#CFE6F3);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#E5F2F8),to(#CFE6F3));
+    background-image: -webkit-linear-gradient(top,#E5F2F8,#CFE6F3);
+    background-image: -o-linear-gradient(top,#E5F2F8,#CFE6F3);
+    background-image: linear-gradient(to bottom,#E5F2F8,#CFE6F3);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe5f2f8', endColorstr='#ffcfe6f3', GradientType=0);
+    background-color: #CFE6F3;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.percentage-filling-content-block .text {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 6px;
+    color: #555;
+    font-size: 11px;
+    text-shadow: 1px 1px 3px #fff;
+    color: #555;
+}

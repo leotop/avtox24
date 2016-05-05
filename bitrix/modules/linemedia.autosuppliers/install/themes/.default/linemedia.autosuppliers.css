@@ -1,0 +1,147 @@
+#linemedia\.autosuppliers_menu_icon              {background-image: url(icons/linemedia.autosuppliers/menu.png);}
+
+#linemedia\.autosuppliers_menu_icon_in           {background-image: url(icons/linemedia.autosuppliers/menu_in.png);}
+#linemedia\.autosuppliers_page_icon_in           {background-image: url(icons/linemedia.autosuppliers/page_in.png);}
+
+#linemedia\.autosuppliers_menu_icon_out          {background-image: url(icons/linemedia.autosuppliers/menu_out.png);}
+#linemedia\.autosuppliers_page_icon_out          {background-image: url(icons/linemedia.autosuppliers/page_out.png);}
+
+#linemedia\.autosuppliers_menu_icon_out_history  {background-image: url(icons/linemedia.autosuppliers/menu_out_history.png);}
+#linemedia\.autosuppliers_page_icon_out_history  {background-image: url(icons/linemedia.autosuppliers/page_out_history.png);}
+
+
+#linemedia\.autosuppliers_menu_icon_stock           {background-image: url(icons/linemedia.autosuppliers/menu_stock.png);}
+#linemedia\.autosuppliers_page_icon_stock           {background-image: url(icons/linemedia.autosuppliers/page_stock.png);}
+
+#linemedia\.autosuppliers_menu_icon_step           {background-image: url(icons/linemedia.autosuppliers/menu_step.png);}
+#linemedia\.autosuppliers_menu_icon_step           {background-image: url(icons/linemedia.autosuppliers/page_step.png);}
+
+
+
+
+
+/* 12 bitrix */
+.linemedia\.autosuppliers_menu_icon   {background-image:url(icons/linemedia.autosuppliers/menu.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_in {background-image:url(icons/linemedia.autosuppliers/menu_in.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_out {background-image:url(icons/linemedia.autosuppliers/menu_out.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_out_history {background-image:url(icons/linemedia.autosuppliers/menu_out_history.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_stock {background-image:url(icons/linemedia.autosuppliers/menu_stock.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_step {background-image:url(icons/linemedia.autosuppliers/menu_step.png)!important;background-position: 50% 50% !important;}
+
+
+
+
+
+/********************************/
+
+#lm-auto-suppliers-orders {float:right; width: 44%; padding-top: 10px; border-left: 1px solid silver;}
+
+#lm-auto-suppliers-request {float:left; width: 55%}
+
+#lm-auto-suppliers-frm label {display:block}
+
+
+.lm-auto-suppliers-in-table {border-collapse:collapse}
+.lm-auto-suppliers-in-table td, .lm-auto-suppliers-in-table th{border:1px solid silver; padding:3px}
+
+.lm-auto-supplier-request { border: 1px solid #D5D5D5; border-collapse: collapse; width: 99%; font-size: 11px;}
+.lm-auto-supplier-request th {
+    border-bottom: 1px solid #D5D5D5;
+    text-align: left;
+    padding: 3px;
+    background-color: #F1F3FA;
+    background-image: -moz-linear-gradient(top, #F1F3FA, #EAEDF6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F1F3FA), to(#EAEDF6));
+    background-image: -webkit-linear-gradient(top, #F1F3FA, #EAEDF6);
+    background-image: -o-linear-gradient(top, #F1F3FA, #EAEDF6);
+    background-image: linear-gradient(to bottom, #F1F3FA, #EAEDF6);
+    background-repeat: repeat-x;
+    border-color: #BDC6E0;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffF1F3FA', endColorstr='#ffEAEDF6', GradientType=0);
+        
+}
+
+.lm-auto-supplier-request .brand {
+    width: 35%;
+}
+
+.lm-auto-supplier-request .article {
+    width: 45%;
+}
+
+.lm-auto-supplier-request td { border: none; border-bottom: 1px solid #D5D5D5; padding: 2px 3px;}
+.lm-auto-supplier-request tr:hover { background: #F7F7F7;}
+.lm-auto-supplier-request .cbox { width: 20px;}
+
+
+.lm-auto-suppliers-orders { border-collapse: collapse; font-size: 11px; width: 100%; margin-bottom: 15px; margin-left: 10px;  }
+.lm-auto-suppliers-order { border-collapse: collapse; font-size: 11px; width: 100%;  }
+.lm-auto-suppliers-order td {padding: 2px 3px;font-size: 11px; }
+.lm-auto-suppliers-order tr{border: none; border-bottom: 1px solid #D5D5D5; }
+.lm-auto-suppliers-orders .user th{ text-align: left;padding-top: 10px;}
+
+.lm-suto-supplier-request-info { font-weight: bold; font-size: 11px; background: #FEFDEA; border: 1px solid #D7D6BA; padding: 10px; margin: 10px 0 10px 3px;}
+.lm-auto-suppliers-orders-desc { margin-left: 10px; font-size: 12px; font-weight: bold;}
+
+.lm-auto-suppliers-order-header { color: #BDBDBD;}
+.lm-auto-suppliers-order-link td{ padding-top: 10px;}
+
+.lm-auto-suppliers-frm label { display: block;}
+
+.lm-auto-suppliers-step-table {
+    margin-top: 10px;
+    padding: 5px;
+    width: 100%;
+}
+
+.lm-auto-suppliers-step-table td {
+    margin-top: 3px;
+}
+
+#lm-auto-suppliers-step-clone {
+    display: none;
+}
+
+.lm-auto-suppliers-nextstep-block { margin: 10px 0 0 0; }
+
+.lm-auto-suppluers-request-for-supplier {
+    font-size: 16px;
+    margin: 15px 0 3px 0;
+}
+
+.lm-auto-suppliers-make-request-submit {
+    margin: 8px 0 0 0;
+    float: left;
+}
+
+.lm-auto-suppliers-content-block {
+    margin: 10px 0 0 0;
+    clear: both;
+    overflow: hidden;
+}
+
+.lm-auto-suppliers-content-block table {
+    font-size: 11px !important;
+    margin: 0 5px 0 10px !important;
+}
+
+#lm-auto-suppliers-status {
+    min-width: 245px;
+    max-width: 390px;
+}
+
+#lm-auto-suppliers-mails {
+    margin: 10px 0 0 0;
+}
+
+.lm-auto-supplier-not-mail {
+    color: #dd0000;
+}
+
+.lm-auto-supplier-has-mail {
+    color: #009900;
+}
+
+.lm-auto-suppliers-request-note {
+    padding: 15px 0 0 0;
+}

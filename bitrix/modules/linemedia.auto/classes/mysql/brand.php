@@ -1,0 +1,180 @@
+<?php
+
+/**
+ * Linemedia Autoportal
+ * Main module
+ * Parts class
+ *
+ * @author  Linemedia
+ * @since   22/01/2012
+ *
+ * @link    http://auto.linemedia.ru/
+ */
+ 
+IncludeModuleLangFile(__FILE__);
+ 
+/*
+ * 
+ */
+class LinemediaAutoBrand extends LinemediaAutoBrandAll
+{
+    
+    public function __construct($brand_id = false, $brand_title = '')
+    {
+        parent::__construct($brand_id, $brand_title);
+    }
+    
+    
+    /**
+     * Добавление бренда.
+     */
+    public function add($fields)
+    {
+        /*
+         * Подключение модуля
+         */
+        CModule::IncludeModule('linemedia.auto');
+        
+        /*
+         * Подключение к БД
+         */
+        $database = new LinemediaAutoDatabase();
+        
+        /*
+         * Получение словоформ.
+         */
+        $wordforms = LinemediaAutoWordForms::getInstance();
+        
+        /*
+         * Обработка параметров.
+         */
+        $title = (string) $fields['title'];
+        if ($this->useWordForms()) {
+            $title = $wordforms->get($title);
+        }
+        
+        
+        /*
+         * Проверим наличие в БД и если такого бренда нет - добавим.
+         */
+        $sql_title = $database->ForSql(LinemediaAutoBrand::clear(strtolower($title)));
+        $res = $database->Query('SELECT id FROM b_lm_brands WHERE LOWER(title) = \'' . $sql_title . '\'');
+        if ($brand = $res->Fetch()) {
+            $key = (int) $brand['id'];
+        } else {
+            $sql_brand_title = $database->ForSql(LinemediaAutoBrand::clear($brand_title));
+            $database->Query('INSERT INTO b_lm_brands (title) VALUES (\'' . $sql_title . '\')');
+            $key = $database->LastID();
+            
+            /*
+             * Вывод отладочной информации.
+             */
+            LinemediaAutoDebug::add("Brand $title added with ID " . $key);
+        }
+        
+        $this->brand_id = (int) $key;
+        
+        $this->loaded = false;
+        $this->load();
+    }
+    
+    
+    /**
+     * Загрузка данных из базы на основании ID, названия бренда или ID TecDoc
+     */
+    protected function load()
+    {
+        if ($this->loaded) {
+            return;
+        }
+        $this->loaded = true;
+        
+        try {
+            $database = new LinemediaAutoDatabase();
+        } catch (Exception $e) {
+            throw $e;
+        }
+        
+        
+        /*
+         * Получение словоформ.
+         */
+        if ($this->brand_title) {
+            $wordforms = LinemediaAutoWordForms::getInstance();
+            
+            /*
+             * Обработка параметров.
+             */
+            if ($this->useWordForms()) {
+                $this->brand_title = $wordforms->get($this->brand_title);
+            }
+        }
+        
+        /*
+         * Cоставим фильтр для поиска бренда
+         */
+        $where = array();
+        if ($this->brand_id > 0) {
+            $where['id'] = $this->brand_id;
+        } elseif ($this->brand_title) {
+            $where['title'] = $this->brand_title;
+        }
+        $where = array_merge($where, $this->extra);
+        
+        
+        /*
+         * Ошибка выбора
+         */
+        if (count($where) == 0) {
+            LinemediaAutoDebug::add('Error loading brand! No "where" conditions', false, LM_AUTO_DEBUG_CRITICAL);
+            return;
+        }
+        
+        /*
+         * Обезопасим данные
+         */
+        $where_cond = array();
+        foreach ($where as $column => $val) {
+            $where_cond[] = "`" . $database->ForSQL($column) . "` = '" . $database->ForSQL($val) . "'";
+        }
+        
+        
+        /*
+         * Непосредственно запрос в БД
+         */
+        try {
+            $res = $database->Query('SELECT * FROM b_lm_brands WHERE ' . join(' AND ', $where_cond));
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+        /*
+         * Производитель найден?
+         */
+        if ($brand = $res->Fetch()) {
+            /*
+             * Вывод отладочной информации
+             */
+            LinemediaAutoDebug::add('Brand object loaded', print_r($brand, 1));
+            
+            
+            /*
+             * создаём событие
+             */
+            $events = GetModuleEvents("linemedia.auto", "OnAfterBrandLoaded");
+		    while ($arEvent = $events->Fetch()) {
+			    ExecuteModuleEventEx($arEvent, array(
+			        &$brand
+			    ));
+		    }
+		    $this->data = $brand;
+            
+        } else {
+            /*
+             * Вывод отладочной информации
+             */
+            LinemediaAutoDebug::add('Error loading brand object, 404', print_r($where, 1));
+        }
+        
+    }
+}

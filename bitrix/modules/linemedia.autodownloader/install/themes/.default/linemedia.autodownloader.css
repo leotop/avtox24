@@ -1,0 +1,9 @@
+.linemedia\.autodownloader_menu_icon_main  {background-image: url(icons/linemedia.autodownloader/menu_main.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autodownloader_menu_icon_add   {background-image: url(icons/linemedia.autodownloader/menu_add.png)!important; background-position: 50% 50% !important;}
+.linemedia\.autodownloader_menu_icon_list  {background-image: url(icons/linemedia.autodownloader/menu_list.png)!important;background-position: 50% 50% !important;}
+
+
+#connection-status-marker {width:24px; height: 24px; float: right}
+
+.connection-status-marker-ok    {background-image: url(/bitrix/themes/.default/icons/linemedia.auto/misc/ok.png)!important;}
+.connection-status-marker-error {background-image: url(/bitrix/themes/.default/icons/linemedia.auto/misc/error.png)!important;}

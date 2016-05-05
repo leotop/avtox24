@@ -1,0 +1,36 @@
+table.br_table tr td {
+	padding: 2px 10px 2px 0;
+	vertical-align: top;
+}
+
+table.garage-edit tr th {
+	text-align: right;
+}
+
+.garage-hide-tr {
+	display: none;
+}
+
+input.garage-vin {
+	width: 100%;
+	font-size: 22px !important;
+}
+
+/********************/
+.garage-edit {}
+
+.garage-edit .left_col { width: 70px}
+
+.garage-edit .button { padding: 4px 15px; margin: 7px 0; cursor: pointer}
+
+.garage-item { border: none; padding: 10px; }
+.garage-item-title { font-size: 14px; margin-top: 2px; }
+.garage-item-title label { display: inline; cursor: pointer; }
+.garage-item-title input { vertical-align: top; margin: 2px 0; }
+.garage-item-title .tecdoc { font-size: 11px; }
+.garage-item .details { color: #A6A6A6; font-size: 11px; padding-right: 10px; }
+.garage-item .edit { margin: 5px; float: right; }
+
+.garage-item .gototecdoc { font-weight:bold; }
+
+.garage-edit td { vertical-align: top}

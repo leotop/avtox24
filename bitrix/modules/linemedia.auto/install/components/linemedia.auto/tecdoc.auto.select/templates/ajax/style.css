@@ -1,0 +1,11 @@
+.lm-auto-auto-select-ajax {
+    background-image: url('./images/ajax.gif');
+    background-repeat: no-repeat;
+    min-width: 50px;
+    min-height: 10px;
+}
+
+.lm-auto-select-wrap {
+    margin: 5px 0 0 0;
+    min-width: 100px;
+}

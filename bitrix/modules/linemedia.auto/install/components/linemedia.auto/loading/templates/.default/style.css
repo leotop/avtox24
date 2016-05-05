@@ -1,0 +1,21 @@
+.lm-page-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    opacity: 0.8;
+    display: none;
+    z-index: 99999;
+    background: url("images/loading-bg.png")
+}
+
+.lm-loading-img { margin: auto }
+
+.lm-loading-place { position: fixed; z-index: 100000; width: 150px; height: 150px; text-align: center }
+
+.lm-loading-header { font-weight: bold; font-family: Tahoma, Arial, sans-serif; font-size: 16px }
+
+
+

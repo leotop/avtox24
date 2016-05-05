@@ -1,0 +1,46 @@
+<?php
+
+
+$LM_AUTO_MAIN_GLOBAL_MENU_HIDE_STORE = serialize((array) $_POST['LM_AUTO_MAIN_GLOBAL_MENU_HIDE_STORE']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_GLOBAL_MENU_HIDE_STORE', $LM_AUTO_MAIN_GLOBAL_MENU_HIDE_STORE);
+
+$LM_AUTO_MAIN_MENU_HIDE = serialize((array) $_POST['LM_AUTO_MAIN_MENU_HIDE']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_MENU_HIDE', $LM_AUTO_MAIN_MENU_HIDE);
+
+//Скрывать пункт Настройки основного меню
+$LM_AUTO_MAIN_GLOBAL_MENU_HIDE_MAIN = serialize((array) $_POST['LM_AUTO_MAIN_GLOBAL_MENU_HIDE_MAIN']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_GLOBAL_MENU_HIDE_MAIN', $LM_AUTO_MAIN_GLOBAL_MENU_HIDE_MAIN);
+
+$LM_AUTO_MAIN_GLOBAL_MENU_HIDE_SERVICES = serialize((array) $_POST['LM_AUTO_MAIN_GLOBAL_MENU_HIDE_SERVICES']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_GLOBAL_MENU_HIDE_SERVICES', $LM_AUTO_MAIN_GLOBAL_MENU_HIDE_SERVICES);
+
+$LM_AUTO_MAIN_GLOBAL_MENU_HIDE_ANALYTICS = serialize((array) $_POST['LM_AUTO_MAIN_GLOBAL_MENU_HIDE_ANALYTICS']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_GLOBAL_MENU_HIDE_ANALYTICS', $LM_AUTO_MAIN_GLOBAL_MENU_HIDE_ANALYTICS);
+
+//Скрыть меню Управление инфоблоками (импорт, экспорт, настройки) в основном меню
+$LM_AUTO_MAIN_GLOBAL_MENU_HIDE_IBLOCK_OPERATION = serialize((array) $_POST['LM_AUTO_MAIN_GLOBAL_MENU_HIDE_IBLOCK_OPERATION']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_GLOBAL_MENU_HIDE_IBLOCK_OPERATION', $LM_AUTO_MAIN_GLOBAL_MENU_HIDE_IBLOCK_OPERATION);
+
+//Показать пункт меню Служебное -> Проверка цен в основном меню
+$LM_AUTO_MAIN_MENU_SHOW_PAGE_PRICE_CHECK = serialize((array) $_POST['LM_AUTO_MAIN_MENU_SHOW_PAGE_PRICE_CHECK']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_MENU_SHOW_PAGE_PRICE_CHECK', $LM_AUTO_MAIN_MENU_SHOW_PAGE_PRICE_CHECK); 
+
+//Показать пункт меню Заявки поставщикам
+$LM_AUTO_MAIN_MENU_SHOW_SUPPLIERS = serialize((array) $_POST['LM_AUTO_MAIN_MENU_SHOW_SUPPLIERS']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_MENU_SHOW_SUPPLIERS', $LM_AUTO_MAIN_MENU_SHOW_SUPPLIERS); 
+
+//Показать пункт меню Менеджеры
+$LM_AUTO_MAIN_MENU_SHOW_PAGE_MANAGERS = serialize((array) $_POST['LM_AUTO_MAIN_MENU_SHOW_PAGE_MANAGERS']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_MENU_SHOW_PAGE_MANAGERS', $LM_AUTO_MAIN_MENU_SHOW_PAGE_MANAGERS);
+
+//Показать пункт меню Покупатели
+$LM_AUTO_MAIN_MENU_SHOW_PAGE_BUERS = serialize((array) $_POST['LM_AUTO_MAIN_MENU_SHOW_PAGE_BUERS']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_MENU_SHOW_PAGE_BUERS', $LM_AUTO_MAIN_MENU_SHOW_PAGE_BUERS);
+
+//Скрыть блок "Как зарабатывать больше"
+$LM_AUTO_MAIN_MENU_HIDE_EARN_MORE = serialize((array) $_POST['LM_AUTO_MAIN_MENU_HIDE_EARN_MORE']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_MENU_HIDE_EARN_MORE', $LM_AUTO_MAIN_MENU_HIDE_EARN_MORE);
+
+//Скрыть гаджет заказов
+$LM_AUTO_MAIN_GADGET_ORDERS_HIDE = serialize((array) $_POST['LM_AUTO_MAIN_GADGET_ORDERS_HIDE']);
+COption::SetOptionString($sModuleId, 'LM_AUTO_MAIN_GADGET_ORDERS_HIDE', $LM_AUTO_MAIN_GADGET_ORDERS_HIDE);

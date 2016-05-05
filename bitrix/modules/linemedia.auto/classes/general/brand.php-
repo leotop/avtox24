@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * Linemedia Autoportal
+ * Main module
+ * Brand class
+ *
+ * @author  Linemedia
+ * @since   22/01/2012
+ *
+ * @link    http://auto.linemedia.ru/
+ */
+ 
+IncludeModuleLangFile(__FILE__);
+ 
+/*
+ * класс отвечает за работу с производителями запчастей
+ */
+abstract class LinemediaAutoBrandAll
+{    
+    /*
+     * Название бренда
+     */
+    protected $brand_title;
+    
+    /*
+     * Дополнительные данные, переданные в конструктор
+     * Они должны помочь определить нужный бренд по другим критериям
+     */
+    protected $extra = array();
+    
+    /*
+     * флаг загрузки информации из БД
+     */
+    protected $loaded = false;
+    
+    /*
+     * Aлаг использования словоформ.
+     */
+    protected $use_wordforms = true;
+    
+    /*
+     * Данные из БД
+     */
+    protected $data;
+    
+    
+    /*
+     * В конструкторе определим критерии, по которым искать бренд
+     * ID, название или что-то ещё
+     */
+    public function __construct($brand_title = '', $extra = array())
+    {
+        $this->brand_title  = self::clear($brand_title);
+        $this->extra        = (array) $extra;
+        
+        /*
+         * Вывод отладочной информации
+         */
+        // LinemediaAutoDebug::add('Brand object created', print_r(func_get_args(), 1));
+    }
+    
+    
+    /*
+     * Получить поле
+     */
+    public function get($field)
+    {
+        $this->load();
+        return $this->data[$field];
+        
+    }
+    
+    
+    /*
+     * Проверить существование бренда
+     */
+    public function exists()
+    {
+        $this->load();
+        return count($this->data) > 0;
+        
+    }
+    
+    
+    /**
+     * Установка флага использования словоформ.
+     * 
+     * @param bool $use
+     */
+    public function setUseWordForms($use)
+    {
+        $this->use_wordforms = (bool) $use;
+    }
+    
+    
+    /**
+     * Получение флага использования словоформ.
+     */
+    public function useWordForms()
+    {
+        return $this->use_wordforms;
+    }
+    
+    
+    /*
+     * Получить все поля
+     */
+    public function getArray()
+    {
+        $this->load();
+        return $this->data;
+        
+    }
+    
+    /*
+     * Очистить строку с название бренда
+     */
+    public static function clear($title)
+    {
+        $r = '';
+        $s1 = iconv('UTF-8', 'ASCII//TRANSLIT', mb_strtolower($title));
+        for ($i = 0; $i < strlen($s1); $i++) {
+            $ch1 = $s1[$i];
+            $ch2 = mb_substr(title, $i, 1);
+            $r .= $ch1=='?'?$ch2:$ch1;
+        }
+        
+        return trim($r);
+    }
+    
+    abstract public function add($fields);
+    
+    abstract protected function load();
+}

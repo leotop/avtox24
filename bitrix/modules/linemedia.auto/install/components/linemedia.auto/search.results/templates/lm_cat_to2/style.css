@@ -1,0 +1,318 @@
+.lm-auto-search-parts-place{position:relative;}
+
+.lm-auto-search-parts-place .lm-auto-search-catalogs td, .lm-auto-search-catalogs th { padding: 8px 5px !important;}
+
+.lm-auto-search-parts-place .lm-auto-search-catalogs-go a{ font-size: 1em; font-weight: bold;}
+
+.lm-auto-search-parts-place .lm-auto-search-catalogs tbody tr:hover > td{  background: #F5f5f5 !important; cursor: pointer;}
+
+.lm-auto-search-parts-place .lm-auto-search-parts .sku {white-space:nowrap}
+
+.lm-auto-search-parts-place .lm-auto-search-parts-title {}
+.lm-auto-search-parts-place .lm-auto-search-parts-article { /*width: 80px;*/}
+.lm-auto-search-parts-place .lm-auto-search-parts-brand { width: 50px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-info { width: 13px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-quantity { width: 25px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-weight {width: 40px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-supplier {/*width: 70px;*/}
+.lm-auto-search-parts-place .lm-auto-search-parts-modified { width: 20px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-price { width: 50px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-count { width: 15px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-basket { width: 68px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-return { width: 40px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-notepad { width: 20px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-delivery-time { width: 30px;}
+.lm-auto-search-parts-place .lm-auto-search-parts-custom-field {width: 40px;}
+
+.lm-auto-search-parts-place .lm-auto-search-parts .price { font-weight: bold; white-space: nowrap}
+.lm-auto-search-parts-place .lm-auto-search-parts .delivery_time { font-weight: bold; white-space: nowrap}
+
+.lm-auto-search-parts-place .lm-auto-search-parts input, 
+.lm-auto-search-parts-place .lm-auto-search-parts textarea, 
+.lm-auto-search-parts-place .lm-auto-search-parts select, 
+.lm-auto-search-parts-place .lm-auto-search-parts .uneditable-input {
+    margin: 0px;
+    padding: 2px;
+    width: 20px;
+}
+
+.lm-auto-search-parts-place .lm-auto-search-catalogs-brand { width: 200px;}
+.lm-auto-search-parts-place .lm-auto-search-catalogs-go { width: 200px;}
+
+.lm-auto-search-parts-place #lm-auto-search-ajax-loader-img{width:64px;height:64px; margin:auto; background-image:url(images/preload.gif)}
+
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block { margin: 10px 0; vertical-align: middle;display: inline-block;font-size: 0;margin-top: 5px;
+white-space: nowrap;margin-bottom: 0 !important;}
+
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block input[type='text'] {
+    height: 20px !important;
+    padding: 4px 6px !important;
+    font-size: 14px;
+    line-height: 20px;
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+}
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block input {
+margin: 0px; display: inline-block;position: relative;
+margin-bottom: 0;
+vertical-align: top;
+-webkit-border-radius: 4px 0 0 4px;
+-moz-border-radius: 4px 0 0 4px;
+border-radius: 4px 0 0 4px;}
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block .lm-auto-submit{
+	display: inline-block;
+	padding: 4px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid #cccccc;
+	  color: #ffffff;
+	  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	  background-color: #faa732;
+	  *background-color: #f89406;
+	  background-image: -moz-linear-gradient(top, #fbb450, #f89406);
+	  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
+	  background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
+	  background-image: -o-linear-gradient(top, #fbb450, #f89406);
+	  background-image: linear-gradient(to bottom, #fbb450, #f89406);
+	  background-repeat: repeat-x;
+	  border-color: #f89406 #f89406 #ad6704;
+	  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
+	  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	border-radius: 0 4px 4px 0;
+	-moz-border-radius: 0 4px 4px 0;
+	-webkit-border-radius: 0 4px 4px 0;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	margin-right:1px;
+}
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block .lm-auto-submit:hover{
+	 color: #ffffff;
+	  background-color: #f89406;
+	  *background-color: #df8505;
+}
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block input[type=radio] { margin: 0 0 7px; }
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block input[type=checkbox] { margin: 3px 0 0; }
+.lm-auto-search-parts-place .lm-auto-main-search-form .lm-auto-partial-search-block label.lm-auto-partial-search { color: #000000; display: inline; cursor: pointer;text-shadow:none; }
+
+.lm-auto-search-parts-place th.lm-auto-search-parts-debug {min-width: 300px}
+
+
+.lm-auto-search-parts-place .lm-auto-main-art-sought-404 { margin:5px; font-weight: bold}
+
+.lm-auto-search-parts-place .icon-info {
+    background: url('images/info.png');
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+
+.lm-auto-search-parts-place span.extra-brands {font-size:smaller; color: gray}
+
+.lm-auto-search-parts-place .add-to-notepad {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+
+.lm-auto-search-parts-place .notepad {
+    text-align: center;
+}
+
+.lm-auto-search-parts-place table.lm-auto-search-parts thead tr .header {
+	cursor: pointer;
+	text-align:left;
+	padding-right:20px;
+	box-shadow: none;
+}
+.lm-auto-search-parts-place table.lm-auto-search-parts thead tr .headerSortUp {
+	background-image: url(images/asc.gif);
+}
+.lm-auto-search-parts-place table.lm-auto-search-parts thead tr .headerSortDown {
+	background-image: url(images/desc.gif);
+}
+
+.lm-auto-search-parts-place .silver-table{
+	border-collapse: separate; border-spacing: 0; width: 100%; border-radius:5px; border-right:1px solid #DCDFE2; border-top:1px solid #DCDFE2; margin:20px 0;font-size:11px;
+}
+
+.lm-auto-search-parts-place .silver-table thead tr th, .silver-table tbody tr td, .silver-table tfoot tr td{
+	border-left:1px solid #DCDFE2; border-bottom:1px solid #DCDFE2;padding:2px;line-height: 15px;
+}
+.lm-auto-search-parts-place .silver-table tbody tr{
+	background-color:#F7F8F9;
+}
+.lm-auto-search-parts-place .silver-table thead tr th{
+	background-color: #ECEDEE !important;
+}
+.lm-auto-search-parts-place .silver-table thead tr th{
+	text-align:left;
+	color: #7B7B7B;
+}
+.lm-auto-search-parts-place .silver-table thead tr th:first-child {
+        -webkit-border-top-left-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        border-top-left-radius: 5px;
+    }
+.lm-auto-search-parts-place .silver-table thead tr th:last-child {
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-right-radius: 5px;
+    }
+.lm-auto-search-parts-place .silver-table tbody tr:last-child td:first-child {
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-bottom-left-radius: 5px;
+    }
+.lm-auto-search-parts-place .silver-table tbody tr:last-child td:last-child {
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+
+.lm-auto-search-parts-place .silver-table .hproduct:hover td { background: #efefef; }
+.lm-auto-search-parts-place .hproduct .fn { word-break: break-all;}
+.lm-auto-search-parts-place .hproduct .brand span{ }
+
+.lm-auto-search-parts-place .btn {
+  display: inline-block;
+  *display: inline;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  text-decoration:none;
+  *margin-left: .3em;
+  font-size: 12px;
+  line-height: 20px;
+  color: #333333;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  *background-color: #e6e6e6;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #cccccc;
+  *border: 0;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #b3b3b3;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.lm-auto-search-parts-place .btn:hover,
+.lm-auto-search-parts-place .btn:focus,
+.lm-auto-search-parts-place .btn:active,
+.lm-auto-search-parts-place .btn.active,
+.lm-auto-search-parts-place .btn.disabled,
+.lm-auto-search-parts-place .btn[disabled] {
+   background:#d82c34; color:#fff;
+}
+
+.lm-auto-search-parts-place .btn:active,
+.lm-auto-search-parts-place .btn.active {
+  background-color: #cccccc \9;
+}
+
+.lm-auto-search-parts-place .btn:first-child {
+  *margin-left: 0;
+}
+
+.lm-auto-search-parts-place .btn:hover,
+.lm-auto-search-parts-place .btn:focus {
+  color: #333333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+     -moz-transition: background-position 0.1s linear;
+       -o-transition: background-position 0.1s linear;
+          transition: background-position 0.1s linear;
+}
+
+.lm-auto-search-parts-place .btn:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.lm-auto-search-parts-place .btn.active,
+.lm-auto-search-parts-place .btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.lm-auto-search-parts-place .btn.disabled,
+.lm-auto-search-parts-place .btn[disabled] {
+  cursor: default;
+  background-image: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}
+
+.lm-auto-search-parts-place .btn-mini {
+  padding: 0 6px;
+  font-size: 10.5px;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+.lm-auto-search-parts-place .btn-mini:hover { background:#d82c34; color:#fff; }
+
+.lm-auto-search-parts-place .basket .btn { white-space: nowrap;}
+.lm-auto-search-parts-place .basket img { margin-bottom: -3px;}
+
+.lm-auto-search-parts-place .hproduct .add-to-notepad { overflow: hidden; width: 16px; height: 16px; cursor: pointer; background: url('images/fav_inactive.png');}
+.lm-auto-search-parts-place .hproduct:hover .add-to-notepad { background: url('images/fav_active_mid.png');}
+
+
+
+.node-info .inline-block {display: inline-block}
+
+.node-info {margin: 5px; padding: 0px 5px 9px 9px; border: 1px solid silver}
+.node-info img {max-width: 200px;}
+
+.lm-auto-search-parts-place .hproduct:hover .add-to-notepad:hover { background: url('images/fav_active.png');}
+
+
+
+
+div.search-limit input {
+	margin-top: 4px !important;margin-right:4px !important;
+}
+
+.search-limit label {color: #000000;text-shadow:none; margin-right:20px; display: inline-block}
+
+.lm_search_block{
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+div.content .lm-auto-search-parts-place h2 { margin-top:0; }

@@ -1,0 +1,65 @@
+<?php 
+
+/**
+ * Linemedia Autoportal
+ * Main module
+ * Main include file
+ *
+ * @author  Linemedia
+ * @since   22/01/2012
+ *
+ * @link    http://auto.linemedia.ru/
+ */
+
+
+include_once('install/version.php');
+include_once('constants.php');
+include_once('functions.php');
+
+global $DBType;
+
+CModule::AddAutoloadClasses(
+	"linemedia.auto",
+	array(
+	       'LinemediaAutoISearch'                     => "classes/general/interfaces/search.php",
+    
+	        'LinemediaAutoApiDriver'                  => "classes/general/api_driver.php",
+	        'LinemediaAutoSearch'                     => "classes/general/search.php",
+	        'LinemediaAutoSearchSimple'               => "classes/$DBType/search_simple.php",
+	        'LinemediaAutoSearchGroup'                => "classes/$DBType/search_group.php",
+	        'LinemediaAutoSearchPartial'              => "classes/$DBType/search_partial.php",
+	        
+	        'LinemediaAutoXML2Arr'                    => "classes/general/xml.php",
+	        'LinemediaAutoArr2XML'                    => "classes/general/xml.php",
+	        'LinemediaAutoDebug'                      => "classes/general/debug.php",
+	        'LinemediaAutoDatabaseAll'                => "classes/general/database.php",
+	        'LinemediaAutoDatabase'                   => "classes/$DBType/database.php",
+	        'LinemediaAutoImportAgent'                => "classes/general/import_agent.php",
+	        'LinemediaAutoBasket'                     => "classes/general/basket.php",
+	        'LinemediaAutoOrder'                      => "classes/general/order.php",
+            'LinemediaAutoPartAll'                    => "classes/general/part.php",	        
+	        'LinemediaAutoPart'                       => "classes/$DBType/part.php",
+	        'LinemediaAutoPrice'                      => "classes/general/price.php",
+	        'LinemediaAutoSupplier'                   => "classes/general/supplier.php",
+	        'LinemediaAutoBrandAll'                   => "classes/general/brand.php",
+	        'LinemediaAutoBrand'                      => "classes/$DBType/brand.php",
+	        'LinemediaAutoUrlHelper'                  => "classes/general/url_helper.php",
+	        'LinemediaAutoPartsHelper'                => "classes/general/parts_helper.php",
+	        'LinemediaAutoDirections'                 => "classes/general/directions.php",
+	        'LinemediaAutoUser'                       => "classes/general/user.php",
+	        'LinemediaAutoIblockPropertyUserGroup'    => "classes/general/iblock_prop_usergroup.php",
+	        'LinemediaAutoEvent'                      => "classes/general/event.php",
+            'LinemediaAutoCustomDiscount'             => "classes/general/custom_discount.php",
+            'LinemediaAutoBasketFilter'               => "classes/general/basket_filter.php",
+            'LinemediaAutoFileHelper'                 => "classes/general/file_helper.php",
+            'LinemediaAutoTest'                       => "classes/general/test.php",
+            'LinemediaAutoWordForms'                  => "classes/general/word_forms.php",
+            'LinemediaAutoBrandsJoin'                 => "classes/general/brands_join.php",
+            'LinemediaAutoTecDocRights'               => "classes/general/tecdoc_rights.php",
+            'LinemediaAutoLogger'                     => "classes/general/logger.php",
+            
+            'LinemediaAutoEventMain'                  => "events/main.php", // Класс событий меню.
+            'LinemediaAutoEventSale'                  => "events/sale.php", // Класс событий магазина.
+            'LinemediaAutoEventSelf'                  => "events/self.php", // Класс событий этого модуля.
+	)
+);

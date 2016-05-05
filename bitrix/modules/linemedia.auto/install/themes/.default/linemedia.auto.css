@@ -1,0 +1,490 @@
+linemedia\.auto                          {background-image:url(icons/linemedia.auto/menu_linemedia_auto.png);}
+
+#linemedia\.auto_menu_icon_order_create   {background-image:url(icons/linemedia.auto/menu_order_create.png);}
+#linemedia\.auto_menu_icon_order          {background-image:url(icons/linemedia.auto/menu_orders.gif);}
+
+#linemedia\.auto_menu_icon_groups_create   {background-image:url(icons/linemedia.auto/menu_groups.png);}
+#linemedia\.auto_menu_icon_groups          {background-image:url(icons/linemedia.auto/menu_groups.png);}
+
+#linemedia\.auto_page_icon_order          {background-image: url(icons/linemedia.auto/page_orders.gif);}
+#linemedia\.auto_page_icon_order_create   {background-image: url(icons/linemedia.auto/page_order_create.gif);}
+
+#linemedia\.auto_page_icon_vin            {background-image: url(icons/linemedia.auto/menu_vin.png);}
+
+#linemedia\.auto_menu_icon_custom_fields  {background-image: url(icons/linemedia.auto/menu_custom_fields.png);}
+#linemedia\.auto_page_icon_custom_fields  {background-image: url(icons/linemedia.auto/page_custom_fields.png);}
+
+#linemedia\.auto_menu_icon_help           {background-image: url(icons/linemedia.auto/menu_help.png);}
+#linemedia\.auto_page_icon_help           {background-image: url(icons/linemedia.auto/page_help.png);}
+
+#linemedia\.auto_menu_icon_search_statistics          {background-image: url(icons/linemedia.auto/menu_search_statistics.png)!important;}
+.linemedia\.auto_menu_icon_search_statistics         {background-image: url(icons/linemedia.auto/menu_search_statistics.png)!important;background-position: 50% 50% !important;}
+
+
+iframe.lm-auto-frame{width:100%; height:100%; border:0; min-height: 600px;}
+
+
+
+.lm-auto-search-parts,
+.lm-auto-search-catalogs { border-collapse: collapse; width: 100%;}
+
+.lm-auto-search-parts th,
+.lm-auto-search-parts td,
+.lm-auto-search-catalogs td,
+.lm-auto-search-catalogs th{ border: 1px solid silver;font: 0.85em Tahoma, Arial, Helvetica, sans-serif;}
+
+.lm-auto-search-parts td,
+.lm-auto-search-catalogs td { padding: 3px 5px;}
+
+.lm-auto-search-catalogs tr:hover { cursor: pointer; background: #DEDEDE;}
+.lm-auto-search-catalogs-go a{ font-size: 1em; font-weight: bold;}
+
+.lm-auto-search-parts th,
+.lm-auto-search-catalogs th {white-space:nowrap; font-weight: bold; background: #F2F2F2; padding: 6px 3px;}
+
+.lm-auto-search-parts .sku {white-space:nowrap}
+
+.lm-auto-search-parts-title {}
+.lm-auto-search-parts-article { width: 80px;}
+.lm-auto-search-parts-brand { width: 100px;}
+.lm-auto-search-parts-quantity { width: 40px;}
+.lm-auto-search-parts-weight {width: 40px;}
+.lm-auto-search-parts-supplier {width: 70px;}
+.lm-auto-search-parts-modified { width: 70px;}
+.lm-auto-search-parts-price { width: 60px;}
+.lm-auto-search-parts-basket { width: 30px;}
+
+.lm-auto-search-catalogs-brand { width: 200px;}
+.lm-auto-search-catalogs-go { width: 200px;}
+
+
+
+
+/* 12 bitrix */
+.adm-LinemediaAuto .adm-main-menu-item-icon {background-image:url(icons/linemedia.auto/menu_linemedia_auto_12.png); background-position: 10px 0px !important;}
+
+#linemedia\.auto_menu_icon_order_create   {background-image:url(icons/linemedia.auto/menu_order_create.png)!important}
+.linemedia\.auto_menu_icon_order_create   {background-image:url(icons/linemedia.auto/menu_order_create.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_order          {background-image:url(icons/linemedia.auto/menu_orders.gif)!important;}
+.linemedia\.auto_menu_icon_order          {background-image:url(icons/linemedia.auto/menu_orders.gif)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_groups          {background-image:url(icons/linemedia.auto/menu_groups.png)!important;}
+.linemedia\.auto_menu_icon_groups          {background-image:url(icons/linemedia.auto/menu_groups.png)!important;background-position: 50% 50% !important;}
+
+
+#linemedia\.auto_menu_icon_service          {background-image: url(icons/linemedia.auto/menu_service.png)!important;}
+.linemedia\.auto_menu_icon_service          {background-image: url(icons/linemedia.auto/menu_service.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_help          {background-image: url(icons/linemedia.auto/menu_help.png)!important;}
+.linemedia\.auto_menu_icon_help          {background-image: url(icons/linemedia.auto/menu_help.png)!important;background-position: 50% 50% !important;}
+
+
+#linemedia\.auto_menu_icon_vin          {background-image: url(icons/linemedia.auto/menu_vin.png)!important;}
+.linemedia\.auto_menu_icon_vin          {background-image: url(icons/linemedia.auto/menu_vin.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_wordforms          {background-image: url(icons/linemedia.auto/menu_wordforms.png)!important;}
+.linemedia\.auto_menu_icon_wordforms          {background-image: url(icons/linemedia.auto/menu_wordforms.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_custom_fields  {background-image: url(icons/linemedia.auto/menu_custom_fields.png)!important;}
+.linemedia\.auto_menu_icon_custom_fields  {background-image: url(icons/linemedia.auto/menu_custom_fields.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_check          {background-image: url(icons/linemedia.auto/menu_check.png)!important;}
+.linemedia\.auto_menu_icon_check          {background-image: url(icons/linemedia.auto/menu_check.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_csv_check          {background-image: url(icons/linemedia.auto/menu_csv_check.png)!important;}
+.linemedia\.auto_menu_icon_csv_check          {background-image: url(icons/linemedia.auto/menu_csv_check.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_products          {background-image: url(icons/linemedia.auto/menu_products.png)!important;}
+.linemedia\.auto_menu_icon_products          {background-image: url(icons/linemedia.auto/menu_products.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_linemedia_account          {background-image: url(icons/linemedia.auto/menu_linemedia_account.png)!important;}
+.linemedia\.auto_menu_icon_linemedia_account          {background-image: url(icons/linemedia.auto/menu_linemedia_account.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_price_check          {background-image: url(icons/linemedia.auto/menu_price_check.png)!important;}
+.linemedia\.auto_menu_icon_price_check          {background-image: url(icons/linemedia.auto/menu_price_check.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.auto_menu_icon_agents_check          {background-image: url(icons/linemedia.auto/menu_agents_check.png)!important;}
+.linemedia\.auto_menu_icon_agents_check          {background-image: url(icons/linemedia.auto/menu_agents_check.png)!important;background-position: 50% 50% !important;}
+
+
+
+.lm-auto-check { border-collapse: collapse;
+background-color: white;
+border-radius: 0 0 4px 4px;
+border: 10px solid #fff;
+font-size: 13px;
+margin: 4px;
+}
+.lm-auto-check .module th{color: black;
+padding: 20px!important;
+font-size: 18px;
+text-align: left;
+min-height: 26px;
+background: #f5f9fa!important; 
+
+}
+.titles th {
+    background-color: #E3EBEE;
+    background-image: -webkit-linear-gradient(top, #E0EAEC, #E5ECEF);
+    background-image: -moz-linear-gradient(top, #E0EAEC, #E5ECEF);
+    background-image: -ms-linear-gradient(top, #E0EAEC, #E5ECEF);
+    background-image: -o-linear-gradient(top, #E0EAEC, #E5ECEF);
+    background-image: linear-gradient(top, #E0EAEC, #E5ECEF);
+    border: none;
+    border-bottom: 1px solid #E5E5E5!important;
+    -webkit-box-shadow: inset 0 -1px 0 darkGray, inset 0 1px 0 white, inset 0 -2px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 -1px 0 darkGray, inset 0 1px 0 white, inset 0 -2px 0 rgba(255, 255, 255, 0.3);
+    color: #586D7C;
+    font-weight: bold;
+    font-size: 13px;
+    height: 43px;
+    text-shadow: 0 1px white;
+    vertical-align: middle;
+}
+
+.lm-auto-check td { border: 1px solid silver; padding: 10px; color: #3F4B54!important}
+
+.lm-auto-check .check-fail td { background: #FFE1E2;}
+.lm-auto-check .check-ok td { background: #E6FFE1;}
+.lm-auto-check .check-recomendation td { background: #f9f68e;}
+.lm-auto-check .check-recomendation td i {font-size: 11px}
+
+
+
+.lm-auto-check-products {float:left}
+.lm-auto-check-logs {float:left}
+
+.lm-auto-account {
+    border: none;
+    border-spacing: 0;
+    font-size: 13px;
+    margin: 0;
+    width: 100%;
+}
+
+.lm-auto-account th { width: 40%;}
+.lm-auto-account td,
+.lm-auto-account th
+{
+    background: #f5f9f9;
+    border-bottom: 1px solid #d0d7d8!important;
+    color: #3f4b54!important;
+    font-size: 13px;
+    height: 15px!important;
+    text-shadow: 0 1px #fff;
+    text-align: left;
+    vertical-align: top;
+    padding: 12px 10px 12px 10px!important;
+    
+}
+
+.lm-auto-account .y { color: #009900; font-weight: bold;}
+.lm-auto-account .n { color: red; font-weight: bold;}
+
+
+.lm-auto-account .original-catalogs span.brand {width: 120px}
+.lm-auto-account .original-catalogs div {margin-top: 5px}
+.lm-auto-account .original-catalogs td span,
+.lm-auto-account .tecdoc span { display: inline-block; padding-right: 20px; vertical-align: middle;}
+.lm-auto-account .payment { margin-left: 20px;}
+
+.lm-auto-account .lm-crosses span { display: inline-block; padding-right: 20px;}
+
+
+
+.lm-auto-account .enabled-functions td span.brand {width: 270px}
+
+
+/* price debug */
+table.lm-auto-price-debug { border-collapse: collapse; margin: 15px 0;}
+div#check-results { margin: 15px 0;}
+div#check-results div{ padding: 2px 7px;background-color: #f5f9f9; border: 1px solid #bec6c8; margin-bottom: -1px;}
+table.lm-auto-price-debug div.price-debug {display:none}
+table.lm-auto-price-debug a.debug-open {font-size:20px; font-weight: bold}
+table.lm-auto-price-debug td {background-color: #f5f9f9; border: 1px solid #bec6c8; padding: 2px 7px;}
+
+#price_check_frm {
+    background: url("/bitrix/panel/main/images/filter-bg.gif") repeat;
+border-radius: 5px;
+border-bottom: 1px solid #a0abb0;
+overflow: hidden;
+padding: 15px;
+}
+
+ 
+
+#price_check_frm .article,
+#price_check_frm .user,
+#price_check_frm .sbm{ display: inline-block; padding-right: 12px; margin-right: 10px;}
+#price_check_frm .article,
+#price_check_frm .user {border-right: 1px solid #87919c; }
+#price_check_frm #div_user { font-weight: bold;}
+
+.bx-core-window .control-group { overflow: hidden; margin: 14px 0; }
+.bx-core-window .control-group .control-label { float: left; width: 180px; }
+.bx-core-window .control-group .controls { margin-left: 190px; }
+.bx-core-window .form-actions { padding: 10px 0 0 190px; border-top: 1px solid #DCE7ED; }
+
+
+.paysystems-images {padding: 10px; background-color: #f5f9f9; margin-bottom: 5px; text-align: center}
+.paysystems-images img {margin: 3px;}
+
+
+.linemedia\.auto_menu_icon_main  {background-image: url(icons/linemedia.auto/menu_main.png)!important;background-position: 50% 50% !important;}
+.linemedia\.auto_menu_icon_add   {background-image: url(icons/linemedia.auto/menu_add.png)!important; background-position: 50% 50% !important;}
+.linemedia\.auto_menu_icon_list  {background-image: url(icons/linemedia.auto/menu_list.png)!important;background-position: 50% 50% !important;}
+
+
+#connection-status-marker {width:24px; height: 24px; float: right}
+
+.connection-status-marker-ok    {background-image: url(/bitrix/themes/.default/icons/linemedia.auto/misc/ok.png)!important;}
+.connection-status-marker-error {background-image: url(/bitrix/themes/.default/icons/linemedia.auto/misc/error.png)!important;}
+
+.conversion-replacement {
+    margin-bottom: 2px;
+}
+
+.order-itog table tr:hover td {
+    background-color: #dfe8bb;
+}
+
+.order-itog-list {
+    margin: 10px 0 0 0;
+    border: 1px solid #a9b194;
+}
+
+/* Styles not active modules */
+.auto_text_modules_not_active   {color: gray}
+.auto_text_modules_not_active   {color: gray}
+
+/* api */
+
+#linemedia\.api_menu_icon_info_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.api/menu_info.png)!important}
+.linemedia\.api_menu_icon_info_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.api/menu_info.png)!important;background-position: 50% 50% !important;}
+
+#linemedia\.autoanalogssimple_menu_icon_main_not_active          {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/menu_main.png);}
+#linemedia\.autoanalogssimple_page_icon_main_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/page_main.png);}
+
+/* autoanalogssimple */
+
+#linemedia\.autoanalogssimple_menu_icon_import_not_active          {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/menu_import.png);}
+#linemedia\.autoanalogssimple_page_icon_import_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/page_import.png);}
+
+
+#linemedia\.autoanalogssimple_menu_icon_list_not_active          {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/menu_list.gif);}
+#linemedia\.autoanalogssimple_page_icon_list_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/page_list.png);}
+
+/* 12 bitrix */
+.linemedia\.autoanalogssimple_menu_icon_main_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/menu_main.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autoanalogssimple_menu_icon_import_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/menu_import.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autoanalogssimple_menu_icon_list_not_active   {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autoanalogssimple/menu_list.gif)!important;background-position: 50% 50% !important;}
+
+/* autobranches */
+
+#linemedia\.autobranches_not_active                     {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autobranches/menu_manager.png);}
+#linemedia\.autobranches_menu_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autobranches/menu_manager.png);}
+#linemedia\.autobranches_page_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autobranches/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autobranches_menu_icon_manager_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autobranches/menu_manager.png)!important;background-position: 50% 50% !important;}
+
+/* autodownloader */
+
+.linemedia\.autodownloader_menu_icon_main_not_active  {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autodownloader/menu_main.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autodownloader_menu_icon_add_not_active   {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autodownloader/menu_add.png)!important; background-position: 50% 50% !important;}
+.linemedia\.autodownloader_menu_icon_list_not_active  {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autodownloader/menu_list.png)!important;background-position: 50% 50% !important;}
+
+/* autogarage */
+
+#linemedia\.autogarage_not_active                     {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autogarage/menu_manager.png);}
+#linemedia\.autogarage_menu_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autogarage/menu_manager.png);}
+#linemedia\.autogarage_page_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autogarage/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autogarage_menu_icon_manager_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autogarage/menu_manager.png)!important;background-position: 50% 50% !important;}
+
+/* autoglass */
+
+#linemedia\.autoglass_not_active                     {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoglass/menu_manager.png);}
+#linemedia\.autoglass_menu_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoglass/menu_manager.png);}
+#linemedia\.autoglass_page_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoglass/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autoglass_menu_icon_manager_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoglass/menu_manager.png)!important;background-position: 50% 50% !important;}
+
+/* automodifier */
+
+#linemedia\.automodifier_menu_icon_main_not_active          {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/menu_main.png);}
+#linemedia\.automodifier_page_icon_main_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/page_main.png);}
+
+#linemedia\.automodifier_menu_icon_import_not_active          {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/menu_import.png);}
+#linemedia\.automodifier_page_icon_import_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/page_import.png);}
+
+#linemedia\.automodifier_menu_icon_list_not_active          {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/menu_list.gif);}
+#linemedia\.automodifier_page_icon_list_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/page_list.png);}
+
+/* 12 bitrix */
+.linemedia\.automodifier_menu_icon_main_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/menu_main.png)!important;background-position: 50% 50% !important;}
+.linemedia\.automodifier_menu_icon_import_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/menu_import.png)!important;background-position: 50% 50% !important;}
+.linemedia\.automodifier_menu_icon_list_not_active   {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.automodifier/menu_list.gif)!important;background-position: 50% 50% !important;}
+
+/* autooil */
+
+#linemedia\.autooil_not_active                     {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autooil/menu_manager.png);}
+#linemedia\.autooil_menu_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autooil/menu_manager.png);}
+#linemedia\.autooil_page_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autooil/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autooil_menu_icon_manager_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autooil/menu_manager.png)!important;background-position: 50% 50% !important;}
+
+/* autooriginalcatalogs */
+
+#linemedia\.autooriginalcatalogs_menu_icon_linemedia_account_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autooriginalcatalogs/menu_linemedia_account.png)!important;}
+.linemedia\.autooriginalcatalogs_menu_icon_linemedia_account_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autooriginalcatalogs/menu_linemedia_account.png)!important;background-position: 50% 50% ;}
+
+/* 12 bitrix */
+.adm-Linemediaautooriginalcatalogs .adm-main-menu-item-icon_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autooriginalcatalogs/menu_linemedia_autooriginalcatalogs_12.png)!important; background-position: 10px 0px!important;}
+
+/* autoprice */
+
+#linemedia\.autoprice_not_active                     {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoprice/menu_manager.png);}
+#linemedia\.autoprice_menu_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoprice/menu_manager.png);}
+#linemedia\.autoprice_page_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoprice/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autoprice_menu_icon_manager_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoprice/menu_manager.png)!important;background-position: 50% 50% !important;}
+
+
+
+.linemedia\.auto_settings_statuses_menu_icon_check {background-image:url(icons/linemedia.auto/menu_settings_statuses.png)!important;background-position: 50% 50% !important;}
+
+
+
+/* autoremotesuppliers */
+
+#linemedia\.autoremotesuppliers_menu_icon_info_not_active              {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autoremotesuppliers/menu_info.png);}
+
+/* 12 bitrix */
+#linemedia\.autoremotesuppliers_menu_icon_info_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoremotesuppliers/menu_info.png)!important;}
+.linemedia\.autoremotesuppliers_menu_icon_info_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoremotesuppliers/menu_info.png)!important;background-position: 50% 50% !important;}
+
+/* autosphinx */
+
+#linemedia\.autosphinx_menu_icon_info_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosphinx/menu_info.png)!important}
+.linemedia\.autosphinx_menu_icon_info_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosphinx/menu_info.png)!important;background-position: 50% 50% !important;}
+
+/* autosuppliers */
+
+#linemedia\.autosuppliers_menu_icon_not_active              {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu.png);}
+
+#linemedia\.autosuppliers_menu_icon_in_not_active           {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_in.png);}
+#linemedia\.autosuppliers_page_icon_in_not_active           {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/page_in.png);}
+
+#linemedia\.autosuppliers_menu_icon_out_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_out.png);}
+#linemedia\.autosuppliers_page_icon_out_not_active          {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/page_out.png);}
+
+#linemedia\.autosuppliers_menu_icon_out_history_not_active  {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_out_history.png);}
+#linemedia\.autosuppliers_page_icon_out_history_not_active  {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/page_out_history.png);}
+
+#linemedia\.autosuppliers_menu_icon_stock_not_active           {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_stock.png);}
+#linemedia\.autosuppliers_page_icon_stock_not_active           {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/page_stock.png);}
+
+#linemedia\.autosuppliers_menu_icon_step_not_active           {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_step.png);}
+/*#linemedia\.autosuppliers_menu_icon_step           {background-image: url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/page_step.png);}
+
+/* 12 bitrix */
+.linemedia\.autosuppliers_menu_icon_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_in_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_in.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_out_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_out.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_out_history_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_out_history.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_stock_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_stock.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autosuppliers_menu_icon_step_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autosuppliers/menu_step.png)!important;background-position: 50% 50% !important;}
+
+/* autoto */
+
+#linemedia\.autoto_not_active                     {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoto/menu_manager.png);}
+#linemedia\.autoto_menu_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoto/menu_manager.png);}
+#linemedia\.autoto_page_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoto/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autoto_menu_icon_manager_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autoto/menu_manager.png)!important;background-position: 50% 50% !important;}
+
+/* autotyres */
+
+#linemedia\.autotyres_not_active                     {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autotyres/menu_manager.png);}
+#linemedia\.autotyres_menu_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autotyres/menu_manager.png);}
+#linemedia\.autotyres_page_icon_manager_not_active   {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autotyres/page_manager.png);}
+
+/* bitrix 12 */
+.linemedia\.autotyres_menu_icon_manager_not_active {background-image:url(icons/linemedia.auto/notActiveModules/linemedia.autotyres/menu_manager.png)!important;background-position: 50% 50% !important;}
+
+
+.adm-submenu-item-name-link span.price {
+	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	box-shadow:inset 0px 1px 0px 0px #a4e271;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809) );
+	background:-moz-linear-gradient( center top, #89c403 5%, #77a809 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809');
+	background-color:#89c403;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #74b807;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:11px;
+	font-weight:bold;
+	padding:2px 4px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #528009;
+}.adm-submenu-item-name-link span.price:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403) );
+	background:-moz-linear-gradient( center top, #77a809 5%, #89c403 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403');
+	background-color:#77a809;
+}.adm-submenu-item-name-link span.price:active {
+	position:relative;
+	top:1px;
+}
+
+
+.adm-sub-submenu-block .auto_see_also { font-weight: bold; font-size: 18px; }
+
+
+
+
+/* agents check page */
+.agent-convert, .agent-import {margin: 10px}
+.agent-convert {float: left}
+.agent-import {float: right}
+.agent-log {display: none; background-color: rgba(248,255,219,0.95); white-space: pre-wrap; border: 1px solid black; padding: 5px; margin: 5px}
+
+.link-history-show {
+    border-bottom: 1px dashed;
+    display: inline-block;
+    margin: 0 0 5px 0;
+    text-decoration: none;
+}
+
+.link-history-show:hover {
+    text-decoration: none;
+}
+
+.payment-history {
+    font-size: 11px;
+    font-family: Courier New;
+}
+
+.linemedia-service td:first-child {
+    padding-left: 50px !important;
+}
+
+
+.linemedia-service input.counts {
+    margin-left: 30px;
+    margin-top: 5px;
+}
+

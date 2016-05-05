@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `b_lm_products`;
+DROP TABLE IF EXISTS `b_lm_wordforms`;
+DROP TABLE IF EXISTS `b_lm_api_modifications`;
+DROP TABLE IF EXISTS `b_lm_notepad`;
+DROP TABLE IF EXISTS `b_lm_search_statistics`;
+DROP TABLE IF EXISTS `b_lm_transactions`;
+DROP TABLE IF EXISTS `b_lm_rights`;
+DROP TABLE IF EXISTS `b_lm_import_history`;
+DROP TABLE IF EXISTS `b_lm_sale_basket_props`;

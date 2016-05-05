@@ -1,0 +1,11 @@
+#linemedia\.autoremotesuppliers_menu_icon_info              {background-image: url(icons/linemedia.autoremotesuppliers/menu_info.png);}
+
+
+/* 12 bitrix */
+#linemedia\.autoremotesuppliers_menu_icon_info   {background-image:url(icons/linemedia.autoremotesuppliers/menu_info.png)!important;}
+.linemedia\.autoremotesuppliers_menu_icon_info   {background-image:url(icons/linemedia.autoremotesuppliers/menu_info.png)!important;background-position: 50% 50% !important;}
+
+.suppliers-check-list {border-collapse: collapse; width:100%}
+.suppliers-check-list td, .suppliers-check-list th {border: 1px solid silver;padding: 4px}
+.suppliers-check-list .ok {color: green}
+.suppliers-check-list .error {color: red}

@@ -1,0 +1,17 @@
+#linemedia\.autoanalogssimple_menu_icon_main          {background-image:url(icons/linemedia.autoanalogssimple/menu_main.png);}
+#linemedia\.autoanalogssimple_page_icon_main          {background-image: url(icons/linemedia.autoanalogssimple/page_main.png);}
+
+
+#linemedia\.autoanalogssimple_menu_icon_import          {background-image:url(icons/linemedia.autoanalogssimple/menu_import.png);}
+#linemedia\.autoanalogssimple_page_icon_import          {background-image: url(icons/linemedia.autoanalogssimple/page_import.png);}
+
+
+#linemedia\.autoanalogssimple_menu_icon_list          {background-image:url(icons/linemedia.autoanalogssimple/menu_list.gif);}
+#linemedia\.autoanalogssimple_page_icon_list          {background-image: url(icons/linemedia.autoanalogssimple/page_list.png);}
+
+
+
+/* 12 bitrix */
+.linemedia\.autoanalogssimple_menu_icon_main   {background-image:url(icons/linemedia.autoanalogssimple/menu_main.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autoanalogssimple_menu_icon_import {background-image:url(icons/linemedia.autoanalogssimple/menu_import.png)!important;background-position: 50% 50% !important;}
+.linemedia\.autoanalogssimple_menu_icon_list   {background-image: url(icons/linemedia.autoanalogssimple/menu_list.gif)!important;background-position: 50% 50% !important;}

@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * install save (final)
+ *
+ * @author  Linemedia
+ * @since   01/08/2012
+ *
+ * @link    http://auto.linemedia.ru/
+ */
+
+$MESS['LM_AUTO_SUPPLIERS_REQUESTED_STATUS']  = 'Р—Р°РїСЂРѕС€РµРЅ';
+$MESS['LM_AUTO_SUPPLIERS_REQUESTED_STATUS_DESCRIPTION']  = 'Р—Р°РїСЂРѕС€РµРЅ Сѓ РїРѕСЃС‚Р°РІС‰РёРєР°';
+$MESS['LM_AUTO_SUPPLIERS_APPROVED_STATUS']  = 'РџРѕРґС‚РІРµСЂР¶РґС‘РЅ РїРѕСЃС‚Р°РІС‰РёРєРѕРј';
+$MESS['LM_AUTO_SUPPLIERS_APPROVED_STATUS_DESCRIPTION']  = 'РџРѕСЃС‚Р°РІС‰РёРє РїРѕРґС‚РІРµСЂРґРёР» РЅР°Р»РёС‡РёРµ С‚РѕРІР°СЂР°';
+$MESS['LM_AUTO_SUPPLIERS_STOCK_STATUS']  = 'РџРѕР»СѓС‡РµРЅ РЅР° СЃРєР»Р°Рґ';
+$MESS['LM_AUTO_SUPPLIERS_STOCK_STATUS_DESCRIPTION']  = 'РЎРєР»Р°Рґ РїРѕР»СѓС‡РёР» С‚РѕРІР°СЂ РѕС‚ РїРѕСЃС‚Р°РІС‰РёРєР°';
+
