@@ -26,5 +26,5 @@ $APPLICATION->IncludeComponent("linemedia.autotecdoc:tecdoc.catalog.detail", ".d
 	),
 	false
 );
-?> 
+?>
 <? require($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php'); ?>

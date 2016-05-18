@@ -1,5 +1,54 @@
 $(document).ready(function () {
 
+    /*
+     * Автозаполнение вин кода для деталей, которые были
+     * куплены для того же авто
+     */
+    $("input.vin").keyup(function() {
+        var value = this.value;
+        var modification_id = $(this).closest("tr").find("input.modification_id").val();
+
+        $("input.vin").each(function () {
+            if($(this).closest("tr").find("input.modification_id").val() == modification_id) {
+                $(this).val(value)
+            }
+        });
+
+    });
+
+    /*
+     * Сохраняем указанный вин код
+     */
+    $("#basketOrderButton2").on('click', function (e) {
+        var basket_ids = [];
+        var vin_codes = [];
+        var modification_ids = [];
+        var send_request = true;
+
+        $("input.vin").each(function (index) {
+            if ($(this).val()) {
+                vin_codes.push($(this).val());
+                basket_ids.push($(this).closest("tr").find("input.basket_id").val());
+                modification_ids.push($(this).closest("tr").find("input.modification_id").val());
+            } else {
+                send_request = false;
+                $(this).parent().addClass("has-error");
+            }
+        });
+
+        if (send_request) {
+            $.post(ajaxurl, {
+                "basket_ids[]": basket_ids,
+                "vin_codes[]": vin_codes,
+                "modification_ids": modification_ids,
+                "set_vin_codes": 'Y'
+            });
+        }
+
+        return send_request;
+    });
+
+
     $('.cart-item-quantity input[name^="QUANTITY_"]').keyup(function () {
 
         var current_parent_cell = $(this).parent();

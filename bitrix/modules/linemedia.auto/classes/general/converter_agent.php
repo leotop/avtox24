@@ -314,12 +314,12 @@ class LinemediaAutoConverterAgent
 
                 if(strpos($filename, '.xlsx') !== false) {
                     $folder = dirname($filename);
-                    $cmd = "libreoffice --headless -convert-to xlsx $filename --outdir $folder/tmp && mv -f $folder/tmp/* $folder";
+                    $cmd = "libreoffice --headless --convert-to xlsx $filename --outdir $folder/tmp && mv -f $folder/tmp/* $folder";
                     print('CMD: ' . $cmd . "\n\n");
                     shell_exec($cmd);
                 } elseif(strpos($filename, '.xls') !== false) {
                     $folder = dirname($filename);
-                    $cmd = "libreoffice --headless -convert-to xls $filename --outdir $folder/tmp && mv -f $folder/tmp/* $folder";
+                    $cmd = "libreoffice --headless --convert-to xls $filename --outdir $folder/tmp && mv -f $folder/tmp/* $folder";
                     print('CMD: ' . $cmd . "\n\n");
                     shell_exec($cmd);
                 }

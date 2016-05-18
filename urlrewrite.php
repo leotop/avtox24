@@ -19,16 +19,22 @@ $arUrlRewrite = array(
 		"PATH" => "/auto/search/index.php",
 	),
 	array(
+		"CONDITION" => "#^/auto/search/(.+?)/(.+?)/#",
+		"RULE" => "q=\$1&brand_title=\$2&",
+		"ID" => "",
+		"PATH" => "/auto/search/index.php",
+	),
+	array(
 		"CONDITION" => "#^/bitrix/services/ymarket/#",
 		"RULE" => "",
 		"ID" => "",
 		"PATH" => "/bitrix/services/ymarket/index.php",
 	),
 	array(
-		"CONDITION" => "#^/auto/search/(.+?)/(.+?)/#",
-		"RULE" => "q=\$1&brand_title=\$2&",
+		"CONDITION" => "#^/acrit.exportpro/(.*)#",
+		"RULE" => "path=\$1",
 		"ID" => "",
-		"PATH" => "/auto/search/index.php",
+		"PATH" => "/acrit.exportpro/index.php",
 	),
 	array(
 		"CONDITION" => "#^/personal/garage/vpn/#",
@@ -69,14 +75,14 @@ $arUrlRewrite = array(
 	array(
 		"CONDITION" => "#^/auto/tecdoc/#",
 		"RULE" => "",
-		"ID" => "linemedia.auto:tecdoc.catalog2",
-		"PATH" => "/bitrix/templates/fast-start_blue_copy/include/row_brands.php",
+		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
+		"PATH" => "/auto/tecdoc/index.php",
 	),
 	array(
 		"CONDITION" => "#^/auto/tecdoc/#",
 		"RULE" => "",
-		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
-		"PATH" => "/index.php",
+		"ID" => "linemedia.auto:tecdoc.catalog2",
+		"PATH" => "/bitrix/templates/fast-start_blue_copy/include/row_brands.php",
 	),
 	array(
 		"CONDITION" => "#^/auto/tecdoc/#",
@@ -88,7 +94,7 @@ $arUrlRewrite = array(
 		"CONDITION" => "#^/auto/tecdoc/#",
 		"RULE" => "",
 		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
-		"PATH" => "/auto/tecdoc/index.php",
+		"PATH" => "/index.php",
 	),
 	array(
 		"CONDITION" => "#^/about/idea/#",

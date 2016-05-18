@@ -105,7 +105,7 @@ $arTypes = array(
             'DESCRIPTION'   => "#TITLE# - заголовок\n#MESSAGE# - сообщение"
         ),
     ),
-    
+
     'LM_AUTO_VIN_IBLOCK_SEND_MAIL' => array(
         array(
             'LID'           => 'ru',
@@ -120,7 +120,22 @@ $arTypes = array(
             'DESCRIPTION'   => "#ID# - ID запроса\n#VIN# - VIN\n#EMAIL# - Email пользователя\n#NAME# - Имя пользователя\n#LAST_NAME# - Фамилия пользователя"
         ),
     ),
-    
+
+    'LM_AUTO_VIN_IBLOCK_SEND_MAIL_UNAUTHORIZED' => array(
+        array(
+            'LID'           => 'ru',
+            'EVENT_NAME'    => 'LM_AUTO_VIN_IBLOCK_SEND_MAIL_UNAUTHORIZED',
+            'NAME'          => 'LINEMEDIA.AUTO: Запрос по VIN (инфоблок, уведомление пользователя)',
+            'DESCRIPTION'   => "#ID# - ID запроса\n#VIN# - VIN\n#EMAIL# - Email пользователя\n#NAME# - Имя пользователя\n#LAST_NAME# - Фамилия пользователя"
+        ),
+        array(
+            'LID'           => 'en',
+            'EVENT_NAME'    => 'LM_AUTO_VIN_IBLOCK_SEND_MAIL_UNAUTHORIZED',
+            'NAME'          => 'LINEMEDIA.AUTO: Запрос по VIN (инфоблок, уведомление пользователя)',
+            'DESCRIPTION'   => "#ID# - ID запроса\n#VIN# - VIN\n#EMAIL# - Email пользователя\n#NAME# - Имя пользователя\n#LAST_NAME# - Фамилия пользователя"
+        ),
+    ),
+
     'LM_AUTO_VIN_IBLOCK_SEND_MAIL_ADMIN' => array(
         array(
             'LID'           => 'ru',

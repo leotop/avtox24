@@ -114,6 +114,9 @@ class LinemediaAutoEventSelf
         if ($search_conditions['extra']['gid']) {
             $api_request_args['generic_article_id'] = $search_conditions['extra']['gid'];
         }
+        if ($search_conditions['extra']['modification_id']) {
+            $api_request_args['modification_id'] = $search_conditions['extra']['modification_id'];
+        }
 
         /*
          * У нас может быть множественный запрос, если словоформы объединили много брендов в один.

@@ -1661,7 +1661,17 @@ while ($arEvent = $events->Fetch()) {
 $lAdmin->AddGroupActionTable($arGroupActions, array("disable_action_target" => !$USER->IsAdmin()));
 
 // Добавление контекстного меню.
-$lAdmin->AddAdminContextMenu(array(), true, true);
+$show_panels_settings = true;
+if(CModule::IncludeModule('linemedia.autobranches')) {
+    $director_group = COption::GetOptionInt('linemedia.autobranches', "LM_AUTO_BRANCHES_USER_GROUP_DIRECTOR");
+
+    if(!$USER->IsAdmin() && in_array($director_group, $USER->GetUserGroupArray())) {
+        $show_panels_settings = false;
+    }
+}
+
+$lAdmin->AddAdminContextMenu(array(), true, $show_panels_settings);
+
 
 $lAdmin->CheckListMode();
 
@@ -2009,6 +2019,15 @@ $oFilter->End();
 $lAdmin->DisplayList();
 
     $show_summary = true;
+    $show_income = true;
+
+    if(CModule::IncludeModule('linemedia.autobranches')) {
+        $director_group = COption::GetOptionInt('linemedia.autobranches', "LM_AUTO_BRANCHES_USER_GROUP_DIRECTOR");
+
+        if(!$USER->IsAdmin() && in_array($director_group, $USER->GetUserGroupArray())) {
+            $show_income = false;
+        }
+    }
     /*
      * Создание событий для модуля: добавление дополнительных фильтров.
      */
@@ -2023,16 +2042,18 @@ $lAdmin->DisplayList();
         <div class="order-itog order-itog-list">
             <table width="100%">
                 <tbody>
-                <tr>
-                    <td class="title">
-                        <?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PURCHASE') ?>:
-                    </td>
-                    <td class="title">
-                        <div id="lm-order-list-total-purchase" style="white-space: nowrap;">
-                            <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
-                        </div>
-                    </td>
+                <?if($show_income) {?>
+                    <tr>
+                        <td class="title">
+                            <?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PURCHASE') ?>:
+                        </td>
+                        <td class="title">
+                            <div id="lm-order-list-total-purchase" style="white-space: nowrap;">
+                                <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
+                            </div>
+                        </td>
                 </tr>
+                <?}?>
                 <tr>
                     <td class="title">
                         <?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_SALES') ?>:
@@ -2043,16 +2064,18 @@ $lAdmin->DisplayList();
                         </div>
                     </td>
                 </tr>
-                <tr class="itog">
-                    <td class="ileft">
-                        <div><?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PROFITS') ?>:</div>
-                    </td>
-                    <td class="iright">
-                        <div id="lm-order-list-total-profits" style="white-space: nowrap;">
-                            <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
-                        </div>
-                    </td>
-                </tr>
+                <?if($show_income) {?>
+                    <tr class="itog">
+                        <td class="ileft">
+                            <div><?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PROFITS') ?>:</div>
+                        </td>
+                        <td class="iright">
+                            <div id="lm-order-list-total-profits" style="white-space: nowrap;">
+                                <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?}?>
                 </tbody>
             </table>
         </div>

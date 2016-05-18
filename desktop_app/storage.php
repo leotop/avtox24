@@ -1,14 +1,29 @@
 <?php
-define('NO_KEEP_STATISTIC', 'Y');
-define('NO_AGENT_STATISTIC','Y');
-define('NO_AGENT_CHECK', true);
-define('DisableEventsCheck', true);
-define('BX_SKIP_SESSION_EXPAND', true);
-define('PUBLIC_AJAX_MODE', true);
-
+require($_SERVER["DOCUMENT_ROOT"]."/desktop_app/headers.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
 /** @var CAllMain $APPLICATION */
-$APPLICATION->IncludeComponent('bitrix:webdav.disk', '', array('VISUAL' => false));
-
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");
+$diskEnabled = false;
+if(IsModuleInstalled('disk'))
+{
+	$diskEnabled =
+		\Bitrix\Main\Config\Option::get('disk', 'successfully_converted', false) &&
+		CModule::includeModule('disk');
+	if($diskEnabled && \Bitrix\Disk\Configuration::REVISION_API >= 5)
+	{
+		$storageController = new Bitrix\Disk\Bitrix24Disk\Legacy\StorageController();
+		$storageController
+			->setActionName($_REQUEST['action'])
+			->exec();
+	}
+	else
+	{
+		$diskEnabled = false;
+	}
+}
+if(!$diskEnabled)
+{
+	$APPLICATION->IncludeComponent('bitrix:webdav.disk', '', array('VISUAL' => false));
+	CMain::FinalActions();
+	die();
+}

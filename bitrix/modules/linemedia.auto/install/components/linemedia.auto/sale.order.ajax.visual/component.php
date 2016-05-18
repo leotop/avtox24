@@ -341,7 +341,7 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y" )
 
         CSaleBasket::UpdateBasketPrices(CSaleBasket::GetBasketUserID(), $site_id);
         /* Check Values Begin */
-        $arSelFields = array("ID", "CALLBACK_FUNC", "MODULE", "PRODUCT_ID", "QUANTITY", "DELAY", "CAN_BUY", "PRICE", "WEIGHT", "NAME", "CURRENCY", "CATALOG_XML_ID", "VAT_RATE", "NOTES", "DISCOUNT_PRICE");
+        $arSelFields = array("ID", "CALLBACK_FUNC", "MODULE", "PRODUCT_ID", "QUANTITY", "DELAY", "CAN_BUY", "PRICE", "WEIGHT", "NAME", "CURRENCY", "CATALOG_XML_ID", "VAT_RATE", "NOTES", "DISCOUNT_PRICE", "DATE_INSERT");
         $dbBasketItems = CSaleBasket::GetList(
                 array("NAME" => "ASC", "ID" => "ASC"),
                 array(
@@ -377,6 +377,7 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y" )
                     $arBasketItems["VAT_VALUE"] = (($arBasketItems["PRICE"] / ($arBasketItems["VAT_RATE"] +1)) * $arBasketItems["VAT_RATE"]);
                     $arResult["VAT_SUM"] += roundEx($arBasketItems["VAT_VALUE"] * $arBasketItems["QUANTITY"], SALE_VALUE_PRECISION);
                 }
+
                 $arBasketItems["PRICE_FORMATED"] = SaleFormatCurrency($arBasketItems["PRICE"], $arBasketItems["CURRENCY"]);
                 $arBasketItems["WEIGHT_FORMATED"] = roundEx(DoubleVal($arBasketItems["WEIGHT"]/$arResult["WEIGHT_KOEF"]), SALE_VALUE_PRECISION)." ".$arResult["WEIGHT_UNIT"];
 
@@ -1582,9 +1583,12 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y" )
         $allSum = 0;
         $allVatSumm = 0;
         $allVatRate = 0;
+        $default_currency = CSaleLang::GetLangCurrency(SITE_ID);
+
         foreach ($arOrderForDiscount['BASKET_ITEMS'] as &$arOneItem)
         {
-            $arOneItem["PRICE_FORMATED"] = SaleFormatCurrency($arOneItem["PRICE"], $arOneItem["CURRENCY"]);
+            $arOneItem["PRICE"] = CCurrencyRates::ConvertCurrency($arOneItem["PRICE"], $arOneItem["CURRENCY"], $default_currency, $arOneItem["DATE_INSERT"]);
+            $arOneItem["PRICE_FORMATED"] = SaleFormatCurrency($arOneItem["PRICE"], $default_currency);
             $arOneItem["DISCOUNT_PRICE_PERCENT"] = $arOneItem["DISCOUNT_PRICE"]*100 / ($arOneItem["DISCOUNT_PRICE"] + $arOneItem["PRICE"]);
             $arOneItem["DISCOUNT_PRICE_PERCENT_FORMATED"] = roundEx($arOneItem["DISCOUNT_PRICE_PERCENT"], SALE_VALUE_PRECISION)."%";
             $allSum += ($arOneItem["PRICE"] * $arOneItem["QUANTITY"]);

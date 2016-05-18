@@ -42,4 +42,4 @@ $APPLICATION->SetTitle("Каталог неоригинальных запчас
 		"PATH_TO_TECDOC" => "/auto/tecdoc/"
 	),
 	false
-);?><? require($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php'); ?>
+);?><? require($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php'); ?> 

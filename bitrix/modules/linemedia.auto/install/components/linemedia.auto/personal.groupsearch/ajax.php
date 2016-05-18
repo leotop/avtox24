@@ -281,7 +281,8 @@ if (count($spares) >= 1) {
 		</div>
         <div style="clear:both;"></div>
 		<form method="post" action="/auto/search/" class="lm_cat_to_form">
-			<input type="hidden" name="act" value="ADD2BASKET" />
+            <?= bitrix_sessid_post() ?>
+            <input type="hidden" name="act" value="ADD2BASKET" />
     		<input type="hidden" name="MULTIPLY_BASKET" value="Y" />
             <table class="table offset-b-20 found">
                 <thead>

@@ -128,7 +128,8 @@ if ($PARTIAL_SUBMIT == "Y") {
 
 function fChangeOrderStatus($ID, $STATUS_ID)
 {          
-  
+    global $APPLICATION;
+
     $arBasketItems = array();
 
     $dbBasketItems = CSaleBasket::GetList(

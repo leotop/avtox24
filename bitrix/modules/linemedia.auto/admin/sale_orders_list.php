@@ -1147,7 +1147,17 @@ $dbBasketList->NavStart();
 $lAdmin->NavText($dbBasketList->GetNavPrint(GetMessage('ORDERS_LIST')));
 
 // Добавление контекстного меню.
-$lAdmin->AddAdminContextMenu(array(), false, true);
+$show_panels_settings = true;
+if(CModule::IncludeModule('linemedia.autobranches')) {
+    $director_group = COption::GetOptionInt('linemedia.autobranches', "LM_AUTO_BRANCHES_USER_GROUP_DIRECTOR");
+
+    if(!$USER->IsAdmin() && in_array($director_group, $USER->GetUserGroupArray())) {
+        $show_panels_settings = false;
+    }
+}
+
+$lAdmin->AddAdminContextMenu(array(), false, $show_panels_settings);
+
 
 
 CUtil::InitJSCore(array('jquery', 'window'));
@@ -1553,8 +1563,6 @@ while ($arEvent = $events->Fetch()) {
 $lAdmin->AddGroupActionTable($arGroupActions, array("disable_action_target" => !$USER->IsAdmin()));
 
 
-$lAdmin->AddAdminContextMenu(array(), true, true);
-
 $lAdmin->CheckListMode();
 
 
@@ -1879,6 +1887,15 @@ if($maxRole == "D") {
     <? $lAdmin->DisplayList();
 
     $show_summary = true;
+    $show_income = true;
+
+    if(CModule::IncludeModule('linemedia.autobranches')) {
+        $director_group = COption::GetOptionInt('linemedia.autobranches', "LM_AUTO_BRANCHES_USER_GROUP_DIRECTOR");
+
+        if(!$USER->IsAdmin() && in_array($director_group, $USER->GetUserGroupArray())) {
+            $show_income = false;
+        }
+    }
     /*
      * Создание событий для модуля: добавление дополнительных фильтров.
      */
@@ -1893,16 +1910,18 @@ if($maxRole == "D") {
         <div class="order-itog order-itog-list">
             <table width="100%">
                 <tbody>
-                <tr>
-                    <td class="title">
-                        <?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PURCHASE') ?>:
-                    </td>
-                    <td class="title">
-                        <div id="lm-order-list-total-purchase" style="white-space: nowrap;">
-                            <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
-                        </div>
-                    </td>
-                </tr>
+                <?if($show_income) {?>
+                    <tr>
+                        <td class="title">
+                            <?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PURCHASE') ?>:
+                        </td>
+                        <td class="title">
+                            <div id="lm-order-list-total-purchase" style="white-space: nowrap;">
+                                <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?}?>
                 <tr>
                     <td class="title">
                         <?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_SALES') ?>:
@@ -1913,16 +1932,18 @@ if($maxRole == "D") {
                         </div>
                     </td>
                 </tr>
-                <tr class="itog">
-                    <td class="ileft">
-                        <div><?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PROFITS') ?>:</div>
-                    </td>
-                    <td class="iright">
-                        <div id="lm-order-list-total-profits" style="white-space: nowrap;">
-                            <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
-                        </div>
-                    </td>
-                </tr>
+                <?if($show_income) {?>
+                    <tr class="itog">
+                        <td class="ileft">
+                            <div><?= GetMessage('LM_AUTO_ORDER_LIST_TOTAL_PROFITS') ?>:</div>
+                        </td>
+                        <td class="iright">
+                            <div id="lm-order-list-total-profits" style="white-space: nowrap;">
+                                <?= CurrencyFormat(0, CCurrency::GetBaseCurrency()) ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?}?>
                 </tbody>
             </table>
         </div>

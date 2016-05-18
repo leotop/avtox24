@@ -12,10 +12,10 @@
  */
 
 $arModuleVersion = array(
-    "VERSION" => "2.8.68",
-    "VERSION_DATE" => "2016-02-03 14:25:17"
+    "VERSION" => "2.8.80",
+    "VERSION_DATE" => "2016-05-05 17:31:14"
 );
 
 
-define('LINEMEDIA_AUTO_MAIN_VERSION', '2.8.68');
+define('LINEMEDIA_AUTO_MAIN_VERSION', '2.8.80');
 

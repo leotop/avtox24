@@ -195,7 +195,7 @@ document.getElementById('bx_auth_secure').style.display = 'inline-block';
                             <? } elseif ($arSaleProperty['TYPE'] == 'CHECKBOX') { ?>
                                 <input type="checkbox" value="Y" "<?= ($_REQUEST['SALE_PROPS'][$arSaleProperty['ID']] == 'Y') ? ('checked') : ('') ?>" name="SALE_PROPS[<?= $arSaleProperty['ID'] ?>]" />
                             <? } else { ?>
-                                <input type="text" value="<?= $_REQUEST['SALE_PROPS'][$arSaleProperty['ID']]?>" maxlength="255" name="SALE_PROPS[<?= $arSaleProperty['ID'] ?>]" />
+                                <input type="text" value="<?= filter_var($_REQUEST['SALE_PROPS'][$arSaleProperty['ID']], FILTER_SANITIZE_STRING)?>" maxlength="255" name="SALE_PROPS[<?= $arSaleProperty['ID'] ?>]" />
                             <? } ?>
                         </td>
                     </tr>

@@ -22,7 +22,7 @@ if ($options) {
 $replacementtypes = @$_GET['replacementtypes'];
 $replacementtypes = implode($replacementtypes, ',');
 
-$request = new GuayaquilRequestAM('en_US');
+$request = new GuayaquilRequestAM('ru_RU');
 if (Config::$useLoginAuthorizationMethod) {
     $request->setUserAuthorizationMethod(Config::$userLogin, Config::$userKey);
 }

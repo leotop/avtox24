@@ -14,6 +14,8 @@ IncludeModuleLangFile(__FILE__);
 
 class LinemediaAutoCrossesApiDriver {
 
+    const DEFAULT_ENCODING = 'UTF-8';
+
     static $BASE_URL = 'http://78.46.101.198/json.php';
     static $LOGIN = null;
     static $PASSWORD = null;
@@ -235,8 +237,10 @@ class LinemediaAutoCrossesApiDriver {
                 } else {
                     $api_args['gid'] = null;
                 }
-
                 $api_args['options'] = $options;
+                if(array_key_exists('modification_id', $req_data)) {
+                    $api_args['options']['modification_id'] = (int) $req_data['modification_id'];
+                }
 
                 $res = self::query('Crosses_search', $api_args);
 
@@ -329,7 +333,47 @@ class LinemediaAutoCrossesApiDriver {
             return $response;
 
         } else {
+            /*
+             *    настройки для перекодировки.
+             *    идеальная проверка на опеле в моделях найти "MOVANO B грузовоe".
+             */
+            mb_substitute_character('');
+            setlocale(LC_COLLATE,'ru_RU.UTF-8');
+            setlocale(LC_CTYPE,'ru_RU.UTF-8');
+            mb_internal_encoding('utf-8');
+
+            /*
+             * Преобразование кодировки.
+             */
+            if (!defined('BX_UTF') || BX_UTF != true) {
+                $response = self::iconvArray($response, self::DEFAULT_ENCODING, 'WINDOWS-1251//TRANSLIT');
+            }
+
+            setlocale(LC_COLLATE, 0);
+            setlocale(LC_CTYPE, 0);
+
+
             return json_decode($response, 1);
         }
+    }
+
+    /**
+     * Конвертация пришедшего от сервера базы кросов массива
+     */
+    protected function iconvArray($array, $from = 'UTF-8', $to = 'cp1251')
+    {
+        if (empty($array) || !is_array($array)) {
+            return array();
+        }
+
+        $result = array();
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $result[$key] = self::iconvArray($value, $from, $to);
+            } else {
+                $result[$key] = iconv($from, $to, $value);
+            }
+        }
+        return $result;
     }
 }

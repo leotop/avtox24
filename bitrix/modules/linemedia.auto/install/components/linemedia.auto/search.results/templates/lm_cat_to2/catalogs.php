@@ -52,7 +52,7 @@
 			$(".modal-body").html('');
 			$('.popUp-overlay').hide();
 			$('.modal-popUp').hide();
-			$('.ItemList .button .CArt<?=str_replace(" ", "", $_REQUEST["article"]);?>').attr("data-brand",brand).attr('new_url',new_url).delay(2000).trigger('click');
+			$('.ItemList .button .CArt<?=str_replace(" ", "", (string)filter_input(INPUT_GET, 'article'));?>').attr("data-brand",brand).attr('new_url',new_url).delay(2000).trigger('click');
 		});
 	});
 </script>

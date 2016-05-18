@@ -1919,6 +1919,36 @@ $iblocks = array(
                 "PROPERTY_TYPE" => "S",
                 "IS_REQUIRED" => "N",
             ),
+
+            /*
+             * Сайт
+             */
+            array(
+                'CODE' => 'user_name',
+                'NAME' => GetMessage('LM_AUTO_MAIN_IBLOCK_VIN_PROP_USER_NAME'),
+                "PROPERTY_TYPE" => "S",
+                "IS_REQUIRED" => "Y",
+            ),
+
+            /*
+             * Сайт
+             */
+            array(
+                'CODE' => 'user_phone',
+                'NAME' => GetMessage('LM_AUTO_MAIN_IBLOCK_VIN_PROP_USER_PHONE'),
+                "PROPERTY_TYPE" => "S",
+                "IS_REQUIRED" => "Y",
+            ),
+
+            /*
+             * Сайт
+             */
+            array(
+                'CODE' => 'user_email',
+                'NAME' => GetMessage('LM_AUTO_MAIN_IBLOCK_VIN_PROP_USER_EMAIL'),
+                "PROPERTY_TYPE" => "S",
+                "IS_REQUIRED" => "N",
+            ),
             
         ),
         /*

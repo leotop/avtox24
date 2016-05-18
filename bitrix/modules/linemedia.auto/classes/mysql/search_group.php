@@ -74,7 +74,7 @@ class LinemediaAutoSearchGroup implements LinemediaAutoISearch{
                 $parts['external_id'] = $items[2];
             }
         }
-        
+
         /*
          * Составляем запрос.
          */
@@ -89,8 +89,14 @@ class LinemediaAutoSearchGroup implements LinemediaAutoISearch{
         foreach ($parts as &$part) {
 
         	$article	 = $database->ForSql($part['article']);
-        	$brand_title = reset($part['brands']);
-        	
+            if(is_array($part['brands'])) {
+                reset($part['brands']);
+            }
+        	$brand_title = $part['brands'];
+			if(is_array($brand_title)) {
+				$brand_title = current($brand_title);
+			}
+
         	if ($brand_title != '') {
         		
         		/*
@@ -183,7 +189,7 @@ class LinemediaAutoSearchGroup implements LinemediaAutoISearch{
         if (!empty($this->suppliersID)) {
         	$arSupplierIDs = array_intersect($this->suppliersID, $arSupplierIDs);
         }
-        
+
         if (!empty($arSupplierIDs)) {
             $where []= '`supplier_id` IN (' . implode(', ', $arSupplierIDs) . ')';
         } else {

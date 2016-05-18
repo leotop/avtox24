@@ -35,6 +35,7 @@ define('LM_AUTO_DEBUG_ERROR', 20);
 define('LM_AUTO_DEBUG_CRITICAL', 30);
 
 define('LANGUAGE_ID', 'ru');
+define('BX_UTF', 1);
 
 /********************************* основной код исполняемого файла ***************************************/
 

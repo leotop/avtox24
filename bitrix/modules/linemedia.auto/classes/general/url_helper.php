@@ -141,7 +141,7 @@ class LinemediaAutoUrlHelper
 	/**
 	 * Получение URL для покупки детали
 	 */
-	public static function getPartBuyUrl($data = array(), $buyArticleUrl = '/auto/search/?part_id=#PART_ID#', $searchArticleUrl = '/auto/search/#ARTICLE#/')
+	public static function getPartBuyUrl($data = array(), $buyArticleUrl = '/auto/search/?part_id=#PART_ID#', $searchArticleUrl = '/auto/search/#ARTICLE#/', $sessid = null)
 	{
 		$url = '';
 
@@ -210,7 +210,11 @@ class LinemediaAutoUrlHelper
 		/*
 		 * Добавляем переменную сессии для защиты от ботов
 		 */
-		$url .= '&sessid=' . bitrix_sessid();
+		if($sessid) {
+			$url .= '&sessid=' . $sessid;
+		} else {
+			$url .= '&sessid=' . bitrix_sessid();
+		}
 
 		/*
 		 * Событие на формирование URL для покупки

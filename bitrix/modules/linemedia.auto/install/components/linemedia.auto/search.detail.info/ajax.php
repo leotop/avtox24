@@ -19,6 +19,11 @@ if ($_REQUEST['applicability'] == 'Y') {
     $manuId             = (int) $_REQUEST['manuId'];
     $brand_title        = (string) $_REQUEST['brand_title'];
     $template           = (string) $_REQUEST['template'];
+
+    if(!in_array($template, array('.default', 'default', 'ajax', 'popup'))) {
+        $template = '';
+    }
+
     $manufacturer       = (string) $_REQUEST['manufacturer'];
     
 	/*$args = array(

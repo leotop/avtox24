@@ -18,8 +18,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
  * OnBeforeBasketItemCancel_ReIncreaseAmountInStock
  */
 IncludeModuleLangFile(__FILE__);
- 
-use Exception;
+
 
 class LinemediaAutoEventSale
 {

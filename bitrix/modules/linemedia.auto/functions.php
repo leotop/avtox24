@@ -103,10 +103,12 @@ if(!function_exists('format_by_count')) {
  * debug
  */
 if (!function_exists('_d')) {
+
     function _d($a = null, $die = true) {
+
         while(ob_get_level())
             ob_end_clean();
-        
+
         echo '<pre>';
         print_r($a);
         echo '</pre>';

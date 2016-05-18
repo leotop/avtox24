@@ -460,9 +460,13 @@ if ($REQUEST_METHOD == "POST" && $save_order_data == "Y" && empty($dontsave) && 
         if (count($arOrder) > 0) {
             $arErrors = array();
             $OrderNewSendEmail = false;
-            
-            $arOldOrder = CSaleOrder::GetByID($ID);
-            
+
+            if($ID > 0) {
+                $arOldOrder = CSaleOrder::GetByID($ID);
+            } else {
+                $arOldOrder = array();
+            }
+
             if ($ID <= 0 || $arOldOrder['STATUS_ID'] == $str_STATUS_ID) {
                 $arAdditionalFields['STATUS_ID'] = $str_STATUS_ID;
             }
@@ -478,7 +482,12 @@ if ($REQUEST_METHOD == "POST" && $save_order_data == "Y" && empty($dontsave) && 
             while ($arEvent = $events->Fetch()) {
                 ExecuteModuleEventEx($arEvent, array(&$arOrder, &$arAdditionalFields));
             }
-            
+
+            /*
+             * »наче происходит задвоение корзин, сами корзины добавл€ютс€ ниже
+             */
+            //unset($arOrder['BASKET_ITEMS']);
+
             $tmpID = CSaleOrder::DoSaveOrder($arOrder, $arAdditionalFields, $ID, $arErrors, $arCupon);
             
             /*

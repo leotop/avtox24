@@ -117,6 +117,13 @@ function CheckFilter()
  * Поставщики
  */
 $suppliers = LinemediaAutoSupplier::GetList(array(), array(), false, false, array(), 'supplier_id');
+
+$events = GetModuleEvents("linemedia.auto", "AfterGetSuppliersList");
+while ($arEvent = $events->Fetch()) {
+    ExecuteModuleEventEx($arEvent, array(&$suppliers));
+}
+
+
 $suppliers_iblock_id = COption::GetOptionInt('linemedia.auto', 'LM_AUTO_IBLOCK_SUPPLIERS');
 
 // Опишем элементы фильтра.
@@ -304,6 +311,14 @@ $upload_mb = min($max_upload, $max_post, $memory_limit);
 $uploadIDs = array();
 
 while ($arRes = $rsData->NavNext(true, "f_")) {
+
+    $events = GetModuleEvents("linemedia.auto", "OnTasksListShow");
+    while ($arEvent = $events->Fetch()) {
+        if(!ExecuteModuleEventEx($arEvent, array(&$arRes))) {
+            continue 2;
+        }
+    }
+
     /*
      * Рлдучим расписания задачи, чтобы вывод был более информативным.
      */
@@ -419,9 +434,14 @@ while ($arRes = $rsData->NavNext(true, "f_")) {
         );
     } else {
        $row->bReadOnly = true;
-   }
+    }
 
     // Применим контекстное меню к строке.
+    $events = GetModuleEvents("linemedia.auto", "OnTasksActionsShow");
+    while ($arEvent = $events->Fetch()) {
+        ExecuteModuleEventEx($arEvent, array(&$arActions));
+    }
+
     $row->AddActions($arActions);
 }
 
@@ -434,12 +454,20 @@ $lAdmin->AddFooter(
     )
 );
 
-// Групповые действия.
-$lAdmin->AddGroupActionTable(array(
+$tableGroupActions = array(
     "delete"        => GetMessage("MAIN_ADMIN_LIST_DELETE"), // удалить выбранные элементы
     "activate"      => GetMessage("MAIN_ADMIN_LIST_ACTIVATE"), // активировать выбранные элементы
     "deactivate"    => GetMessage("MAIN_ADMIN_LIST_DEACTIVATE"), // деактивировать выбранные элементы
-));
+);
+
+// Применим контекстное меню к строке.
+$events = GetModuleEvents("linemedia.auto", "OnTasksTableActionsShow");
+while ($arEvent = $events->Fetch()) {
+    ExecuteModuleEventEx($arEvent, array(&$tableGroupActions));
+}
+
+// Групповые действия.
+$lAdmin->AddGroupActionTable($tableGroupActions);
 
 
 if($userPermission > LM_AUTO_MAIN_ACCESS_READ_SUPPLIERS) {
@@ -454,6 +482,10 @@ if($userPermission > LM_AUTO_MAIN_ACCESS_READ_SUPPLIERS) {
     );
 }
 
+$events = GetModuleEvents("linemedia.auto", "OnTasksContextShow");
+while ($arEvent = $events->Fetch()) {
+    ExecuteModuleEventEx($arEvent, array(&$aContext));
+}
 
 // И прикрепим его к списку.
 $lAdmin->AddAdminContextMenu($aContext, false, true);

@@ -304,22 +304,26 @@ class LinemediaAutoPrice
      * @param $price - числовое или строковое представление цены
      * @return mixed
      */
-    public static function userPrice($price, $date = "", $base_currency = false) {
+    public static function userPrice($price, $default_currency = false, $format = false) {
 
         global $USER;
 
         if(CModule::IncludeModule('currency')) {
 
             $user_currency = $USER->GetParam('CURRENCY');
-            $default_currency = $base_currency ? $base_currency : CCurrency::GetBaseCurrency();
+            if(!$default_currency) $default_currency = CCurrency::GetBaseCurrency();
 
             if(!empty($user_currency) && $user_currency != $default_currency) {
 
                 if(is_numeric($price)) {
-                    $price = CCurrencyRates::ConvertCurrency($price, $default_currency, $user_currency, $date);
+                    $price = CCurrencyRates::ConvertCurrency($price, $default_currency, $user_currency);
+
+                    if($format) {
+                        $price = CurrencyFormat($price, $user_currency);
+                    }
                 } else {
                     $price_num = preg_replace("/[^0-9,.]/", "", $price);
-                    $new_price = CCurrencyRates::ConvertCurrency($price_num, $default_currency, $user_currency, $date);
+                    $new_price = CCurrencyRates::ConvertCurrency($price_num, $default_currency, $user_currency);
 
                     $price = CurrencyFormat($new_price, $user_currency);
                 }

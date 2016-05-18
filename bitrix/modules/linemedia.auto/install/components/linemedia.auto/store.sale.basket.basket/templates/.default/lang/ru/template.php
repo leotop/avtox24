@@ -37,4 +37,6 @@ $MESS ['SALE_DELETE'] = "Удалить";
 $MESS ['SALE_DELETE_CHECKED'] = "Удалить выбранные";
 $MESS['LM_AUTO_SEARCH_MULTIPLICATION_FACTOR'] = 'Примечание: заказ должен быть кратен N';
 $MESS ['SALE_NEED_VIN_TITLE'] = "Некоторые запчасти в корзине требуют указания VIN - номера";
+$MESS ['SALE_NEED_VIN_PLACEHOLDER'] = "Введите VIN";
+
 ?>

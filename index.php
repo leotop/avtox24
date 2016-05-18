@@ -6,32 +6,29 @@ $APPLICATION->SetPageProperty("title", "Автозапчасти для ином
 $APPLICATION->SetTitle("AvtoX24.ru");
 ?>
 
-<?$APPLICATION->IncludeComponent(
-	"linemedia.autotecdoc:tecdoc.catalog2", 
-	".default", 
-	array(
-		"DETAIL_URL" => "/auto/part-detail/#ARTICLE_ID#/#ARTICLE_LINK_ID#/",
-		"SEARCH_ARTICLE_URL" => "",
-		"COLUMNS_COUNT" => "4",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"SHOW_ORIGINAL_ITEMS" => "Y",
-		"GROUP_MODELS" => "Y",
-		"TECDOC_BRAND_TYPES" => array(
+<?$APPLICATION->IncludeComponent("linemedia.autotecdoc:tecdoc.catalog2", "ajax1", Array(
+	"DETAIL_URL" => "/auto/part-detail/#ARTICLE_ID#/#ARTICLE_LINK_ID#/",	// Путь к детальной странице (доступны шаблоны #ARTICLE_ID# и #ARTICLE_LINK_ID#)
+		"SEARCH_ARTICLE_URL" => "",	// Путь к поиску запчастей (доступны шаблоны #ARTICLE# и #BRAND_TITLE#)
+		"COLUMNS_COUNT" => "4",	// Количество столбцов для вывода
+		"ADD_SECTIONS_CHAIN" => "Y",	// Добавлять в цепочку навигации
+		"SHOW_ORIGINAL_ITEMS" => "Y",	// Выводить оригинальные номера
+		"GROUP_MODELS" => "Y",	// Группировать модификации автомобилей
+		"TECDOC_BRAND_TYPES" => array(	// Типы брендов TecDoc
 			0 => "1",
 			1 => "2",
 			2 => "3",
 		),
-		"MODIFICATIONS_SET" => "default",
-		"HIDE_UNAVAILABLE" => "Y",
-		"INCLUDE_PARTS_IMAGES" => "Y",
-		"ANTI_BOTS" => "Y",
-		"MANUAL_TECDOC_GROUPS" => "",
-		"SWIFT_FILTER" => "N",
-		"CONTEMPORARY_YEAR" => "1999",
-		"SEF_MODE" => "Y",
-		"SEF_FOLDER" => "/auto/tecdoc/",
-		"COMPONENT_TEMPLATE" => ".default",
-		"PATH_TO_TECDOC" => "/auto/tecdoc/"
+		"MODIFICATIONS_SET" => "default",	// Применять набор модификаций
+		"HIDE_UNAVAILABLE" => "Y",	// Скрывать запчасти которых нет в базе
+		"INCLUDE_PARTS_IMAGES" => "Y",	// Отображать картинки запчастей в таблице
+		"ANTI_BOTS" => "Y",	// Включить защиту от парсинга незарегистрированными пользователями (рекомендуется)
+		"MANUAL_TECDOC_GROUPS" => "",	// Выбор групп для показа
+		"SWIFT_FILTER" => "N",	// Скрывать запчасти
+		"CONTEMPORARY_YEAR" => "1999",	// Установка фильтра для кнопки современные (в годах)
+		"SEF_MODE" => "Y",	// Включить поддержку ЧПУ
+		"SEF_FOLDER" => "/auto/tecdoc/",	// Каталог ЧПУ (относительно корня сайта)
+		"COMPONENT_TEMPLATE" => "ajax",
+		"PATH_TO_TECDOC" => "/auto/tecdoc/",	// Путь к TecDoc
 	),
 	false
 );?>

@@ -107,15 +107,7 @@ $decreaseCol = !(bool) $paramString ? 1 : 0;
 	</tr>
 </table>
 </div>
-<?
-/*
- * may be defined in \bitrix\components\linemedia.autogarage\admin.garage.select\ajax.php
- */
-if(is_array($_SESSION['BASKET_NEED_VIN'])) {
 
-	?><input type="hidden" name="auto_garage_use_auto" id="auto_garage_use_auto" value="<?=$_SESSION['BASKET_NEED_VIN']['car_id']?>"><?
-}
-?>
 <?php
 
 function fillProperties($props, $param) {
@@ -132,11 +124,7 @@ function fillProperties($props, $param) {
             $time_deliv = round(($val["VALUE"]/24), 0, PHP_ROUND_HALF_UP);
             $resultString .= $val["NAME"]." ~ ".$time_deliv." ".GetMessage('LM_AUTO_DAYS').".<br />";
             continue;
-       } else if(strtoupper($val["CODE"]) == 'NEED_VIN') {
-		   $resultString .= $val["NAME"] . "<br />";
-		   continue;
-	   }
-
+       }
 
 	   $resultString .= $val["NAME"].": ".$val["VALUE"]."<br />";
    }

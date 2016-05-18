@@ -134,6 +134,8 @@ if (!$USER->IsAuthorized() && $arParams['ANTI_BOTS'] && isset($_REQUEST['SHOW_AU
  */
 if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR']] == 'ADD2BASKET') {
 
+    //_d($_REQUEST);
+
     /*
      * Проверка сессии, установлена в LinemediaAutoUrlHelper::getPartBuyUrl
      */
@@ -149,6 +151,9 @@ if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR
 
             foreach((array)$_REQUEST['part_id'] as $key => $id) {
 
+                $extra = (array) $_REQUEST['extra'][$key];
+                $extra['need_vin'] = ($_REQUEST['need_vin'][$key] == 'Y');
+
                 $arAddToBasket[$key] = array(
                     'supplier_id' => (string) $_REQUEST['supplier_id'][$key], // ID поставщика. По нему можно также узнать, что запчасть лежит не в локальной БД, а в удалённом API.
                     'quantity' => (int) $_REQUEST['quantity'][$key], // Количество к заказу
@@ -156,7 +161,7 @@ if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR
                     'additional' => array(
                         'article'       => (string) $_REQUEST['q'][$key],
                         'brand_title'   => (string) $_REQUEST['brand_title'][$key],
-                        'extra'         => (array) $_REQUEST['extra'][$key],
+                        'extra'         => $extra,
                         'max_available_quantity' => (int) $_REQUEST['max_available_quantity'][$key]
                     ),
                 );
@@ -168,6 +173,9 @@ if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR
 
         } else {
 
+            $extra = (array) $_REQUEST['extra'];
+            $extra['need_vin'] = ($_REQUEST['need_vin'] == 'Y');
+
             $arAddToBasket[0] = array(
                 'part_id' => (int) $_REQUEST['part_id'], // ID запчасти в локальной БД.
                 'supplier_id' => (string) $_REQUEST['supplier_id'], // ID поставщика. По нему можно также узнать, что запчасть лежит не в локальной БД, а в удалённом API.
@@ -176,7 +184,7 @@ if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR
                 'additional' => array(
                     'article'       => (string) $_REQUEST['q'],
                     'brand_title'   => (string) $_REQUEST['extra']['brand_title_original'] ? : $_REQUEST['brand_title'],
-                    'extra'         => (array) $_REQUEST['extra'],
+                    'extra'         => $extra,
                     'max_available_quantity'          => (int) $_REQUEST['max_available_quantity']
                 ),
             );

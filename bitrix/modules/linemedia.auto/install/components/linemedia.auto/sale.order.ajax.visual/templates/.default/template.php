@@ -9,7 +9,7 @@
 	<div class="errortext"><?=GetMessage("SOA_NO_JS")?></div>
 </NOSCRIPT>
 
-<? 
+<?
 if(!$USER->IsAuthorized() && $arParams["ALLOW_AUTO_REGISTER"] == "N")
 {
 	if(!empty($arResult["ERROR"]))
@@ -51,9 +51,9 @@ else
 		{
 			if(val != 'Y')
 				BX('confirmorder').value = 'N';
-			
+
 			var orderForm = BX('ORDER_FORM');
-			
+
 			BX.ajax.submitComponentForm(orderForm, 'order_form_content', true);
 			BX.submit(orderForm);
 
@@ -86,7 +86,7 @@ else
 			</script>
 			<?
 		}
-        
+
 		include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/person_type.php");
 		include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props.php");
 

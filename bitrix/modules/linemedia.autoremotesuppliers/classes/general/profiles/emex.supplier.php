@@ -1,5 +1,5 @@
 <?php
-
+ 
 /**
  * Linemedia Autoportal
  * Suppliers parser module
@@ -10,12 +10,12 @@
  *
  * @link    http://auto.linemedia.ru/
  */
-
+ 
 IncludeModuleLangFile(__FILE__);
-
+ 
 /**
  * link to service description - http://wsdoc.emex.ru/
- * Èíòåðôåéñ óäàë¸ííîãî ïîñòàâùèêà
+ * Ð˜Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹Ñ ÑƒÐ´Ð°Ð»Ñ‘Ð½Ð½Ð¾Ð³Ð¾ Ð¿Ð¾ÑÑ‚Ð°Ð²Ñ‰Ð¸ÐºÐ°
  * Class EmexRemoteSupplier
  */
 class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
@@ -24,16 +24,16 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
     const WSDL_BRAND_DICTIONARY_ADDRESS = 'http://ws.emex.ru/EmExDictionaries.asmx?WSDL';
     const WSDL_TIMEOUT = 3;
     
-    // Ôèëüòð ïî çàìåíàì.
+    // Ð¤Ð¸Ð»ÑŒÑ‚Ñ€ Ð¿Ð¾ Ð·Ð°Ð¼ÐµÐ½Ð°Ð¼.
     const PARAM_SUBSTLEVEL_ORIGINAL = 'OriginalOnly';
     const PARAM_SUBSTLEVEL_ALL = 'All';
     
-    // Ôèëüòð ïî çàìåíàì.
+    // Ð¤Ð¸Ð»ÑŒÑ‚Ñ€ Ð¿Ð¾ Ð·Ð°Ð¼ÐµÐ½Ð°Ð¼.
     const PARAM_SUBSTFILTER_NONE = 'None';
     const PARAM_SUBSTFILTER_ORIGINAL_AND_REPLASES = 'FilterOriginalAndReplacements';
     const PARAM_SUBSTFILTER_ORIGINAL_AND_ANALOGS = 'FilterOriginalAndAnalogs';
     
-    // Òèï äîñòàâêè.
+    // Ð¢Ð¸Ð¿ Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸.
     const PARAM_DELYVERY_PRI = 'PRI';
     const PARAM_DELYVERY_ALT = 'ALT';
     
@@ -44,10 +44,10 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
     public static $title = 'Emex';
     
     /**
-     * public - äëÿ âûâîäà â íàñòðîéêà
+     * public - Ð´Ð»Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð° Ð² Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ°
      * @var string
      */
-    public $url = 'http://www.emex.ru'; // õ
+    public $url = 'http://www.emex.ru'; // Ñ…
     
     /**
      * @var
@@ -55,58 +55,58 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
     protected $soap;
     
     /**
-     * Ñîçäàäèì îáúåêò
+     * Ð¡Ð¾Ð·Ð´Ð°Ð´Ð¸Ð¼ Ð¾Ð±ÑŠÐµÐºÑ‚
      */
     public function __construct()
     {
         parent::__construct();
     }
-
+ 
     /**
-     * Èíèöèàëèçàöèÿ.
+     * Ð˜Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ.
      * 
      * @throws Exception
      */
     public function init()
     {   
-		/*
-		 * Get default and set new timeout for soap request.
-		 */
-		$defaultTimeout = ini_get('default_socket_timeout');
-		ini_set("default_socket_timeout", self::WSDL_TIMEOUT);
-
-		if (!class_exists('SoapClient')) {
-			throw new Exception('SOAP module is not installed');
-		}
-		
-		/*
-		 * Create new soap client.
-		 */
+                /*
+                 * Get default and set new timeout for soap request.
+                 */
+                $defaultTimeout = ini_get('default_socket_timeout');
+                ini_set("default_socket_timeout", self::WSDL_TIMEOUT);
+ 
+                if (!class_exists('SoapClient')) {
+                        throw new Exception('SOAP module is not installed');
+                }
+                
+                /*
+                 * Create new soap client.
+                 */
         try {
-	        $this->soap = new SoapClient(self::WSDL_ADDRESS, array('trace' => false, 'soap_version' => SOAP_1_2));
+                $this->soap = new SoapClient(self::WSDL_ADDRESS, array('trace' => false, 'soap_version' => SOAP_1_2));
         } catch(SoapFault $e) {
-	        throw new Exception('WSDL error: ' . $e->GetMessage());
+                throw new Exception('WSDL error: ' . $e->GetMessage());
         }
-
-		/*
-		 * Set default timeout for soap request.
-		 */
-		ini_set("default_socket_timeout", $defaultTimeout);
+ 
+                /*
+                 * Set default timeout for soap request.
+                 */
+                ini_set("default_socket_timeout", $defaultTimeout);
     }
-
-
+ 
+ 
     /**
-     * Àâòîðèçàöèÿ.
+     * ÐÐ²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ.
      */
     public function login()
     {
-
+ 
     }
-	
+        
     
     /**
      * http://ws.emex.ru/EmExDictionaries.asmx?op=GetMakes
-     * áðåíäû êîäèðóþòñÿ ïî ñâîåé ñèñòåìå, à íå èñïîëüçóþòñÿ ïî íàçâàíèÿì.
+     * Ð±Ñ€ÐµÐ½Ð´Ñ‹ ÐºÐ¾Ð´Ð¸Ñ€ÑƒÑŽÑ‚ÑÑ Ð¿Ð¾ ÑÐ²Ð¾ÐµÐ¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ, Ð° Ð½Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑŽÑ‚ÑÑ Ð¿Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸ÑÐ¼.
      * 
      * @return array
      * @throws Exception
@@ -114,7 +114,7 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
     public function loadMakers($login, $password)
     {
         require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.autoremotesuppliers/classes/general/cache.php');
-
+ 
         $lmCache = LinemediaAutoSimpleCache::create(array('path' => '/lm_auto/remote_suppliers/'));
         $life_time = 60*60*24;
         $cache_id = 'emex-makers';
@@ -127,7 +127,7 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                     'login' => $login,
                     'password' => $password
                 );
-
+ 
                 $response = $soap->__soapCall('GetMakesDict', array($params));
             } catch (Exception $e) {
                 $error = trim($e->GetMessage());
@@ -136,24 +136,24 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                 }
                 throw $e;
             }
-
+ 
             $result = array();
             foreach ( (array)$response->GetMakesDictResult->ShortMakeInfo as $maker) {
                 $result[ mb_strtoupper(strval($maker->MakeName)) ] = strval($maker->MakeLogo);
             }
             unset($soap);
-
+ 
             $lmCache->setData($cache_id, $result);
         }
         return $result;
     }
-	
+        
     
     /**
-     * Ïîèñê.
-     * Ñíà÷àëà ìû ïîëó÷àåì ñòðàíè÷êó ñ ðåçóëüòàòàìè ïîèñêà.
-     * ×òîáû ïîëó÷èòü äàííûå èç "îñòàëüíûå ïðåäëîæåíèÿ îò", íàäî îòïðàâèòü íà êàæäîå ïî çàïðîñó.
-     * ñ óêàçàíèå áðåíäà è shkey.PGr (Original / ReplacementNonOriginal / ReplacementOriginal).
+     * ÐŸÐ¾Ð¸ÑÐº.
+     * Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð¼Ñ‹ Ð¿Ð¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ‡ÐºÑƒ Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°Ð¼Ð¸ Ð¿Ð¾Ð¸ÑÐºÐ°.
+     * Ð§Ñ‚Ð¾Ð±Ñ‹ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· "Ð¾ÑÑ‚Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¾Ñ‚", Ð½Ð°Ð´Ð¾ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ Ð½Ð° ÐºÐ°Ð¶Ð´Ð¾Ðµ Ð¿Ð¾ Ð·Ð°Ð¿Ñ€Ð¾ÑÑƒ.
+     * Ñ ÑƒÐºÐ°Ð·Ð°Ð½Ð¸Ðµ Ð±Ñ€ÐµÐ½Ð´Ð° Ð¸ shkey.PGr (Original / ReplacementNonOriginal / ReplacementOriginal).
      * 
      * @throws Exception
      */
@@ -161,15 +161,15 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
     {
         $login    = $this->profile_options['LOGIN'];
         $password = $this->profile_options['PASSWORD'];
-
-
+ 
+ 
         $brand_map = $this->loadMakers($login, $password);
-
+ 
         $logo = '';
         if (!empty($this->extra['e_ml'])) {
             $logo = $this->extra['e_ml'];
         } else if(!empty($this->brand_title)) {
-
+ 
             if(array_key_exists($this->brand_title, $brand_map)) {
                 $logo = $brand_map[ $this->brand_title ];
             } else if(array_key_exists(mb_strtoupper($this->brand_title), $brand_map)) {
@@ -181,27 +181,27 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
         }
         
         /*
-         * Ïàðàìåòðû äëÿ ïîèñêà äåòàëè.
+         * ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ Ð´Ð»Ñ Ð¿Ð¾Ð¸ÑÐºÐ° Ð´ÐµÑ‚Ð°Ð»Ð¸.
          */
         $param = array(
-            'login' 			 => $login,
-            'password' 			 => $password,
-            'makeLogo' 			 => $logo,
-            'detailNum'			 => $this->query,
-            'substLevel' 		 => self::PARAM_SUBSTLEVEL_ALL,
-            'substFilter'		 => $this->profile_options['FILTER_BY_TYPE_SPARES'] ? : self::PARAM_SUBSTFILTER_NONE,
+            'login'                      => $login,
+            'password'                   => $password,
+            'makeLogo'                   => $logo,
+            'detailNum'                  => $this->query,
+            'substLevel'                 => self::PARAM_SUBSTLEVEL_ALL,
+            'substFilter'                => $this->profile_options['FILTER_BY_TYPE_SPARES'] ? : self::PARAM_SUBSTFILTER_NONE,
             'deliveryRegionType' => self::PARAM_DELYVERY_PRI
         );
-		
+                
         /*
-         * Íåêîòîðûå ââîäÿò ïàðîëü ðóññêèìè áóêâàìè.
+         * ÐÐµÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð²Ð²Ð¾Ð´ÑÑ‚ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ Ñ€ÑƒÑÑÐºÐ¸Ð¼Ð¸ Ð±ÑƒÐºÐ²Ð°Ð¼Ð¸.
          */
         if (!defined('BX_UTF') || BX_UTF !== true) {
             $param['password']   = iconv('CP1251', 'UTF-8', $param['password']);
         }
-		
+                
         try {
-            $response = $this->soap->__soapCall('FindDetailAdv3', array($param));
+            $response = $this->soap->__soapCall('FindDetailAdv4', array($param));
         } catch (Exception $e) {
             $error = trim($e->GetMessage());
             if (strpos($error, 'AccessProvider') !== false) {
@@ -209,47 +209,47 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
             }
             throw $e;
         }
-
-        if ($response->FindDetailAdv3Result->IsSuccess == false) {
-            throw new Exception(strval($response->FindDetailAdv3Result->ErrorMessage), LM_AUTO_DEBUG_USER_ERROR);
+ 
+        if ($response->FindDetailAdv4Result->IsSuccess == false) {
+            throw new Exception(strval($response->FindDetailAdv4Result->ErrorMessage), LM_AUTO_DEBUG_USER_ERROR);
         }
         /*
-         * Äâà âàðèàíòà òîãî, êàê ïðèäóò äàííûå. Â îäíîì ñëó÷àå â $xml->FindDetailAdv2Result->DetailItem
-         * îêàæåòñÿ ïðîñòî ýëåìåíò ñ ïðåäëîæåíèÿìè, à âî âòîðîì - ìàññèâ ýëåìåíòîâ ñ ïðåäëîæåíèÿìè.
-         * Ïðèìåð ïåðâîãî ñëó÷àÿ - àðòèêóë 93196389.
+         * Ð”Ð²Ð° Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚Ð° Ñ‚Ð¾Ð³Ð¾, ÐºÐ°Ðº Ð¿Ñ€Ð¸Ð´ÑƒÑ‚ Ð´Ð°Ð½Ð½Ñ‹Ðµ. Ð’ Ð¾Ð´Ð½Ð¾Ð¼ ÑÐ»ÑƒÑ‡Ð°Ðµ Ð² $xml->FindDetailAdv2Result->DetailItem
+         * Ð¾ÐºÐ°Ð¶ÐµÑ‚ÑÑ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ñ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸ÑÐ¼Ð¸, Ð° Ð²Ð¾ Ð²Ñ‚Ð¾Ñ€Ð¾Ð¼ - Ð¼Ð°ÑÑÐ¸Ð² ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ñ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸ÑÐ¼Ð¸.
+         * ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ ÑÐ»ÑƒÑ‡Ð°Ñ - Ð°Ñ€Ñ‚Ð¸ÐºÑƒÐ» 93196389.
          */
 //         if (!is_array($response->FindDetailAdv3Result->Details)) {
 //             $response = $response->FindDetailAdv3Result;
 //         } else {
-            $response = (array)$response->FindDetailAdv3Result->Details->SoapDetailItem;
+            $response = (array)$response->FindDetailAdv4Result->Details->SoapDetailItem;
 //         }
-
+ 
         /*
-            ìîæåò âåðíóòüñÿ îäèí ýëåìåíò, à ìîæåò --ìàññèâ. îòëè÷èòü óäà¸òñÿ èìåííî ïðîâåðêîé, îáúåêò ëåæèò â ïåðâîì ýëåìåíòå èëè íåò.
-            åñëè ïåðâûé ýëåìåíò -- íå îáúåêò, òî ó íàñ èäóò ñðàçó äàííûå äåòàëè, ïîýòîìó íàäî ïðèâåñòè ê ïðèâû÷íîìó ìàññèâó äåòàëåé.
+            Ð¼Ð¾Ð¶ÐµÑ‚ Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð¾Ð´Ð¸Ð½ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚, Ð° Ð¼Ð¾Ð¶ÐµÑ‚ --Ð¼Ð°ÑÑÐ¸Ð². Ð¾Ñ‚Ð»Ð¸Ñ‡Ð¸Ñ‚ÑŒ ÑƒÐ´Ð°Ñ‘Ñ‚ÑÑ Ð¸Ð¼ÐµÐ½Ð½Ð¾ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¾Ð¹, Ð¾Ð±ÑŠÐµÐºÑ‚ Ð»ÐµÐ¶Ð¸Ñ‚ Ð² Ð¿ÐµÑ€Ð²Ð¾Ð¼ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ðµ Ð¸Ð»Ð¸ Ð½ÐµÑ‚.
+            ÐµÑÐ»Ð¸ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ -- Ð½Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚, Ñ‚Ð¾ Ñƒ Ð½Ð°Ñ Ð¸Ð´ÑƒÑ‚ ÑÑ€Ð°Ð·Ñƒ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð´ÐµÑ‚Ð°Ð»Ð¸, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð½Ð°Ð´Ð¾ Ð¿Ñ€Ð¸Ð²ÐµÑÑ‚Ð¸ Ðº Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡Ð½Ð¾Ð¼Ñƒ Ð¼Ð°ÑÑÐ¸Ð²Ñƒ Ð´ÐµÑ‚Ð°Ð»ÐµÐ¹.
         */
         if ( !empty($response) && !is_object($response[0])) {
             $response = array( 0 => $response );
         }
         $parts = array();
-
+ 
         /*
-         * ÐÅÇÅÐÂÍÛÅ ÊÀÒÀËÎÃÈ
-         * Ñêîðåå âñåãî êàòàëîãè ìû óæå èñêàëè
-         * Íî åñëè êòî-òî åù¸ âåðíóë êàòàëîãè, íàäî ïîêàçàòü, ÷òî äëÿ ýòîé äåòàëè
-         * åñòü èìåííî ó ýòîãî ïîñòàâùèêà,
-         * ïîýòîìó âñ¸ ðàâíî èõ ïðîïèøåì
+         * Ð Ð•Ð—Ð•Ð Ð’ÐÐ«Ð• ÐšÐÐ¢ÐÐ›ÐžÐ“Ð˜
+         * Ð¡ÐºÐ¾Ñ€ÐµÐµ Ð²ÑÐµÐ³Ð¾ ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³Ð¸ Ð¼Ñ‹ ÑƒÐ¶Ðµ Ð¸ÑÐºÐ°Ð»Ð¸
+         * ÐÐ¾ ÐµÑÐ»Ð¸ ÐºÑ‚Ð¾-Ñ‚Ð¾ ÐµÑ‰Ñ‘ Ð²ÐµÑ€Ð½ÑƒÐ» ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³Ð¸, Ð½Ð°Ð´Ð¾ Ð¿Ð¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ, Ñ‡Ñ‚Ð¾ Ð´Ð»Ñ ÑÑ‚Ð¾Ð¹ Ð´ÐµÑ‚Ð°Ð»Ð¸
+         * ÐµÑÑ‚ÑŒ Ð¸Ð¼ÐµÐ½Ð½Ð¾ Ñƒ ÑÑ‚Ð¾Ð³Ð¾ Ð¿Ð¾ÑÑ‚Ð°Ð²Ñ‰Ð¸ÐºÐ°,
+         * Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð²ÑÑ‘ Ñ€Ð°Ð²Ð½Ð¾ Ð¸Ñ… Ð¿Ñ€Ð¾Ð¿Ð¸ÑˆÐµÐ¼
          */
         $reserve_catalogs = array();
-
+ 
         foreach ($response as $part) {
-
-            if (is_object($part)) {//åñëè ïðèøëî ìíîãî äåòàëåé -- ó íàñ part áóäåò îáúåêòîì, èíà÷å --ìàññèâîì.
+ 
+            if (is_object($part)) {//ÐµÑÐ»Ð¸ Ð¿Ñ€Ð¸ÑˆÐ»Ð¾ Ð¼Ð½Ð¾Ð³Ð¾ Ð´ÐµÑ‚Ð°Ð»ÐµÐ¹ -- Ñƒ Ð½Ð°Ñ part Ð±ÑƒÐ´ÐµÑ‚ Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð¼, Ð¸Ð½Ð°Ñ‡Ðµ --Ð¼Ð°ÑÑÐ¸Ð²Ð¾Ð¼.
                 $part   = get_object_vars($part);
             }
-
+ 
             /*
-             * Óíèêàëüíàÿ extra äëÿ äåòàëè
+             * Ð£Ð½Ð¸ÐºÐ°Ð»ÑŒÐ½Ð°Ñ extra Ð´Ð»Ñ Ð´ÐµÑ‚Ð°Ð»Ð¸
              */
             $extra = $this->extra;
             $extra['e_ml'] = strval($part['MakeLogo']);
@@ -260,24 +260,24 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
             $title          = strval($part['DetailNameRus']);
             $quantity       = intval($part['Quantity']);
             
-
+ 
             $delivery_time  = $this->profile_options['DELIVERY_TIME'] == 'expected' ? intval($part['ADDays']) : intval($part['DeliverTimeGuaranteed']);
             $g_delivery_time  = intval($part['DeliverTimeGuaranteed']);
             $date_update    = '';
             $multiplication_factor = max(1, intval($part["LotQuantity"]));
-
+ 
             /*
-                $MESS['LM_AUTO_SEARCH_GROUP_N'] = 'Èñêîìûé àðòèêóë';
-                $MESS['LM_AUTO_SEARCH_GROUP_0'] = 'Íåîðèãèíàëüíûå àíàëîãè';
-                $MESS['LM_AUTO_SEARCH_GROUP_1'] = 'OEM àíàëîãè';
-                $MESS['LM_AUTO_SEARCH_GROUP_2'] = 'Ïðîäàæíûå íîìåðà';
-                $MESS['LM_AUTO_SEARCH_GROUP_3'] = 'Ñðàâíèòåëüíûå íîìåðà';
-                $MESS['LM_AUTO_SEARCH_GROUP_4'] = 'Çàìåíû';
-                $MESS['LM_AUTO_SEARCH_GROUP_5'] = 'Çàìåíû óñòàðåâøåãî àðòèêóëà';
+                $MESS['LM_AUTO_SEARCH_GROUP_N'] = 'Ð˜ÑÐºÐ¾Ð¼Ñ‹Ð¹ Ð°Ñ€Ñ‚Ð¸ÐºÑƒÐ»';
+                $MESS['LM_AUTO_SEARCH_GROUP_0'] = 'ÐÐµÐ¾Ñ€Ð¸Ð³Ð¸Ð½Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð°Ð½Ð°Ð»Ð¾Ð³Ð¸';
+                $MESS['LM_AUTO_SEARCH_GROUP_1'] = 'OEM Ð°Ð½Ð°Ð»Ð¾Ð³Ð¸';
+                $MESS['LM_AUTO_SEARCH_GROUP_2'] = 'ÐŸÑ€Ð¾Ð´Ð°Ð¶Ð½Ñ‹Ðµ Ð½Ð¾Ð¼ÐµÑ€Ð°';
+                $MESS['LM_AUTO_SEARCH_GROUP_3'] = 'Ð¡Ñ€Ð°Ð²Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð½Ð¾Ð¼ÐµÑ€Ð°';
+                $MESS['LM_AUTO_SEARCH_GROUP_4'] = 'Ð—Ð°Ð¼ÐµÐ½Ñ‹';
+                $MESS['LM_AUTO_SEARCH_GROUP_5'] = 'Ð—Ð°Ð¼ÐµÐ½Ñ‹ ÑƒÑÑ‚Ð°Ñ€ÐµÐ²ÑˆÐµÐ³Ð¾ Ð°Ñ€Ñ‚Ð¸ÐºÑƒÐ»Ð°';
                 $MESS['LM_AUTO_SEARCH_GROUP_6'] = 'EAN';
-                $MESS['LM_AUTO_SEARCH_GROUP_10'] = 'Äðóãîå';
+                $MESS['LM_AUTO_SEARCH_GROUP_10'] = 'Ð”Ñ€ÑƒÐ³Ð¾Ðµ';
             */
-
+ 
             switch ($part['PriceGroup']) {
                 case 'Original':
                     $analog_type = 'N';
@@ -294,28 +294,28 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                 default:
                     $analog_type = 10;
             }
-
+ 
             /*
              * #6788, #9888
-             * ïî÷åìó òî â èñêîìûé àðòèêóë ìîãóò ïîïàäàòü ëèøíèå áðåíäû, íàâåðíîå çà ñ÷åò àíàëîãîâ
-			 * à âîçìîæíî, ïðîáëåìà áûëà â òîì ÷òî òàáëèöà brand_map ñîäåðæèò íå âñå áðåíäû - ñîîòâ. îñóùåñòâëÿëñÿ ïîèñê áåç áðåíäîâ
+             * Ð¿Ð¾Ñ‡ÐµÐ¼Ñƒ Ñ‚Ð¾ Ð² Ð¸ÑÐºÐ¾Ð¼Ñ‹Ð¹ Ð°Ñ€Ñ‚Ð¸ÐºÑƒÐ» Ð¼Ð¾Ð³ÑƒÑ‚ Ð¿Ð¾Ð¿Ð°Ð´Ð°Ñ‚ÑŒ Ð»Ð¸ÑˆÐ½Ð¸Ðµ Ð±Ñ€ÐµÐ½Ð´Ñ‹, Ð½Ð°Ð²ÐµÑ€Ð½Ð¾Ðµ Ð·Ð° ÑÑ‡ÐµÑ‚ Ð°Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²
+                         * Ð° Ð²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾, Ð¿Ñ€Ð¾Ð±Ð»ÐµÐ¼Ð° Ð±Ñ‹Ð»Ð° Ð² Ñ‚Ð¾Ð¼ Ñ‡Ñ‚Ð¾ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ð° brand_map ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ð½Ðµ Ð²ÑÐµ Ð±Ñ€ÐµÐ½Ð´Ñ‹ - ÑÐ¾Ð¾Ñ‚Ð². Ð¾ÑÑƒÑ‰ÐµÑÑ‚Ð²Ð»ÑÐ»ÑÑ Ð¿Ð¾Ð¸ÑÐº Ð±ÐµÐ· Ð±Ñ€ÐµÐ½Ð´Ð¾Ð²
              */
             if ($analog_type == 'N' && strlen($this->extra[hash("crc32", $this->profile_options['LMRSID'], false).'bt']) > 0 && strtoupper(trim($brand_title)) != strtoupper(trim($this->extra[hash("crc32", $this->profile_options['LMRSID'],
                     false).'bt']))) {
                 $analog_type = 0;
             }
-
+ 
             /*
-             * Èç-çà ýòîãî ïðè íàëè÷èè ñëîâîôîðì ïðè 2 çàïðîñàõ ïðîïàäàëè îðèã. äåòàëè. Çàäà÷ 12706
+             * Ð˜Ð·-Ð·Ð° ÑÑ‚Ð¾Ð³Ð¾ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ ÑÐ»Ð¾Ð²Ð¾Ñ„Ð¾Ñ€Ð¼ Ð¿Ñ€Ð¸ 2 Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°Ñ… Ð¿Ñ€Ð¾Ð¿Ð°Ð´Ð°Ð»Ð¸ Ð¾Ñ€Ð¸Ð³. Ð´ÐµÑ‚Ð°Ð»Ð¸. Ð—Ð°Ð´Ð°Ñ‡ 12706
              */
             /*
             if ($analog_type == 'N' && strlen($this->extra['e_ml']) > 0 && strtoupper(trim($brand_map[ $this->brand_title ])) != strtoupper(trim($this->extra['e_ml']))) {
                 $analog_type = 0;
             }
             */
-
+ 
             /*
-             * Ðåçåðâíûå êàòàëîãè
+             * Ð ÐµÐ·ÐµÑ€Ð²Ð½Ñ‹Ðµ ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³Ð¸
              */
             if (LinemediaAutoPartsHelper::clearArticle($article) == $this->query) {
                 $reserve_catalogs[$brand_title] = array(
@@ -325,7 +325,7 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                     'extra'=> array('e_ml'=>$part['MakeLogo'])
                 );
             }
-
+ 
             $itempart = array(
                 'id'                => 'emex',
                 'article'           => LinemediaAutoPartsHelper::clearArticle($article),
@@ -333,40 +333,40 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                 'title'             => $title,
                 'price'             => $price,
                 'quantity'          => $quantity,
-                'delivery_time'     => $delivery_time * 24, // â ÷àñàõ
-                'g_delivery_time'     => $g_delivery_time * 24, // â ÷àñàõ
+                'delivery_time'     => $delivery_time * 24, // Ð² Ñ‡Ð°ÑÐ°Ñ…
+                'g_delivery_time'     => $g_delivery_time * 24, // Ð² Ñ‡Ð°ÑÐ°Ñ…
                 'date_update'       => $date_update,
                 'data-source'       => self::$title,
                 'multiplication_factor' =>$multiplication_factor
             );
-
+ 
             $extra['hash'] = md5($part['MakeLogo'].'|'.$part['DetailNum'].'|'.$part['PriceLogo'].'|'.$part['DestinationLogo']);
-
+ 
             $itempart['extra'] = $extra;
-
+ 
             $parts['analog_type_' . $analog_type] []= $itempart;
         }
-
-
+ 
+ 
         /*
-         * Òèï îòâåòà
+         * Ð¢Ð¸Ð¿ Ð¾Ñ‚Ð²ÐµÑ‚Ð°
          */
         $this->response_type = count($reserve_catalogs) > 1 ? 'catalogs' : 'parts';
         if (count($reserve_catalogs) <= 1 && count($parts) == 0) {
             $this->response_type = '404';
         }
-
+ 
         $this->parts = $parts;
-		
+                
         /*
-         * Ðåçåðâíûå êàòàëîãè
+         * Ð ÐµÐ·ÐµÑ€Ð²Ð½Ñ‹Ðµ ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³Ð¸
          */
         $this->catalogs = array_values($reserve_catalogs);
     }
-
+ 
     
     /**
-     * Ïîëó÷èòü ìàêñèìóì èíôîðìàöèè î äåòàëè (à îñîáåííî öåíó) îñíîâûâàÿñü íà òîì, ÷òî ýòà çàï÷àñòü äàííîãî ïîñòàâùèêà è ïðèøëà èç ïîèñêà.
+     * ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð¼Ð°ÐºÑÐ¸Ð¼ÑƒÐ¼ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð´ÐµÑ‚Ð°Ð»Ð¸ (Ð° Ð¾ÑÐ¾Ð±ÐµÐ½Ð½Ð¾ Ñ†ÐµÐ½Ñƒ) Ð¾ÑÐ½Ð¾Ð²Ñ‹Ð²Ð°ÑÑÑŒ Ð½Ð° Ñ‚Ð¾Ð¼, Ñ‡Ñ‚Ð¾ ÑÑ‚Ð° Ð·Ð°Ð¿Ñ‡Ð°ÑÑ‚ÑŒ Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð¿Ð¾ÑÑ‚Ð°Ð²Ñ‰Ð¸ÐºÐ° Ð¸ Ð¿Ñ€Ð¸ÑˆÐ»Ð° Ð¸Ð· Ð¿Ð¾Ð¸ÑÐºÐ°.
      * 
      * @param $data
      * @return mixed
@@ -375,17 +375,17 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
     public function getPartData($data)
     {
         $hash = $data['extra']['hash'];
-
+ 
         $this->query = $data['article'];
         $this->brand_title = $data['brand_title'];
         $this->extra = $data['extra'];
-
+ 
         $this->init();
-
-        // Âûïîëíèòü â ëþáîì ñëó÷àå äëÿ ëîãèíà è ïîëó÷åíèÿ id user
+ 
+        // Ð’Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ Ð² Ð»ÑŽÐ±Ð¾Ð¼ ÑÐ»ÑƒÑ‡Ð°Ðµ Ð´Ð»Ñ Ð»Ð¾Ð³Ð¸Ð½Ð° Ð¸ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ id user
         $this->search();
-
-        // Íàéä¸ì èìåííî ýòó äåòàëü
+ 
+        // ÐÐ°Ð¹Ð´Ñ‘Ð¼ Ð¸Ð¼ÐµÐ½Ð½Ð¾ ÑÑ‚Ñƒ Ð´ÐµÑ‚Ð°Ð»ÑŒ
         foreach ($this->parts as $group => $parts) {
             foreach ($parts as $part) {
                 if ($part['extra']['hash'] == $hash) {
@@ -393,13 +393,13 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                 }
             }
         }
-
+ 
         throw new Exception(self::$title.': '.'Remote part not found');
     }
-
+ 
     
     /**
-     * Ïîëó÷åíèå êîíôèãà.
+     * ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð°.
      * 
      * @return array
      */
@@ -415,22 +415,22 @@ class EmexRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                 'type' => 'password',
             ),
             'DELIVERY_TIME' => array(
-	            'title' => GetMessage('DELIVERY_TIME'),
-	            'type' => 'list',
-	            'values' => array('expected'=>GetMessage('DELIVERY_TIME_EXPECTED'),'guaranteed'=>GetMessage('DELIVERY_TIME_GUARANTEED'))
+                    'title' => GetMessage('DELIVERY_TIME'),
+                    'type' => 'list',
+                    'values' => array('expected'=>GetMessage('DELIVERY_TIME_EXPECTED'),'guaranteed'=>GetMessage('DELIVERY_TIME_GUARANTEED'))
             ),
             
             'FILTER_BY_TYPE_SPARES' => array(
                 'title' => GetMessage('FILTER'),
-            	'type' => 'list',
+                'type' => 'list',
                 'values' => array(
                     'None' => GetMessage('NO_FILTER'),
                     'FilterOriginalAndReplacements' => GetMessage('ONLY_SOUGHT_ARTICLE_NEW_REPLACMENT'),
                     'FilterOriginalAndAnalogs' => GetMessage('ONLY_SOUGHT_ARTICLE_ANALOGS')
                 )
             )
-
+ 
         );
     }
-
+ 
 }

@@ -193,3 +193,7 @@
     height: auto;
     width: auto;
 }
+
+.red-placeholder::-webkit-input-placeholder {
+    color: red;
+}

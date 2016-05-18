@@ -9,7 +9,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Оригинальный каталог", 
-		"http://avtox24.auto2d.com/", 
+		"http://avtox24.auto2d.com/catalog/type/9", 
 		Array(), 
 		Array("ICON"=>"original"), 
 		"" 

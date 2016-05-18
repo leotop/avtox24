@@ -80,6 +80,10 @@ foreach ($suppliers_res as $supplier) {
 	$suppliers[$supplier['PROPS']['supplier_id']['VALUE']] = $supplier;
 }
 
+$events = GetModuleEvents("linemedia.auto", "AfterGetSuppliersList");
+while ($arEvent = $events->Fetch()) {
+    ExecuteModuleEventEx($arEvent, array(&$suppliers));
+}
 
 /*
  * Доступные протоколы
@@ -216,10 +220,10 @@ if ($ID > 0) {
     }
 
     $task = LinemediaAutoTask::GetByID($ID);
-	$task = $task->Fetch();	
-	
+	$task = $task->Fetch();
+
 	$supplierId = $task['supplier_id'];
-	
+
     $task['connection'] = unserialize(strVal($task['connection']));
     $task['conversion'] = unserialize(strVal($task['conversion']));
 
@@ -315,8 +319,8 @@ if ((strlen($save) > 0 || strlen($apply) > 0) && $REQUEST_METHOD == "POST" && $l
 			$column_replacements_all[$column] = $replacement;
 		}
 	}
-	
-	
+
+
 	$source_resave = (bool) $_POST['conversion']['source_resave'];
 
 	$conversion = array(
@@ -471,6 +475,12 @@ if ($ID > 0 && $linemedia_ModulePermissions >= "W" && !in_array($userPermissions
 		"ICON" => "btn_delete"
     );
 }
+
+$events = GetModuleEvents("linemedia.auto", "BeforeTaskAddShowMenu");
+while ($arEvent = $events->Fetch()) {
+    ExecuteModuleEventEx($arEvent, array(&$aMenu));
+}
+
 $context = new CAdminContextMenu($aMenu);
 $context->Show();
 ?>
@@ -503,7 +513,16 @@ $aTabs = array(
 if($has_shedule_tab) {
 	$aTabs[] = array("DIV" => "edit4", "TAB" => GetMessage("LM_AUTO_TAB_SHEDULE"), "TITLE" => GetMessage("LM_AUTO_TAB_SHEDULE"));
 }
-if($userPermissions == LM_AUTO_MAIN_ACCESS_FULL) {
+
+
+$showAccessTab = true;
+$events = GetModuleEvents("linemedia.auto", "BeforeTasksAddAccessTabShow");
+while ($arEvent = $events->Fetch()) {
+    if(!ExecuteModuleEventEx($arEvent, array())) {
+        $showAccessTab = false;
+    }
+}
+if($showAccessTab && $userPermissions == LM_AUTO_MAIN_ACCESS_FULL) {
     $aTabs[] = array("DIV" => "rights", "TAB" => GetMessage("LM_AUTO_TAB_RIGHTS"), "TITLE" => GetMessage("LM_AUTO_TAB_RIGHTS"));
 }
 
@@ -539,7 +558,7 @@ $tabControl->BeginNextTab();
 			<select name="supplier_id" <?= in_array($userPermissions, $readAccess) ? 'disabled' : ''; ?>>
 			<? foreach ($suppliers as $sid => $supplier) { ?>
 				<option value="<?= htmlspecialchars($sid) ?>" <?= $task['supplier_id'] == $sid ? 'selected' : '' ?>>
-				    <?= htmlspecialchars($supplier['NAME']) ?>
+				    <?= htmlspecialchars($supplier['NAME'])?:filter_var($supplier['NAME'], FILTER_SANITIZE_STRING) ?>
 			    </option>
 			<? } ?>
 			</select>
@@ -566,7 +585,7 @@ $tabControl->BeginNextTab();
 			<select id="protocol" name="protocol" <?= in_array($userPermissions, $readAccess) ? 'disabled' : ''; ?> >
     			<? foreach ($protocols as $pid => $protocol) { ?>
     				<option value="<?= htmlspecialchars($pid) ?>" <?= ($task['protocol'] == $pid) ? 'selected' : '' ?><?= ($protocol['available'])?'':' disabled' ?>>
-    				    <?= htmlspecialchars($protocol['title']) ?>
+    				    <?=htmlspecialchars($protocol['title'])?:filter_var($protocol['title'], FILTER_SANITIZE_STRING)?>
     			    </option>
     			<? } ?>
 			</select>
@@ -859,7 +878,15 @@ foreach ($protocols as $pid => $protocol) {
 
 <? } // if($has_shedule_tab) ?>
 <?
-if($userPermissions == LM_AUTO_MAIN_ACCESS_FULL) {
+$showAccessTab = true;
+$events = GetModuleEvents("linemedia.auto", "BeforeTasksAddAccessTabShow");
+while ($arEvent = $events->Fetch()) {
+    if(!ExecuteModuleEventEx($arEvent, array())) {
+        $showAccessTab = false;
+    }
+}
+
+if($showAccessTab && $userPermissions == LM_AUTO_MAIN_ACCESS_FULL) {
     $tabControl->BeginNextTab();
     $lm_rights->showRightsTab($task['id']);
 }
@@ -870,7 +897,7 @@ if($userPermissions == LM_AUTO_MAIN_ACCESS_FULL) {
 
 
 if(!in_array($userPermissions, $readAccess)) {
-   
+
    $tabControl->Buttons(array(
        "disabled" => ($linemedia_ModulePermissions < "W"),
        "back_url" => "/bitrix/admin/" . $arPageSettings['LIST_PAGE'] . "?lang=".LANG.GetFilterParams("filter_")

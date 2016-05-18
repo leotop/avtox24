@@ -392,6 +392,25 @@ class LinemediaAutoCustomDiscount
         $supplier_id            = $this->part->get('supplier_id');
         $base_price             = $this->part->get('price');
 
+
+        /*
+         * Создаём событие
+         */
+        if(!isset(self::$cache['events']['BeforeItemPriceCalculate'])) {
+            $events = GetModuleEvents("linemedia.auto", "BeforeItemPriceCalculate");
+            while ($arEvent = $events->Fetch()) {
+                self::$cache['events']['BeforeItemPriceCalculate'][] = $arEvent;
+            }
+        }
+        $events = self::$cache['events']['BeforeItemPriceCalculate'];
+
+        foreach ($events AS $arEvent) {
+            ExecuteModuleEventEx($arEvent, array(
+                &$this->part, &$article, &$brand_title, &$user_id, &$groups, &$supplier_id, &$base_price
+            ));
+        }
+
+
         // Скидка применяется к оригинальному бренду.
         if (COption::getOptionString('linemedia.auto', 'LM_AUTO_MAIN_USE_WORDFORM_DISCOUNT') != 'Y' && !empty($original_brand_title)) {
             $brand_title = $original_brand_title;

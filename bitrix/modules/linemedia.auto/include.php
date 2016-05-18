@@ -123,6 +123,8 @@ $classes = array(
     'LinemediaAutoPartsHelper'              => "classes/general/parts_helper.php",
     'LinemediaAutoUserHelper'				=> 'classes/general/user_helper.php', // вспомогательный класс для работы с пользователями
     'LinemediaAutoFileHelper'               => "classes/general/file_helper.php",
+    'LinemediaIblockHelper'                 => 'classes/general/iblock_helper.php',
+    'LinemediaPictureHelper'                 => 'classes/general/picture_helper.php',
 
 
     'LinemediaAutoDirections'               => "classes/general/directions.php",

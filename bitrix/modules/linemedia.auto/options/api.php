@@ -1,7 +1,31 @@
 <?
 IncludeModuleLangFile(__FILE__);
 $LM_AUTO_MAIN_API_INFORM_TECDOC = COption::GetOptionString( 'linemedia.auto', 'LM_AUTO_MAIN_API_INFORM_TECDOC', 'Y' ) == 'Y';
-?>
+// TODO: доработать API linemedia с целью получения данных о редакции Автоэксперта
+	$example_response_array = array(
+		1	=> array(
+			'name' => 'Быстрый старт'
+		),
+		2 => array(
+			'name' => 'Профи'
+		),
+		3 => array(
+			'name' => 'Эксперт'
+		)
+	);
+	
+	$example_result_response = 1;
+	
+	$result = $example_response_array[$example_result_response]['name'];
+?><tr>
+    <td colspan="2">
+    	<?= BeginNote();?>
+	    <?=GetMessage('LM_AUTO_MAIN_API_TYPE_AUTOEXPERT')?><?= $result ?>
+	    <?= EndNote(); ?>
+    </td>
+</tr>
+
+
 <tr>
     <td colspan="2">
     	<?= BeginNote();?>
