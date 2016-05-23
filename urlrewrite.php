@@ -76,6 +76,12 @@ $arUrlRewrite = array(
 		"CONDITION" => "#^/auto/tecdoc/#",
 		"RULE" => "",
 		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
+		"PATH" => "/index.php",
+	),
+	array(
+		"CONDITION" => "#^/auto/tecdoc/#",
+		"RULE" => "",
+		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
 		"PATH" => "/auto/tecdoc/index.php",
 	),
 	array(
@@ -89,12 +95,6 @@ $arUrlRewrite = array(
 		"RULE" => "",
 		"ID" => "linemedia.auto:tecdoc.catalog2",
 		"PATH" => "/bitrix/templates/fast-start_blue/include/row_brands.php",
-	),
-	array(
-		"CONDITION" => "#^/auto/tecdoc/#",
-		"RULE" => "",
-		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
-		"PATH" => "/index.php",
 	),
 	array(
 		"CONDITION" => "#^/about/idea/#",

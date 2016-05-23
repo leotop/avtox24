@@ -9,14 +9,13 @@ $APPLICATION->SetPageProperty("title", "Avtox24");
 <h3> <b>8&nbsp;(495) 150-12-95</b>&nbsp;</h3>
 <h3></h3>
 <p>
- <span style="font-size: large; text-align: right;">8&nbsp;(499) 350-36-04&nbsp;</span>
 </p>
- <span style="font-size: large; text-align: right;">8&nbsp;(499) 705-93-62&nbsp;<br>
-</span><b style="font-size: large; text-align: right;"><br>
- </b>
 <p>
- <b>Адрес: &nbsp;</b><b style="font-size: large;">&nbsp;</b><b>127238</b>&nbsp;<b>г. Москва, Ильменский пр-д., д.1. стр1. оф 1</b>
+	<span style="font-size: large; text-align: right;">8&nbsp;(499) 350-36-04&nbsp;</span> <br>
+	<span style="font-size: large; text-align: right;">8&nbsp;(499) 705-93-62<br>
+ </span><span style="font-size: large; text-align: right;">8 (800) 333-98-51</span>
 </p>
+<b>Адрес: &nbsp;</b><b style="font-size: large;">&nbsp;</b><b>127238</b>&nbsp;<b>г. Москва, Ильменский пр-д., д.1. стр1. оф 1</b>
 <p>
  <a href="mailto:info@avtox24.ru">info@</a><a href="mailto:info@avtox24.ru">avtox24.ru</a>
 </p>

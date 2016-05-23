@@ -13,17 +13,18 @@ $arSelect = Array('ID','IBLOCK_ID','IBLOCK_SECTION_ID','DETAIL_PICTURE', "PROPER
         }
     }
     $newElement = new CIBlockElement;
-   // arshow(count($itemArticleProduct));    //14688
+    arshow(count($itemArticleProduct));    //8474
     foreach($itemArticleProduct as $key => $articleProduct){
-      //  if($key > 100 && $key < 200){
+        if($key > 500 && $key < 1000){
           //  arshow($articleProduct);
             $arLoadProductArray = Array(
                 "DETAIL_PICTURE" => CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/accessories/".$articleProduct['PROPERTY_CML2_ARTICLE_VALUE'].".JPEG"),
             );
-
+           arshow($arLoadProductArray);
+           arshow($articleProduct);
            $newElement->Update($articleProduct["ID"], $arLoadProductArray);
            $productId = $articleProduct["ID"];
-    //    }
+        }
     }
 ?>
 
