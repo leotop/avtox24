@@ -1,7 +1,7 @@
 <?
 $arTemplate = array (
-  'NAME' => 'avtox',
-  'DESCRIPTION' => 'Шаблон мосавтомаг',
+  'NAME' => 'avtox - NEW',
+  'DESCRIPTION' => 'шаблон с новой версткой',
   'SORT' => '',
   'TYPE' => '',
 );

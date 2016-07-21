@@ -23,19 +23,19 @@
 
 
 
-    <?$APPLICATION->SetAdditionalCSS('/bitrix/templates/'.SITE_TEMPLATE_ID.'/js/fancybox/jquery.fancybox-1.3.1.css');?>
+    <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/js/fancybox/jquery.fancybox-1.3.1.css');?>
     <?$APPLICATION->SetAdditionalCSS('http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic');?>
     <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . '/bootstrap/css/bootstrap.min.css');?>
     <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . '/js/jquery-1.8.2.min.js');?>
-    <?$APPLICATION->AddHeadScript('/bitrix/templates/'.SITE_TEMPLATE_ID.'/js/jquery.cookie.js');?>
+    <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.cookie.js');?>
 
     <?
         /*
         * Подключим зависимости для AJAX окон
         */
         $APPLICATION->SetAdditionalCSS('/bitrix/panel/main/popup.css');
-        $APPLICATION->AddHeadScript('/bitrix/templates/'.SITE_TEMPLATE_ID.'/script.js');
-        $APPLICATION->AddHeadScript('/bitrix/templates/'.SITE_TEMPLATE_ID.'/js/fancybox/jquery.fancybox-1.3.1.pack.js');
+        $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/script.js');
+        $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/fancybox/jquery.fancybox-1.3.1.pack.js');
         $APPLICATION->AddHeadScript('/bitrix/components/linemedia.auto/search.results/templates/.default/js/tablesorter.js');
         $APPLICATION->AddHeadScript('/bitrix/components/linemedia.auto/search.results/templates/.default/script.js');
         $APPLICATION->AddHeadScript('/bitrix/components/linemedia.auto/search.results/templates/.default/menu-script.js');
@@ -50,7 +50,7 @@
 
     <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . '/bootstrap/css/bootstrap-fileupload.css');?>
 
-    <?$APPLICATION->SetAdditionalCSS('/bitrix/templates/'.SITE_TEMPLATE_ID.'/styles_new.css');?>
+    <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles_new.css');?>
 
     <title><?$APPLICATION->ShowTitle()?></title>
 
@@ -205,11 +205,11 @@
                                 )
                             );?>
                         <div class="mobile-items-phone2">
-                            <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="/bitrix/templates/fast-start_blue_copy/images/watsapp.png" height="32" title="i.jpg"></a>
-                            <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="/bitrix/templates/fast-start_blue_copy/images/sms.png" height="32" title="i.jpg"></a>
-                            <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="/bitrix/templates/fast-start_blue_copy/images/viber.png" height="32" title="i.jpg"></a>
-                            <a href="skype:avtox24.ru?chat"><img class="" width="50" alt="phone" src="/bitrix/templates/fast-start_blue_copy/images/skype.png" height="32" title="i.jpg"></a>
-                            <a href="mailto:info@avtox24.ru"><img class="" width="50" alt="phone" src="/bitrix/templates/fast-start_blue_copy/images/email.png" height="32" title="i.jpg"></a>
+                            <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/watsapp.png" height="32" title="i.jpg"></a>
+                            <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/sms.png" height="32" title="i.jpg"></a>
+                            <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/viber.png" height="32" title="i.jpg"></a>
+                            <a href="skype:avtox24.ru?chat"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/skype.png" height="32" title="i.jpg"></a>
+                            <a href="mailto:info@avtox24.ru"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/email.png" height="32" title="i.jpg"></a>
 
 
                         </div>
