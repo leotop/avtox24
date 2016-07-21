@@ -31,16 +31,16 @@ $arUrlRewrite = array(
 		"PATH" => "/bitrix/services/ymarket/index.php",
 	),
 	array(
-		"CONDITION" => "#^/acrit.exportpro/(.*)#",
-		"RULE" => "path=\$1",
-		"ID" => "",
-		"PATH" => "/acrit.exportpro/index.php",
-	),
-	array(
 		"CONDITION" => "#^/personal/garage/vpn/#",
 		"RULE" => "",
 		"ID" => "linemedia.auto:personal.request.vin.iblock",
 		"PATH" => "/personal/garage/vpn/index.php",
+	),
+	array(
+		"CONDITION" => "#^/acrit.exportpro/(.*)#",
+		"RULE" => "path=\$1",
+		"ID" => "",
+		"PATH" => "/acrit.exportpro/index.php",
 	),
 	array(
 		"CONDITION" => "#^/auto/catalogs/oem/#",
@@ -76,25 +76,19 @@ $arUrlRewrite = array(
 		"CONDITION" => "#^/auto/tecdoc/#",
 		"RULE" => "",
 		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
-		"PATH" => "/index.php",
-	),
-	array(
-		"CONDITION" => "#^/auto/tecdoc/#",
-		"RULE" => "",
-		"ID" => "linemedia.autotecdoc:tecdoc.catalog2",
 		"PATH" => "/auto/tecdoc/index.php",
 	),
 	array(
 		"CONDITION" => "#^/auto/tecdoc/#",
 		"RULE" => "",
 		"ID" => "linemedia.auto:tecdoc.catalog2",
-		"PATH" => "/bitrix/templates/fast-start_blue_copy/include/row_brands.php",
+		"PATH" => "/bitrix/templates/fast-start_blue/include/row_brands.php",
 	),
 	array(
 		"CONDITION" => "#^/auto/tecdoc/#",
 		"RULE" => "",
 		"ID" => "linemedia.auto:tecdoc.catalog2",
-		"PATH" => "/bitrix/templates/fast-start_blue/include/row_brands.php",
+		"PATH" => "/bitrix/templates/fast-start_blue_copy/include/row_brands.php",
 	),
 	array(
 		"CONDITION" => "#^/about/idea/#",
@@ -109,16 +103,16 @@ $arUrlRewrite = array(
 		"PATH" => "/m/catalog/index.php",
 	),
 	array(
-		"CONDITION" => "#^/articles/#",
-		"RULE" => "",
-		"ID" => "bitrix:news",
-		"PATH" => "/articles/index.php",
-	),
-	array(
 		"CONDITION" => "#^/auto/vin/#",
 		"RULE" => "",
 		"ID" => "linemedia.auto:personal.request.vin.iblock",
 		"PATH" => "/auto/vin/index.php",
+	),
+	array(
+		"CONDITION" => "#^/articles/#",
+		"RULE" => "",
+		"ID" => "bitrix:news",
+		"PATH" => "/articles/index.php",
 	),
 	array(
 		"CONDITION" => "#^/catalog/#",
@@ -139,16 +133,16 @@ $arUrlRewrite = array(
 		"PATH" => "/forum/index.php",
 	),
 	array(
-		"CONDITION" => "#^/news/#",
-		"RULE" => "",
-		"ID" => "bitrix:news",
-		"PATH" => "/news/index.php",
-	),
-	array(
 		"CONDITION" => "#^/blog/#",
 		"RULE" => "",
 		"ID" => "bitrix:blog",
 		"PATH" => "/blog/index.php",
+	),
+	array(
+		"CONDITION" => "#^/news/#",
+		"RULE" => "",
+		"ID" => "bitrix:news",
+		"PATH" => "/news/index.php",
 	),
 );
 

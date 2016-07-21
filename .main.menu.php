@@ -13,13 +13,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array("ICON"=>"original"), 
 		"" 
-	),
-	Array(
-		"Неоригинальные запчасти", 
-		"/auto/tecdoc/", 
-		Array(), 
-		Array("ICON"=>"tecdoc1"), 
-		"" 
 	)
 );
 ?>

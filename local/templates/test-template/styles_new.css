@@ -1,0 +1,137 @@
+/**new menu**/
+.span3.logo {
+    position:relative;
+    margin:-20px 0 0;
+}
+
+.dropdown-main-menu {
+    position: absolute;
+    top:4px;
+    left:0;
+    border:3px solid #f1e2b6;
+    -webkit-border-radius:  10px;
+    -moz-border-radius:  10px;
+    border-radius: 10px;
+    padding:9px 0;
+    width:254px;
+    text-align: center;
+    background: #fff;
+}
+
+.dropdown-main-menu-line {
+    width:100%;
+    height:3px;
+    background: #f1e2b6;
+    margin:15px 0;
+}
+
+.dropdown-main-menu-button {
+    color: #0070be;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 15px auto 0;
+    position: relative;
+    text-align: left;
+    width: 185px;
+}
+
+.dropdown-main-menu-button:after {
+    background: rgba(0, 0, 0, 0) url("images/dropdown-menu-arrows.png") no-repeat scroll center top;
+    content: "";
+    display: block;
+    height: 11px;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    width: 16px;
+}
+
+.dropdown-main-menu.active .dropdown-main-menu-button:after {
+    background-position: 0 -11px;
+}
+
+.dropdown-main-menu-button span {
+    margin: 0 10px 0 0;
+}
+
+.dropdown-main-menu-list {
+    display:none;
+    width: 100%;
+}
+
+.dropdown-main-menu.active .dropdown-main-menu-list {
+   display:block !important; 
+}
+
+.dropdown-main-menu-list h3 {
+    color: #0070be;
+    font-size: 18px;
+    font-weight: bold; 
+    width: 185px;
+    text-align: left;
+    margin: auto;
+    line-height: 30px;
+}
+
+.dropdown-main-menu-list .bottom_menu, .dropdown-main-menu-list .catalog-section-list {
+    width:185px;
+    margin: auto;
+    text-align: left;
+    font-size: 13px;
+}
+
+.dropdown-main-menu-list .catalog-section-list ul {
+    margin: 0;
+}
+
+.search_block {
+    position: relative;
+}
+
+.main-search-tabs-titles {
+    position: absolute;
+    top:-40px;
+    left:0;
+    height:40px;
+}
+
+.main-search-tabs-titles ul {
+    display: block;
+    margin:0;
+}
+
+.main-search-tabs-titles ul li {
+    float:left;
+    width:160px;
+    color: #393939;
+    background: #ecedee;
+    height:40px;
+    line-height: 40px;
+    font-size:14px;
+    margin:0 10px 0 0;
+    -webkit-border-radius:  5px 5px 0 0;
+    -moz-border-radius:  5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    font-family: arial;
+    cursor: pointer;
+}
+
+.main-search-tabs-titles ul li.active {
+    color: #fff;
+    background: #33ABE3;
+}
+
+.row-fluid .span6 {
+    padding: 0 0 40px;
+}
+
+.search-tab-content {
+    display:none !important;
+    margin:0 !important;
+}
+
+.search-tab-content.active {
+    display:block !important;
+}
