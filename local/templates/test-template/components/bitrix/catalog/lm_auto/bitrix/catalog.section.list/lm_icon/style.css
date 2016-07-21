@@ -1,0 +1,12 @@
+/*div.content div.catalog-section-list img {width: 160px; display: block; margin-bottom: 10px;}
+div.content div.catalog-section-list li {margin-right: 50px !important; margin-bottom: 50px !important; text-align: center; padding: 10px; border-bottom: 1px dotted silver; width: 160px; display: inline-block;}
+
+div.content div.catalog-section-list a {font-weight: normal; font-size: 16px; text-decoration: none}
+div.content div.catalog-section-list li:hover {border-bottom: 1px solid silver}
+*/
+
+.catalog-section-list .thumbnails li { background: #fff;}
+.catalog-section-list .thumbnails .first { margin-left: 0!important;}
+
+.catalog-section-list .product_img { min-height: 225px; vertical-align: middle;}
+.catalog-section-list .thumbnail { text-align: center;}
