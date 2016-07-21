@@ -48,6 +48,13 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
+	),
+	Array(
+		"Предоплата", 
+		"/prepayment.php", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
 ?>

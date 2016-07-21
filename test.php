@@ -2,7 +2,7 @@
     require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
     $APPLICATION->SetTitle("тест1");
 ?>
-<?
+<?      /*
 $arSelect = Array('ID','IBLOCK_ID','IBLOCK_SECTION_ID','DETAIL_PICTURE', "PROPERTY_CML2_ARTICLE");
     $arFilter = Array("IBLOCK_ID" => 3);
     $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
@@ -25,7 +25,7 @@ $arSelect = Array('ID','IBLOCK_ID','IBLOCK_SECTION_ID','DETAIL_PICTURE', "PROPER
            $newElement->Update($articleProduct["ID"], $arLoadProductArray);
            $productId = $articleProduct["ID"];
         }
-    }
+    }        */
 ?>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

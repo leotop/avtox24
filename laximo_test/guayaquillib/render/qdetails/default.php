@@ -133,7 +133,7 @@ class GuayaquilQuickDetailsList extends GuayaquilTemplate
     {
 /*        $note = (string)$unit['note'];
         if (strlen($note))
-            $html .= '<br>Примечание: '.$note;
+            $html .= '<br>Примечание: '.$note; 
 */
         $link = $this->FormatLink('unit', $unit, $this->catalog);
 
