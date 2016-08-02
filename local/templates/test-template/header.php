@@ -7,6 +7,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>">
 <head>
+
+
     <meta name='wmail-verification' content='ff445a99a49ffa38957686b617ab060e' />
     <meta name='yandex-verification' content='5aca97f004d65975' />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,11 +19,9 @@
         <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . '/ie.css');?>
         <?endif?>
 
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic,700,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
     <?$APPLICATION->ShowHead();?>
-
-
-
 
     <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/js/fancybox/jquery.fancybox-1.3.1.css');?>
     <?$APPLICATION->SetAdditionalCSS('http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic');?>
@@ -96,7 +96,7 @@
             p.src = '//rum-static.pingdom.net/prum.min.js';
             s.parentNode.insertBefore(p, s);
         })();
-    </script>
+    </script>          
 
 
 </head>
@@ -293,7 +293,7 @@
                         <ul>
                             <li class="active" data-search-tab-index="1">Номер детали</li>
                             <li data-search-tab-index="2">VIN-номер</li>
-                            <li data-search-tab-index="3">Марка</li>
+                            <li data-search-tab-index="3"><a href="/laximo/catalogs.php">Марка</a></li>
                         </ul>
                     </div>    
 
@@ -338,83 +338,18 @@
                                             false
                                         );?>    
                                 </div>
-                                
-                                <div class="span7 search-tab-content" data-search-tab="2">                                     
-                                    <?$APPLICATION->IncludeComponent(
-                                            "bitrix:search.title", 
-                                            "search_lm", 
-                                            array(
-                                                "NUM_CATEGORIES" => "1",
-                                                "TOP_COUNT" => "5",
-                                                "ORDER" => "rank",
-                                                "USE_LANGUAGE_GUESS" => "Y",
-                                                "CHECK_DATES" => "Y",
-                                                "SHOW_OTHERS" => "N",
-                                                "PAGE" => SITE_DIR."auto/search/",
-                                                "CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
-                                                "CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
-                                                "CATEGORY_0" => array(
-                                                    0 => "iblock_linemedia_auto",
-                                                    1 => "iblock_linemedia_autotecdoc",
-                                                ),
-                                                "SHOW_INPUT" => "Y",
-                                                "INPUT_ID" => "title-search-input",
-                                                "CONTAINER_ID" => "search",
-                                                "COMPONENT_TEMPLATE" => "search_lm",
-                                                "CATEGORY_0_iblock_linemedia_auto" => array(
-                                                    0 => "23",
-                                                ),
-                                                "CATEGORY_0_iblock_linemedia_autotecdoc" => array(
-                                                    0 => "all",
-                                                ),
-                                                "PRICE_CODE" => "",
-                                                "PRICE_VAT_INCLUDE" => "Y",
-                                                "PREVIEW_TRUNCATE_LEN" => "",
-                                                "SHOW_PREVIEW" => "Y",
-                                                "CONVERT_CURRENCY" => "N"
-                                            ),
-                                            false
-                                        );?>    
-                                </div>
-                                
-                                <div class="span7 search-tab-content" data-search-tab="3">                                     
-                                    <?$APPLICATION->IncludeComponent(
-                                            "bitrix:search.title", 
-                                            "search_lm", 
-                                            array(
-                                                "NUM_CATEGORIES" => "1",
-                                                "TOP_COUNT" => "5",
-                                                "ORDER" => "rank",
-                                                "USE_LANGUAGE_GUESS" => "Y",
-                                                "CHECK_DATES" => "Y",
-                                                "SHOW_OTHERS" => "N",
-                                                "PAGE" => SITE_DIR."auto/search/",
-                                                "CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
-                                                "CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
-                                                "CATEGORY_0" => array(
-                                                    0 => "iblock_linemedia_auto",
-                                                    1 => "iblock_linemedia_autotecdoc",
-                                                ),
-                                                "SHOW_INPUT" => "Y",
-                                                "INPUT_ID" => "title-search-input",
-                                                "CONTAINER_ID" => "search",
-                                                "COMPONENT_TEMPLATE" => "search_lm",
-                                                "CATEGORY_0_iblock_linemedia_auto" => array(
-                                                    0 => "23",
-                                                ),
-                                                "CATEGORY_0_iblock_linemedia_autotecdoc" => array(
-                                                    0 => "all",
-                                                ),
-                                                "PRICE_CODE" => "",
-                                                "PRICE_VAT_INCLUDE" => "Y",
-                                                "PREVIEW_TRUNCATE_LEN" => "",
-                                                "SHOW_PREVIEW" => "Y",
-                                                "CONVERT_CURRENCY" => "N"
-                                            ),
-                                            false
-                                        );?>    
-                                </div>
 
+                                <div class="span7 search-tab-content" data-search-tab="2">                                     
+                                    <div id="search">  
+                                        <form class="navbar-form" action="/laximo/vehicles.php" method="GET">
+                                            <div class="input-append">
+                                                <input id="title-search-input" class="search" type="text" placeholder="Поиск детали по VIN, например WAUBH54B11N111054" autocomplete="off" maxlength="50" size="40" value="<?=$_GET["vin"]?>" name="vin">
+                                                <input type="hidden" name="ft" value="findByVIN"/>
+                                                <input class="btn btn-warning" type="submit" value="Искать">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>         
 
                             </div>
                         </div>
@@ -487,7 +422,7 @@
 <div class="container">              
 <div class="row">                  
 
-<div class="span9 content"> 
+<div class="content"> 
 
 <div class="breadcrumbs"> <?$APPLICATION->IncludeComponent(
     "bitrix:breadcrumb",
@@ -500,5 +435,5 @@
         );?>
      </div>
                               
-          <h1><?$APPLICATION->ShowTitle(false)?></h1>
+          <h1><?$APPLICATION->ShowTitle()?></h1>
             <?//endif?>

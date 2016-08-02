@@ -2,7 +2,7 @@
 $aMenuLinks = Array(
 	Array(
 		"Запрос по VIN", 
-		"/auto/vin/", 
+		"http://avtox24.ru/auto/vin/vin-request.php", 
 		Array(), 
 		Array("ICON"=>"vin1"), 
 		"" 

@@ -1,4 +1,5 @@
-<?//?if ($curPage !== SITE_DIR."index.php"):?> 				</div>
+<?//?if ($curPage !== SITE_DIR."index.php"):?> 				
+</div>
 </div>
 </div>
 </div>

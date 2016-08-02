@@ -61,7 +61,7 @@
 }
 
 .dropdown-main-menu.active .dropdown-main-menu-list {
-   display:block !important; 
+    display:block !important; 
 }
 
 .dropdown-main-menu-list h3 {
@@ -118,6 +118,16 @@
     cursor: pointer;
 }
 
+.main-search-tabs-titles ul li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width:100%;
+    height:100%;
+    line-height:40px;
+    text-align: center;
+}
+
 .main-search-tabs-titles ul li.active {
     color: #fff;
     background: #33ABE3;
@@ -134,4 +144,485 @@
 
 .search-tab-content.active {
     display:block !important;
+}
+
+/*скрываем ссылку на разработчика API guayaquil*/
+.vin-search-results-wrap > div:last-child {
+    display:none !important;
+}
+
+.laximo-left-menu-wrap {
+    width:255px;
+    border:3px solid #29aae6;
+    border-radius: 0 0 5px 5px;
+    font-family: 'Noto Sans', sans-serif;
+    text-shadow: none;
+    text-align: center;
+    float:left;
+    margin: 40px 0 0;
+    position: relative;
+}
+
+.laximo-left-menu-wrap #guayaquil_toolbar, .laximo-left-menu-wrap .xtop, .laximo-left-menu-wrap .xbottom {
+    display: none
+}
+
+.laximo-left-menu-wrap ul li {
+    list-style: none !important;
+    clear: both;
+    display: block;
+    font-size:14px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer > li {
+    min-height:40px;
+    line-height: 40px;
+    color:#474747;
+}
+
+.laximo-left-menu-wrap ul .qgExpand, .laximo-left-menu-wrap ul .qgContent {
+    float:left
+}
+
+.laximo-left-menu-wrap ul.qgContainer .qgExpand {
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 19px;
+}
+
+.laximo-left-menu-wrap ul .qgContent {
+    max-width: 215px;
+    line-height: 20px;
+    margin: 10px 0 0 14px;
+    height: auto;
+    color: #474747;
+    text-align: left;
+    cursor: pointer; 
+}
+
+.laximo-left-menu-wrap ul .qgContent:first-letter {
+    text-transform: uppercase;
+}
+
+.laximo-left-menu-wrap ul li.qgNode {
+    margin-left:0;
+    background: none;
+} 
+
+.laximo-left-menu-wrap ul.qgContainer > li > ul {
+    margin-left: 28px;
+}
+
+#qgTree {
+    border-top: 3px solid #29aae6;
+}
+
+#qgTree > ul.qgContainer > li > .qgExpand {
+    background-image: url("images/list-closed-arrow.png") !important;
+} 
+
+#qgTree > ul.qgContainer > li.qgExpandOpen > .qgExpand {
+    background-color: #d4eefa;
+    background-image: url("images/list-opened-arrow.png") !important;
+    background-position: 9px 50%;
+}
+
+#qgTree > ul.qgContainer > li.qgExpandOpen > .qgContent {
+    color: #0088c5;
+
+}
+
+#qgTree > ul.qgContainer > li.qgExpandOpen > .qgContent{
+    position:relative;
+    z-index:1;
+}
+
+#qgTree > ul.qgContainer > li.qgExpandOpen > .qgExpand {
+    position:relative;
+    z-index:10;
+}
+
+#qgTree > ul.qgContainer > li.qgExpandOpen > .qgContent:before {
+    width: 255px;
+    height:100%;
+    position: absolute;
+    content: "";
+    top: -10px;
+    left:-33px;
+    background: #d4eefa; 
+    padding: 11px 0;
+    z-index: -1;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer {
+    width:225px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer .qgContent {
+    max-width:180px;  
+    margin: 5px 0 0 10px;    
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer > .qgExpandOpen > .qgContent {
+    color: #fa9600;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer > li {
+    min-height: 30px;
+    line-height: 30px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer > li:first-child {
+    padding: 10px 0 0;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer > li > .qgExpand {
+    width:16px;
+    height: 30px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer > li.qgExpandClosed > .qgExpand {   
+    background-image: url("images/list-submenu-closed.png") !important;
+    background-position: 0 50%;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer > li.qgExpandOpen > .qgExpand {   
+    background-image: url("images/list-submenu-opened.png") !important;
+    background-position: 0 50%;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer > li.qgExpandOpen > ul > li {
+    border-left:2px solid #fa9600;
+    margin: 0 0 0 7px;
+    overflow: hidden;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer {
+    margin: 0 0 10px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer > li  {
+    min-height: 30px;
+    line-height: 30px;  
+    margin:0;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer > li > .qgExpand {
+    margin: 0 0 0 2px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer > li > .qgContent {
+    margin: 5px 0 0 0;
+    color: #a49e8e;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer > li.qgExpandClosed > .qgExpand {   
+    background-image: url("images/list-submenu-closed2.png") !important;
+    background-position: 0 50%;
+    height: 30px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer > li.qgExpandOpen > .qgExpand {   
+    background-image: url("images/list-submenu-opened2.png") !important;
+    background-position: 0 50%;
+    height: 30px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer  > li.qgExpandOpen > ul > li {
+    border-left:none;
+    margin: 0 0 0 30px;
+    overflow: hidden;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer  > li.qgExpandOpen > ul > li:before {
+    background: #000 none repeat scroll 0 0;
+    border-radius: 2px;
+    content: " ";
+    display: block;
+    float: left;
+    height: 4px;
+    margin: 8px 0 0;
+    width: 4px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer  > li.qgExpandOpen > ul > li .qgExpand {
+    display: none;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer  > li.qgExpandOpen > ul > li .qgContent {
+    margin: 0 0 0 5px;
+}
+
+.laximo-left-menu-wrap ul.qgContainer ul.qgContainer ul.qgContainer ul.qgContainer {
+    margin: 5px 0 ;
+}
+
+.laximo-left-menu-wrap input[type=button] {
+    display: none;
+}
+
+.laximo-left-menu-wrap #qgsearchinput {
+    margin: 3px auto 25px;
+    border: 2px solid #fa9600;
+    height:35px;
+    line-height:35px;
+    padding:0 10px;
+    color: #fa9600;
+    width:200px;
+}
+
+.laximo-left-menu-wrap #qgsearchinput:focus {
+    box-shadow: none;            
+}
+
+.laximo-page-content-wrap {
+    width:890px;
+    float:right;
+    font-family: "Noto Sans",sans-serif;
+    text-shadow: none;
+}
+
+.laximo-page-content-wrap > .xtop, .laximo-page-content-wrap > .xboxcontent, .laximo-page-content-wrap .xbottom {
+    display: none;
+}
+
+.laximo-tree-element {
+    border: 3px solid #f1e2b6;
+    border-radius: 5px;
+    float: left;
+    height: 194px;
+    margin: 0 30px 30px 0;
+    text-align: center;
+    width: 194px;
+    cursor: pointer;
+    color: #000;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.laximo-tree-element span {
+    width: 90%;
+}
+
+.laximo-tree-element span:first-letter {
+    text-transform: uppercase;
+}
+
+.laximo-tree-element .tree-element-text {
+    width:90%;
+}
+
+.laximo-tree-element:hover {
+    background: #f1e2b6;
+}
+
+.laximo-tree-element:nth-child(4n+4) {
+    margin-right: 0;
+}
+
+.laximo-page-headers {
+    width:100%;
+    height:auto;
+    font-size:20px;
+    font-family: "Noto Sans",sans-serif;
+    margin: 0 0 25px;
+    overflow: hidden;
+    color: #000;
+    height: 30px;
+    line-height: 30px;
+}
+
+.laximo-page-headers .laximo-left-menu-title {
+    width: 260px;
+    float:left;
+    text-align: left;
+}
+
+.laximo-page-headers .laximo-content-title {
+    width: 890px;
+    float: right;
+    text-align: left;
+}
+
+.laximo-left-menu-tabs-titles {
+    position: absolute;
+    width:261px;
+    height: 40px;
+    top: -43px;
+    left: -3px;
+    font-family: "Noto Sans",sans-serif;
+    font-size: 14px;
+    margin: 0;       
+}
+
+.laximo-left-menu-tabs-titles li {
+    height:40px;
+    line-height: 40px;
+    padding:0 18px;
+    border-radius: 5px 5px 0 0;
+    background: #ecedee;
+    color: #000;
+    clear: none !important;
+    cursor: pointer;
+}
+
+.laximo-left-menu-tabs-titles li.active {
+    background: #29aae6;
+    color: #fff;
+    cursor: default;
+}
+
+.laximo-left-menu-tabs-titles li:nth-child(1) {
+    float:left;
+}
+
+.laximo-left-menu-tabs-titles li:nth-child(2) {
+    float:right;
+}
+
+.laximo-content-line {
+    width:100%;
+    height:2px;
+    background: #f1e2b6;
+    overflow: hidden;
+    margin: 30px 0 30px;
+}
+
+.laximo-wrapper h2 {
+    font-size: 24px;
+    font-family: "Noto Sans",sans-serif;
+    color: #000 !important;
+    font-weight: normal;
+}
+
+.laximo-car-info-line {
+    width: 100%;
+    overflow: hidden;
+    font-size:14px;
+    font-family: "Noto Sans",sans-serif;  
+    color: #000;
+    margin: 15px 0 0 ;
+}
+
+.laximo-car-info-line .laximo-car-info-item {
+    float:left;
+    margin: 0 40px 0 0; 
+}
+
+.laximo-car-info-line .laximo-car-info-item .prop_name {
+    font-weight: bold;
+}
+
+.laximo-page-content-wrap .gdUnit {
+    background: #ecedee;
+    border-collapse: collapse;
+    font-family: "Noto Sans",sans-serif;
+    border-radius: 5px;
+    padding:3px;
+    display:block;
+    margin: 0 0 30px;
+}  
+
+.laximo-page-content-wrap .gdUnit:hover {
+    background: #d4eefa;
+}
+
+.laximo-page-content-wrap .gdUnit .gdImageCol {
+    padding: 0 !important; 
+    width: 225px;
+    background: #fff;         
+}   
+
+.laximo-page-content-wrap .gdUnit a.block_name {
+    width:100%;
+    box-sizing: border-box;
+    padding:0 20px;
+    text-align: left;
+    font-size:16px;
+    color:#000;
+    text-decoration: none;
+    display: block;
+    margin: 20px 0 5px
+}
+
+.laximo-page-content-wrap .gdUnit a.block_name:hover {
+    text-decoration: underline;
+}
+     
+.laximo-page-content-wrap .gdUnit .gdDetailCol a.block_name {
+    padding-left: 0 !important;
+    margin: 20px 0 0;
+}
+
+.laximo-page-content-wrap .gdUnit .gdImageCol .gdImage {
+    width:100% !important;
+    margin: 0 !important;
+}
+
+
+.laximo-page-content-wrap .gdUnit .gdDetailCol {
+    padding: 0 30px;
+} 
+
+.laximo-page-content-wrap .gdUnit .guayaquil_table {
+    border: 0 !important;
+    margin: 20px 0 0;        
+} 
+
+.laximo-page-content-wrap .gdUnit .guayaquil_table .g_ttd {
+    color: #000000;
+    font-size:15px;
+    text-align: left;
+    padding: 8px 0 !important;
+}
+
+.laximo-page-content-wrap .gdUnit .guayaquil_table .g_ttd:first-child {
+    text-align: left;
+    width:80px;
+}
+
+.laximo-page-content-wrap .gdUnit .guayaquil_table .g_ttd:nth-child(3) {
+    text-align: left;
+    width:430px;
+}
+
+.laximo-page-content-wrap .gdUnit .guayaquil_table .g_ttd:last-child {
+    text-align: left;
+    padding: 0 0 0 50px !important;
+}
+
+.laximo-page-content-wrap .gdUnit .guayaquil_table a {
+    color: #0088c4;
+}
+
+.laximo-page-content-wrap .gdUnit table td, .laximo-page-content-wrap .gdUnit table th, .laximo-page-content-wrap .gdUnit table tr {
+    background: none !important;  
+    border: none; 
+}
+
+.laximo-page-content-wrap .gdUnit .guayaquil_table tr.g_collapsed td {
+    border-bottom: 1px solid #cccccc;
+}
+
+.laximo-page-content-wrap .otherDetailsLink {
+    height: 40px;
+    width: 210px;
+    border:2px solid #29aae6;
+    border-radius: 5px;
+    color: #000 !important;         
+    box-sizing: border-box;
+    display:block;
+    line-height: 38px;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 40px 0 30px;
+}
+
+.laximo-page-content-wrap .gdUnit:hover .otherDetailsLink {
+    background: #29aae6;
+    color: #fff !important; 
 }

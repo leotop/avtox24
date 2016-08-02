@@ -458,7 +458,7 @@ class LinemediaAutoSearch
 			// кроссы Laximo
 			global $USER;
 			if ($USER->IsAdmin()) {
-				require($_SERVER["DOCUMENT_ROOT"] . "/laximo_test/cross_test.php");
+				require($_SERVER["DOCUMENT_ROOT"] . "/laximo/cross_test.php");
 				$laximo_results = getLaximoCrosses($this->search_conditions['query']);
 				foreach ($laximo_results as $k => $value) {
 					if (!$this->articles_to_search[$k]) {

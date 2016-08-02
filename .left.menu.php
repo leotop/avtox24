@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Запрос по VIN", 
-		"/auto/vin/", 
+		"/auto/vin/vin-request.php", 
 		Array(), 
 		Array(), 
 		"" 

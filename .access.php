@@ -1,7 +1,8 @@
 <?
+$PERM["online"]["*"]="R";
+$PERM["desktop_app"]["*"]="R";
 $PERM["catalog"]["G6"]="W";
 $PERM["catalog"]["*"]="R";
-$PERM["desktop_app"]["*"]="R";
 $PERM["log.txt"]["2"]="D";
 $PERM["log.txt"]["3"]="D";
 $PERM["log.txt"]["4"]="D";
