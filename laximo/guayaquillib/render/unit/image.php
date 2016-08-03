@@ -40,11 +40,11 @@ class GuayaquilUnitImage extends GuayaquilTemplate
 
 	function DrawUnitImage($unit, $imagemap)
 	{
-        $html = $this->DrawMagnifier($unit);
+        //$html = $this->DrawMagnifier($unit);
 		$html .= '<div id="viewport" class="inline_block" style="position:absolute; border: 1px solid #777; background: white; width:'.($this->containerwidth/2).'px; height:'.$this->containerheight.'px; overflow: auto;">';
 
 		$html .= $this->DrawImageMap($imagemap);
-		$html .= $this->DrawImage($unit);
+		$html .= $this->DrawImage($unit);   
 
 		$html .= '</div>';
 

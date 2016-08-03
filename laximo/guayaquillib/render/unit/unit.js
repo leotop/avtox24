@@ -2,8 +2,10 @@ function prepareImage()
 {
 	var img = jQuery('img.dragger');
 	
-	var width = img.innerWidth();
-	var height = img.innerHeight();
+	var width = img.prop("naturalWidth");
+	var height = img.prop("naturalHeight"); 
+    
+    console.log(width + " " + height); 
 
 	img.attr('owidth', width);
 	img.attr('oheight', height);
@@ -139,11 +141,13 @@ function SubscribeDblClick(selector)
 
 jQuery(document).ready(function($){
 
+    /*
 	jQuery('.dragger, #viewport').bind('mousewheel', function(event, delta) {
 		rescaleImage(delta);
 		return false;
 	});
-
+    */
+    
 	jQuery('#viewport').dragscrollable({dragSelector: '.dragger, , #viewport', acceptPropagatedEvent: false});
 
 	jQuery('#viewport div').tooltip({ 
@@ -261,4 +265,10 @@ jQuery(document).ready(function($){
     });
 
     SubscribeDblClick('#viewport div');
+    
+    
+    //дополнительный функции
+    $(".unit-resize-image").on("click", function() {
+        $(this).toggleClass("resized");
+    })
 });

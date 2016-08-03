@@ -20,9 +20,9 @@
         function FormatLink($type, $dataItem, $catalog, $renderer)
         {
             if ($type == 'vehicle')
-                $link = 'vehicle.php?c='.$catalog.'&vid='.$renderer->vehicleid. '&ssd=' . $renderer->ssd;
+                $link = 'vehicle.php?c='.$catalog.'&vid='.$renderer->vehicleid. '&ssd=' . $renderer->ssd. "&vin=".$_GET['vin'];
             elseif ($type == 'category')
-                $link = 'vehicle.php?c=' . $catalog . '&vid=' . $renderer->vehicleid . '&cid=' . $dataItem['categoryid'] . '&ssd=' . $dataItem['ssd'];
+                $link = 'vehicle.php?c=' . $catalog . '&vid=' . $renderer->vehicleid . '&cid=' . $dataItem['categoryid'] . '&ssd=' . $dataItem['ssd']. "&vin=".$_GET['vin'];
             elseif ($type == 'unit')
             {
                 $coi = array();
@@ -34,7 +34,7 @@
                     }
                 }
 
-                $link = 'unit.php?c=' . $catalog . '&vid=' . $renderer->vehicleid . '&uid=' . $dataItem['unitid'] .  '&cid=' . $renderer->currentunit['categoryid'] . '&ssd=' . $dataItem['ssd'] . '&coi=' . implode(',', $coi);
+                $link = 'unit.php?c=' . $catalog . '&vid=' . $renderer->vehicleid . '&uid=' . $dataItem['unitid'] .  '&cid=' . $renderer->currentunit['categoryid'] . '&ssd=' . $dataItem['ssd'] . '&coi=' . implode(',', $coi) . "&vin=".$_GET['vin'];
             }
             elseif ($type == 'detail') {
                 $link = Config::$redirectUrl;
@@ -50,9 +50,9 @@
         function FormatLink($type, $dataItem, $catalog, $renderer)
         {
             if ($type == 'vehicle')
-                $link = 'vehicle.php?c='.$catalog.'&vid='.$renderer->vehicleid. '&ssd=' . $renderer->ssd;
+                $link = 'vehicle.php?c='.$catalog.'&vid='.$renderer->vehicleid. '&ssd=' . $renderer->ssd . "&vin=".$_GET['vin'];
             else
-                $link = 'qdetails.php?c='.$catalog.'&gid='.$dataItem['quickgroupid']. '&vid=' . $renderer->vehicleid. '&ssd=' . $renderer->ssd;
+                $link = 'qdetails.php?c='.$catalog.'&gid='.$dataItem['quickgroupid']. '&vid=' . $renderer->vehicleid. '&ssd=' . $renderer->ssd . "&vin=".$_GET['vin'];
 
             return $link;
         }

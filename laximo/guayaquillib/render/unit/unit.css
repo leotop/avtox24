@@ -1,5 +1,5 @@
 #viewport .g_highlight_over {
-	border: 2px solid #ee5500 !important;
+	border: 2px solid #29aae6 !important;
 	background:none;
 }
 
@@ -20,9 +20,8 @@ position: relative;
 
 #g_container #viewtable {
     position:absolute;
-    top:0;
-    right:0;
-    width: 50% !important;
+    /*top:0;*/
+    /*width: 50% !important;*/
 }
 
 /*

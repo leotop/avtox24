@@ -146,7 +146,7 @@
     display:block !important;
 }
 
-/*ñêğûâàåì ññûëêó íà ğàçğàáîò÷èêà API guayaquil*/
+/*ÑĞºÑ€Ñ‹Ğ²Ğ°ĞµĞ¼ ÑÑÑ‹Ğ»ĞºÑƒ Ğ½Ğ° Ñ€Ğ°Ğ·Ñ€Ğ°Ğ±Ğ¾Ñ‚Ñ‡Ğ¸ĞºĞ° API guayaquil*/
 .vin-search-results-wrap > div:last-child {
     display:none !important;
 }
@@ -551,7 +551,7 @@
 .laximo-page-content-wrap .gdUnit a.block_name:hover {
     text-decoration: underline;
 }
-     
+
 .laximo-page-content-wrap .gdUnit .gdDetailCol a.block_name {
     padding-left: 0 !important;
     margin: 20px 0 0;
@@ -625,4 +625,148 @@
 .laximo-page-content-wrap .gdUnit:hover .otherDetailsLink {
     background: #29aae6;
     color: #fff !important; 
+}
+
+#g_container {
+    height: 980px !important;
+}
+
+#g_container .details-tree {
+    float: right;
+    width:750px !important;
+    height:980px !important;
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid #dadada !important;
+    border-radius: 10px;
+}
+
+#g_container .details-tree #viewport {
+    border: none !important;
+    box-sizing: border-box;
+    width: 748px !important;
+    height: 940px !important;
+    overflow: hidden !important;
+    border-radius: 10px;
+}
+
+.laximo-unit-page-wrapper {
+    height: 980px;
+}
+
+.laximo-unit-page-wrapper #viewtable {
+    left: 0 !important;
+    width:440px !important;
+    box-sizing: border-box;   
+    top: 51px;    
+}
+
+.laximo-unit-page-wrapper .guayaquil_table {
+    width: 400px !important;
+    border: none;
+
+}
+
+.laximo-unit-page-wrapper .guayaquil_table td {
+    border: none;
+    font-size:14px !important;
+    font-family: 'Noto Sans' !important;
+    padding: 15px 12px!important;
+    color: #000;
+    line-height: 20px;
+}
+
+.laximo-unit-page-wrapper .guayaquil_table td a {
+    color: #0088c4;
+}
+
+.laximo-unit-page-wrapper .guayaquil_table tr {
+    background: #fff !important;
+}
+
+.laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_lock td {
+    background: #fc7200;
+    color: #fff;
+}
+
+.laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_over td {
+    background: #f9efd1; 
+    color: #fc7200;  
+}
+
+.laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_lock a {
+    color: #fff;
+}
+
+.laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_over a {
+    color: #fc7200;
+}
+
+.laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_over td:first-child, .laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_lock td:first-child {
+    border-radius: 7px 0 0 7px;
+} 
+
+.laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_over td:last-child, .laximo-unit-page-wrapper .guayaquil_table tr.g_highlight_lock td:last-child {
+    border-radius: 0 7px 7px 0;
+}
+
+#viewport .g_highlight, #viewport .g_highlight_over {
+    border-radius: 5px;
+}
+
+#g_container .tree-list-titles {
+    width:100%;
+    height:51px;
+    border-bottom: 1px solid #dadada;
+    padding: 12px 0 0;
+    box-sizing: border-box;
+    width:400px;
+    position: absolute;
+}
+
+#g_container .tree-list-titles > div {
+    float:left;
+    font-weight: bold;
+    color: #000;
+    padding: 0 20px 0 12px;
+}
+
+.unit-page-h2 {
+    font-size: 20px !important;
+}
+
+#g_container .details-tree .unit-resize-image {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size:14px;
+    font-family: 'Noto Sans' !important;
+    color: #000;
+    cursor:pointer;
+}
+
+#g_container .details-tree .unit-resize-image > span:last-child {
+    display: none;
+}
+
+#g_container .details-tree .unit-resize-image:before {
+    content: "+";
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    left: -15px;
+    position: absolute;
+    top: -2px;
+}
+
+#g_container .details-tree .unit-resize-image.resized > span:first-child {
+    display:none;
+}
+
+#g_container .details-tree .unit-resize-image.resized > span:last-child {
+    display:block;
+}
+
+#g_container .details-tree .unit-resize-image.resized:before {
+    content: "-";
 }

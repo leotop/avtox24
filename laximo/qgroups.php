@@ -30,9 +30,9 @@
         function FormatLink($type, $dataItem, $catalog, $renderer)
         {
             if ($type == 'vehicle')
-                $link = 'vehicle.php?c='.$catalog.'&vid='.$renderer->vehicleid. '&ssd=' . $renderer->ssd;
+                $link = 'vehicle.php?c='.$catalog.'&vid='.$renderer->vehicleid. '&ssd=' . $renderer->ssd . "&vin=".$_GET['vin'];
             else
-                $link = 'qdetails.php?c='.$catalog.'&gid='.$dataItem['quickgroupid']. '&vid=' . $renderer->vehicleid. '&ssd=' . $renderer->ssd;
+                $link = 'qdetails.php?c='.$catalog.'&gid='.$dataItem['quickgroupid']. '&vid=' . $renderer->vehicleid. '&ssd=' . $renderer->ssd . "&vin=".$_GET['vin'];
 
             return $link;
         }
