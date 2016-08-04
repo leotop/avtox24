@@ -36,7 +36,7 @@ class LinemediaAutoOrdersViewFilter
     public function setIDs($ids) {
 
         if(is_array($ids) && count($ids) > 0) {
-            $this->where['IDS'] = "ID IN (". join(', ', $ids) .")";
+            $this->where['IDS'] = "ORDER_ID IN (". join(', ', $ids) .")";
         }
 
     }
@@ -199,8 +199,8 @@ class LinemediaAutoOrdersViewFilter
 
     public function setBrandTitle($brand) {
 
-        if(is_array($brand) && count($brand) > 0) {
-            $this->where['BRAND'] = "BRAND IN ('". join("', '", $brand) ."')";
+        if(!empty($brand)) {
+            $this->where['BRAND'] = "BRAND LIKE '" . $brand . "'";
         }
     }
 

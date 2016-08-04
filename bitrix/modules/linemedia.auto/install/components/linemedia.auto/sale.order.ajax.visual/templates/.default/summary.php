@@ -4,9 +4,9 @@
 
 <?php 
 
-$basketItem = current($arResult["BASKET_ITEMS"]);
-$paramString = fillProperties($basketItem['PROPS'], $arParams);
-$decreaseCol = !(bool) $paramString ? 1 : 0;
+//$basketItem = current($arResult["BASKET_ITEMS"]);
+//$paramString = fillProperties($basketItem['PROPS'], $arParams);
+//$decreaseCol = !(bool) $paramString ? 1 : 0;
 
 ?>
 
@@ -24,7 +24,11 @@ $decreaseCol = !(bool) $paramString ? 1 : 0;
 </thead>
 <tbody>
 	<?
-	foreach ($arResult["BASKET_ITEMS"] as $arBasketItems) {?>
+	foreach ($arResult["BASKET_ITEMS"] as $arBasketItems) {
+
+		$paramString = fillProperties($arBasketItems['PROPS'], $arParams);
+		$decreaseCol = !(bool) $paramString ? 1 : 0;
+		?>
 		<tr>
 
 			<?= !in_array('IMAGE', $arParams['COLUMNS_LIST']) ? '<td>'.fillPicture($arBasketItems, $arParams).'</td>' : ''?>
@@ -125,6 +129,18 @@ function fillProperties($props, $param) {
             $resultString .= $val["NAME"]." ~ ".$time_deliv." ".GetMessage('LM_AUTO_DAYS').".<br />";
             continue;
        }
+
+	   if(in_array($val['CODE'], $param['EDITABLE_PROPERTIES'])) {
+		   ob_start();
+		   ?>
+		   <div class="form-group">
+			   <label for="<?=$val['BASKET_ID']?>_<?=$val['CODE']?>"><?=$val["NAME"] ?>:</label>
+			   <input type="text" id="<?=$val['BASKET_ID']?>_<?=$val['CODE']?>" name="<?=$val['BASKET_ID']?>_<?=$val['CODE']?>" value="<?=$val["VALUE"] ?>">
+		   </div>
+		   <?
+		   $resultString .= ob_get_clean();
+		   continue;
+	   }
 
 	   $resultString .= $val["NAME"].": ".$val["VALUE"]."<br />";
    }

@@ -158,7 +158,7 @@ function printPartsTable($parts, $group_id, $arParams) {
     </thead>
     <tbody>
     <? foreach ($parts as $part) { ?>
-        <? $hash = md5(json_encode($part)); ?>
+        <? $hash = md5(safe_json_encode($part)); ?>
         <tr class="hproduct" style="<?= $part['supplier']['PROPS']['css']['VALUE'] ?>">
             <? if (!in_array('brand', $GLOBALS['LM_AUTO_SEARCH_RESULTS_HIDE_FIELDS'])) { ?>
                 <td class="brand" title="<?= $part['brand']['title'] ?>"><span><?= $part['brand']['title'] ?></span>
@@ -308,7 +308,7 @@ function printPartsTable($parts, $group_id, $arParams) {
                         <img class="add-to-notepad" onclick="javascript: AddToNotepad(this,event);" src="<?=$templateFolder?>/images/add_to_notepad.png" title="<?= GetMessage('LM_AUTO_SEARCH_ITEM_ADD_NOTEPAD') ?>" alt="<?= GetMessage('LM_AUTO_SEARCH_ITEM_ADD_NOTEPAD') ?>"/>
                         <input type="hidden" class="notepad_part_id" name="notepad_part_id" value="<?= $part['id'] ?>" />
                         <input type="hidden" class="part_api_value" name="part_api_value" value="<?=$part['supplier']['PROPS']['api']['VALUE']?>" />
-                        <input type="hidden" id="part_url_extra" name="part_url_extra" value='<?=json_encode($_REQUEST['extra'])?>' />
+                        <input type="hidden" id="part_url_extra" name="part_url_extra" value='<?=safe_json_encode($_REQUEST['extra'])?>' />
                     </td>
                 <? } ?>
             <? } ?>

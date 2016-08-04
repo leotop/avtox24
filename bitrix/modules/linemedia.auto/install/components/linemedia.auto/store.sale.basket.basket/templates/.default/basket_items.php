@@ -76,27 +76,28 @@
             }?>
             <tr>
                 <td><input class="lm-auto-main-basket-delete" type="checkbox" name="deletes[]" value="<?= $arBasketItems['ID'] ?>"/></td>
-                <? if (in_array("NAME", $arParams["COLUMNS_LIST"])): ?>
+                <? if (in_array("NAME", $arParams["COLUMNS_LIST"])) { ?>
                     <td class="cart-item-name">
                         <input type="hidden" class="basket_id" value="<?= $arBasketItems['ID'] ?>" />
 
                         <b><?= $arBasketItems["NAME"] ?></b>
-                        <?if (in_array("PROPS", $arParams["COLUMNS_LIST"])) {
+                        <? if (in_array("PROPS", $arParams["COLUMNS_LIST"])) {
 
                             foreach ($arBasketItems["PROPS"] as $val) {
+
                                 if (in_array($val['CODE'], (array)$arParams['HIDE_PROPERTIES']) || $val['CODE'] == 'max_available_quantity' || $val['CODE'] == 'retail_chain') {
                                     continue;
                                 }
 
                                 if ($val['CODE'] == 'need_vin') {
 
-                                    if(!$val["VALUE"]) {
+                                    if (!$val["VALUE"]) {
                                         /*
                                          * Может быть VIN уже есть в гараже?
                                          */
                                         $modification_id = false;
-                                        foreach($arBasketItems["PROPS"] as $_prop) {
-                                            if($_prop['CODE'] == 'modification_id') {
+                                        foreach ($arBasketItems["PROPS"] as $_prop) {
+                                            if ($_prop['CODE'] == 'modification_id') {
                                                 $modification_id = $_prop["VALUE"];
                                                 break;
                                             }
@@ -123,15 +124,25 @@
                                                 }
                                             }
                                         }
-                                    }
+                                    } // if (!$val["VALUE"])
 
-                                    $time = (int) (microtime(true) * 10000);
+                                    $time = (int)(microtime(true) * 10000);
                                     ?>
                                     <div class="form-group">
-                                        <label class="control-label" for="need_vin_<?=$time?>"><?= $val["NAME"] ?>:</label>
-                                        <input type="text" class="form-control vin" id="need_vin_<?=$time?>" value="<?= $val["VALUE"] ?>" placeholder="<?= GetMessage("SALE_NEED_VIN_PLACEHOLDER") ?>">
+                                        <label class="control-label" for="need_vin_<?= $time ?>"><?= $val["NAME"] ?>
+                                            :</label>
+                                        <input type="text" class="form-control vin" id="need_vin_<?= $time ?>"
+                                               value="<?= $val["VALUE"] ?>"
+                                               placeholder="<?= GetMessage("SALE_NEED_VIN_PLACEHOLDER") ?>">
                                     </div>
-                                <?
+                                    <?
+                                } else if(in_array($val['CODE'], $arParams['EDITABLE_PROPERTIES'])) {
+                                    ?>
+                                    <div class="form-group">
+                                        <label for="<?=$arBasketItems['ID']?>_<?=$val['CODE']?>"><?=$val["NAME"] ?>:</label>
+                                        <input type="text" id="<?=$arBasketItems['ID']?>_<?=$val['CODE']?>" name="<?=$arBasketItems['ID']?>_<?=$val['CODE']?>" value="<?=$val["VALUE"] ?>">
+                                    </div>
+                                    <?
                                 } else {
                                     if($val['CODE'] == 'modification_id') {?>
                                         <input type="hidden" class="modification_id" value="<?= $val["VALUE"] ?>" />
@@ -146,7 +157,8 @@
                                 $mf = max(1, intval($prop['VALUE']));
                             }
                             if ($prop['CODE'] == 'max_available_quantity') {
-                                $max_available_quantity = $is_remote_supplier ? $arBasketItems["QUANTITY"] : $prop['VALUE'];
+                            //	$max_available_quantity = $is_remote_supplier ? $arBasketItems["QUANTITY"] : $prop['VALUE'];
+								$max_available_quantity = $prop['VALUE'];
                             }
                             if ($mf > $max_available_quantity) {
                                 $mf = 1;
@@ -155,7 +167,7 @@
                         ?>
                         <div style="display: none" class="max_available_quantity"><?= $max_available_quantity ?></div>
                     </td>
-                <? endif; ?>
+                <? } ?>
                 <? if (in_array("PRICE", $arParams["COLUMNS_LIST"])): ?>
                     <td class="cart-item-price"><?= $arBasketItems["PRICE_FORMATED"] ?></td>
                 <? endif; ?>

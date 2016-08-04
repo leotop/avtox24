@@ -72,6 +72,19 @@ class LinemediaAutoBasket
         return $this->fuser_id;
     }
 
+    /**
+     * Получить очищеный от свойств содержащих длинные значения (>=255) массив.
+     * Предполагается использовать его перед вызовом методов CSaleBasket:Add
+     * @author Albert Abdrahimov <abdrahimov.albert@gmail.com>
+     * @param [mixed] Массив свойств
+     * @return [mixed]
+     */
+    public static function clearTooLongBasketPropsValue(&$props)
+    {
+        $props = array_filter($props, function($v){
+            return (strlen($v['VALUE']) < 255);}
+        );
+    }
 
     /**
      * Получение свойств корзины.
@@ -123,6 +136,9 @@ class LinemediaAutoBasket
 	        }
             
         }
+        // Albert: очищаем от слишком длинных свойств, т.к. отправлять их базу в бессысленно
+        self::clearTooLongBasketPropsValue($props);
+
         return CSaleBasket::Update($basket_id, array('PROPS' => $props));
     }
     
@@ -537,7 +553,6 @@ class LinemediaAutoBasket
         $arFields = array_merge_recursive(
             array(
                 "PRODUCT_ID"            => $part_id,
-                "PRODUCT_XML_ID"        => $part_id,
                 "FUSER_ID"              => $this->getFuserId(),
                 "PRICE"                 => $price,
                 "CURRENCY"              => $currency,
@@ -774,8 +789,15 @@ class LinemediaAutoBasket
             ExecuteModuleEventEx($arEvent, array(&$part_id, &$supplier_id, &$quantity, &$arFields, &$additional));
         }
 
+        // Albert: Обнаружил, что метод CSaleBasket::Add возвращает false если среди PROPS встречается элемент с VALUE длиннее 255, но при этом корзина создается
+        // Соответственно решение: не отправлять PROPS'ы с VALUE длиннее 255
+        // Для этого в метод отдам клон массива с подчищенными PROPS'ами а дальше везде буду использовать исходный массив
+        $clone_arFields = $arFields;
+        self::clearTooLongBasketPropsValue($clone_arFields['PROPS']);
 
-        $basket_id = CSaleBasket::Add($arFields);
+        $basket_id = CSaleBasket::Add($clone_arFields);
+        unset($clone_arFields);
+
         
         if(!$basket_id) {
 	        global $APPLICATION;
@@ -789,7 +811,7 @@ class LinemediaAutoBasket
         while ($arEvent = $events->Fetch()) {
             ExecuteModuleEventEx($arEvent, array(&$part_id, &$supplier_id, &$quantity, &$basket_id, &$arFields));
         }
-        
+
         
         /**
         * Длинные свойства обрезаются битриксом

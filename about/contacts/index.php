@@ -21,17 +21,23 @@ $APPLICATION->SetPageProperty("title", "Avtox24");
  <img width="96" alt="i.jpg" src="http://avtox24.ru/upload/medialibrary/6d0/6d0d142c6d23d8d6c7ee09b24e9e4308.jpg" height="32" title="i.jpg">
 </p>
 <p>
-	<br><div class="mango-call-site" data-options='{"host": "lk.mango-office.ru/", "id": "MTAwMDI5MDk=", "errorMessage": "В данный момент наблюдаются технические проблемы и совершение звонка невозможно"}'>
-	<button style=" border-radius: 24px;   background: #08b8e8; width: 175px;height: 36px;white-space: nowrap;border: none;font-family: 'SegoeUISemibold';color: #fff;font-size: 13px;cursor: pointer;">Звонок с сайта</button>
+ <br>
+</p>
+<div class="mango-call-site" data-options="{&quot;host&quot;: &quot;lk.mango-office.ru/&quot;, &quot;id&quot;: &quot;MTAwMDI5MDk=&quot;, &quot;errorMessage&quot;: &quot;В данный момент наблюдаются технические проблемы и совершение звонка невозможно&quot;}">
+ <button style=" border-radius: 24px; background: #08b8e8; width: 175px;height: 36px;white-space: nowrap;border: none;font-family: 'SegoeUISemibold';color: #fff;font-size: 13px;cursor: pointer;">Звонок с сайта</button>
 </div>
-<script>!function(t){function e(t){options=JSON.parse(t.getAttribute("data-options")),t.querySelector("button, a").setAttribute("onClick","window.open('https://"+options.host+"widget/call-from-site-auto-dial/"+options.id+"', '_blank', 'width=238,height=400,resizable=no,toolbar=no,menubar=no,location=no,status=no'); return false;")}for(var o=document.getElementsByClassName(t),n=0;n<o.length;n++){var i=o[n];if("true"!=o[n].getAttribute("init")){options=JSON.parse(o[n].getAttribute("data-options"));var a=document.createElement("link");a.setAttribute("rel","stylesheet"),a.setAttribute("type","text/css"),a.setAttribute("href",window.location.protocol+"//"+options.host+"widget/widget-button.css"),a.readyState?a.onreadystatechange=function(){("complete"==this.readyState||"loaded"==this.readyState)&&e(i)}:(a.onload=e(i),a.onerror=function(){options=JSON.parse(i.getAttribute("data-options")),i.querySelector("."+t+" button, ."+t+" a").setAttribute("onClick","alert('"+options.errorMessage+"');")}),(i||document.documentElement).appendChild(a),i.setAttribute("init","true")}}}("mango-call-site");</script>
+ <script>!function(t){function e(t){options=JSON.parse(t.getAttribute("data-options")),t.querySelector("button, a").setAttribute("onClick","window.open('https://"+options.host+"widget/call-from-site-auto-dial/"+options.id+"', '_blank', 'width=238,height=400,resizable=no,toolbar=no,menubar=no,location=no,status=no'); return false;")}for(var o=document.getElementsByClassName(t),n=0;n<o.length;n++){var i=o[n];if("true"!=o[n].getAttribute("init")){options=JSON.parse(o[n].getAttribute("data-options"));var a=document.createElement("link");a.setAttribute("rel","stylesheet"),a.setAttribute("type","text/css"),a.setAttribute("href",window.location.protocol+"//"+options.host+"widget/widget-button.css"),a.readyState?a.onreadystatechange=function(){("complete"==this.readyState||"loaded"==this.readyState)&&e(i)}:(a.onload=e(i),a.onerror=function(){options=JSON.parse(i.getAttribute("data-options")),i.querySelector("."+t+" button, ."+t+" a").setAttribute("onClick","alert('"+options.errorMessage+"');")}),(i||document.documentElement).appendChild(a),i.setAttribute("init","true")}}}("mango-call-site");</script>
+<p>
 </p>
 <p>
-	<br>
+ <br>
 </p>
  <b>Адрес: &nbsp;</b><b style="font-size: large;">&nbsp;</b><b>127238</b>&nbsp;<b>г. Москва, Ильменский пр-д., д.1. стр1. оф 1</b>
 <p>
  <a href="mailto:info@avtox24.ru">info@</a><a href="mailto:info@avtox24.ru">avtox24.ru</a>
+</p>
+<p>
+	 Режим работы: пн-пт &nbsp;9<sup>00</sup> - 19<sup>00\ &nbsp;</sup>сб &nbsp;11<sup>00</sup>&nbsp;- 17<sup>00</sup>
 </p>
 <p>
 	 <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=dh_w6LkreZTlkCG5jiHFW7PQqpfecPnf&width=-1&height=450"></script>

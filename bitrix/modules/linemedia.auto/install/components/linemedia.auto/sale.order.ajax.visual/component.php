@@ -2194,6 +2194,38 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y" )
                         //$arResult["ORDER_PRICE"] += roundEx($arBasketItems["PRICE"], SALE_VALUE_PRECISION) * DoubleVal($arBasketItems["QUANTITY"]);
                         $arOrderForDiscount['BASKET_ITEMS'][] = $arBasketItems;
                         $arOrderForDiscount['ORDER_WEIGHT'] += doubleval($arBasketItems['WEIGHT']);
+
+                        /*
+                         * Обновление редактируемых свойств
+                         */
+                        if(is_array($arParams['EDITABLE_PROPERTIES'])) {
+
+                            //$basket = new LinemediaAutoBasket(CSaleBasket::GetBasketUserID());
+
+                            foreach($arParams['EDITABLE_PROPERTIES'] as $code) {
+
+                                if(isset($_REQUEST[$arBasketItems['ID'] . '_' . $code])) {
+
+                                    $dbprops = CSaleBasket::GetPropsList(array(), array('BASKET_ID' => intval($arBasketItems['ID'])), false, false, array());
+                                    $props = array();
+                                    while ($prop = $dbprops->Fetch()) {
+
+                                        /*
+                                         * После конвертации магазина в свойстве не должно быть BASKET_ID
+                                         */
+                                        $isOrderConverted = (\Bitrix\Main\Config\Option::get("main", "~sale_converted_15", 'N') == 'Y');
+                                        if($isOrderConverted) unset($prop['BASKET_ID']);
+
+                                        if($prop['CODE'] == $code) {
+                                            $prop['VALUE'] = $_REQUEST[$arBasketItems['ID'] . '_' . $code];
+                                        }
+                                        $props[$prop['CODE']] = $prop;
+                                    }
+                                    $res = CSaleBasket::Update($arBasketItems['ID'], array('PROPS' => $props));
+                                    $debug = $res;
+                                }
+                            }
+                        } // if(is_array($arParams['EDITABLE_PROPERTIES']))
                     }
 
                     $arDiscountOptions = array();

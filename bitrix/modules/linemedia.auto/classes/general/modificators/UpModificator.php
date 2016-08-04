@@ -347,12 +347,23 @@ class UpModificator implements CapableToModifyingSearchInterface
 		}
 		
 		$suppliers = array();
-		if (!in_array($conveyedSuppliers, \LinemediaAutoSupplier::getAllowedSuppliers())) {
-			$obj->setDebugInfo(array(
-				'unavailableSuppliers' => self::UNAVAILABLE_SUPPLIERS
-			));
-			return;
+		// #21849 - для массива in_array некорректен
+		if(is_array($conveyedSuppliers)) {
+			if(count(array_diff($conveyedSuppliers, \LinemediaAutoSupplier::getAllowedSuppliers())) > 0) {
+				$obj->setDebugInfo(array(
+					'unavailableSuppliers' => self::UNAVAILABLE_SUPPLIERS
+				));
+				return;
+			}
+		} else {
+			if (!in_array($conveyedSuppliers, \LinemediaAutoSupplier::getAllowedSuppliers())) {
+				$obj->setDebugInfo(array(
+					'unavailableSuppliers' => self::UNAVAILABLE_SUPPLIERS
+				));
+				return;
+			}
 		}
+
 		
 		
 		/*if(!is_array($conveyedSuppliers)) {

@@ -1127,7 +1127,7 @@ class UploadHandler
 
     protected function generate_response($content, $print_response = true) {
         if ($print_response) {
-            $json = json_encode($content);
+            $json = safe_json_encode($content);
             $redirect = isset($_REQUEST['redirect']) ?
                 stripslashes($_REQUEST['redirect']) : null;
             if ($redirect) {

@@ -19,7 +19,7 @@ IncludeModuleLangFile(__FILE__);
  */
 class LinemediaAutoUser
 {
-  public function getUserBranchByManagerId($manager_id)
+  public static function getUserBranchByManagerId($manager_id)
   {
         global $USER;
         CModule::IncludeModule("linemedia.autobranches");
@@ -55,9 +55,9 @@ class LinemediaAutoUser
 			else return false;           
         } 
 		else return false;		
-  }  
-    
-  public function setUserBranchByManagerId($user_id, $manager_id, $is_user_new = false)
+  }
+
+  public static function setUserBranchByManagerId($user_id, $manager_id, $is_user_new = false)
   {
         global $USER;
         CModule::IncludeModule("linemedia.autobranches");
@@ -136,9 +136,9 @@ class LinemediaAutoUser
             
         }  
       
-  }  
-  
-  public function setUserManagerByManagerId($user_id, $manager_id)
+  }
+
+  public static function setUserManagerByManagerId($user_id, $manager_id)
   {
         $branchUser = new LinemediaAutoBranchesUser($user_id);
         if((int)$manager_id > 0)
@@ -186,7 +186,7 @@ class LinemediaAutoGroup extends CGroup
     }
 
     /*Доработанная битриксовая функция, чтобы работать с массивами тасков для одного и того же модуля*/
-    function SetTasksForModule($module_id, $arGroupTask) 
+    public static function SetTasksForModule($module_id, $arGroupTask)
     {
         global $DB;
         $module_id = $DB->ForSql($module_id);
@@ -279,7 +279,7 @@ class LinemediaAutoGroup extends CGroup
     }
     
     /*Доработанная битриксовая функция, чтобы получать права для одного и того же таска в пределах одного модуля*/
-    function GetTasksForModule($module_id, $onlyMainTasks = true)
+    public static function GetTasksForModule($module_id, $onlyMainTasks = true)
     {
         global $DB;
 
@@ -325,7 +325,7 @@ class LinemediaAutoGroup extends CGroup
      * @param $arTasksFilter фильтр по биндингу, например array("BINDING" => "linemedia_auto_order");
      * @return string
      */
-    public function getMaxPermissionId($sModuleId, $curUserGroup, $arTasksFilter)
+    public static function getMaxPermissionId($sModuleId, $curUserGroup, $arTasksFilter)
     {        
         global $USER;
         if($USER->isAdmin() || php_sapi_name() == 'cli') {
@@ -435,7 +435,7 @@ class LinemediaAutoGroup extends CGroup
      * @param $groups
      * @return string
      */
-    function getMaxIblockPermissionId($iblock_id, $groups) {
+    public static function getMaxIblockPermissionId($iblock_id, $groups) {
 
         global $USER;
         if($USER->isAdmin() || php_sapi_name() == 'cli') {
@@ -502,7 +502,7 @@ class LinemediaAutoGroup extends CGroup
     }
     
     /*Получить права доступа для расширенных настроек главного модуля в соответствии с биндингом (Заказы, статусы товаров, поставщики и т.д.)*/
-    function getUserPermissionsForModuleBinding($module_id, $arUserGroups, $arFilter)
+    public static function getUserPermissionsForModuleBinding($module_id, $arUserGroups, $arFilter)
     {
         global $DB;
 
@@ -518,7 +518,7 @@ class LinemediaAutoGroup extends CGroup
     }
     
     /*Иерархия ролей*/
-    function roleHierarchy($arLetters, $defaultRight)
+    private static function roleHierarchy($arLetters, $defaultRight)
     {    
         $arOrderLetters = array(LM_AUTO_MAIN_ACCESS_DENIED, LM_AUTO_MAIN_ACCESS_READ_WRITE_OWN, LM_AUTO_MAIN_ACCESS_READ_OWN_BRANCH, LM_AUTO_MAIN_ACCESS_READ, LM_AUTO_MAIN_ACCESS_READ_SUPPLIERS, LM_AUTO_MAIN_ACCESS_VIN_CLIENTS, LM_AUTO_MAIN_ACCESS_VIN_BRANCH, LM_AUTO_MAIN_ACCESS_READ_WRITE_OWN_CLIENTS, LM_AUTO_MAIN_ACCESS_READ_WRITE_OWN_BRANCH, LM_AUTO_MAIN_ACCESS_READ_WRITE_SUPPLIERS, LM_AUTO_MAIN_ACCESS_READ_WRITE, LM_AUTO_MAIN_ACCESS_FULL);
        
@@ -538,7 +538,7 @@ class LinemediaAutoGroup extends CGroup
     }
     
     /*Получить фильтр заказа в соответствии с уровнем досупа*/
-    function makeOrderFilter($accessLevel, $arFilter)
+    public static function makeOrderFilter($accessLevel, $arFilter)
     {
         global $USER;
         

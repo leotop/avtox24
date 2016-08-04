@@ -831,7 +831,7 @@ $iblocks = array(
             array(
                 'CODE' => 'brand_title',
                 'NAME' => GetMessage('LM_AUTO_MAIN_IBLOCK_SEARCH_SEO_PROP_BRAND_TITLE'),
-                "PROPERTY_TYPE" => "N",
+                "PROPERTY_TYPE" => "S",
             ),
         ),
         /*

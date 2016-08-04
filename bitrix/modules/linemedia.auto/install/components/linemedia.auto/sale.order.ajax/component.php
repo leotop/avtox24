@@ -1507,6 +1507,7 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y")
 					$arResult["ORDER_PRICE"] = 0;
 					while ($arBasketItems = $dbBasketItems->GetNext())
 					{
+						//TODO: check editable properties
 						$arResult["ORDER_PRICE"] += roundEx($arBasketItems["PRICE"], SALE_VALUE_PRECISION) * DoubleVal($arBasketItems["QUANTITY"]);
 					}
 

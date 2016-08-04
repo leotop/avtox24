@@ -144,5 +144,5 @@ if (!empty($_REQUEST) && isset($_REQUEST['BASKET_ID'])) {
     $arResult['TOTAL_PRICE'] = $result['allNOVATSum_FORMATED'];
 }
 
-echo json_encode($arResult);
+echo safe_json_encode($arResult);
 exit();

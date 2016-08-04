@@ -19,5 +19,5 @@ foreach ($arResult['PARTS'] as $y => $parts) {
     }
 }
 header('Content-type: application/json');
-echo json_encode(array('parts' => $arResult['PARTS']));
+echo safe_json_encode(array('parts' => $arResult['PARTS']));
 exit();

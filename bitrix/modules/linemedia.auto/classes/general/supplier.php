@@ -245,7 +245,7 @@ class LinemediaAutoSupplier
 		} */
 		
 		// Для запуска из консоли не проверяем доступ.
-		if (php_sapi_name() == 'cli') {
+    		if (php_sapi_name() == 'cli') {
 			$filter['CHECK_PERMISSIONS'] = 'N';
 		}
 		

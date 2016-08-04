@@ -95,6 +95,8 @@ class LinemediaAutoEventSelf
          */
         $api = new LinemediaAutoApiDriver();
 
+        $wordforms = new LinemediaAutoWordForm();
+
         /*
          * Аргументы запроса
          * Почистим артикул
@@ -103,7 +105,6 @@ class LinemediaAutoEventSelf
         $api_request_args = array(
             'article' => $query
         );
-
 
         /*
          * Если присутствует родной бренд TecDoc и его специфические аргументы запроса.
@@ -117,10 +118,16 @@ class LinemediaAutoEventSelf
         if ($search_conditions['extra']['modification_id']) {
             $api_request_args['modification_id'] = $search_conditions['extra']['modification_id'];
         }
+        if ($search_conditions['extra']['catalog_code']) {
+            $api_request_args['catalog_code'] = $search_conditions['extra']['catalog_code'];
+        }
+        if ($search_conditions['extra']['catalog_group_id']) {
+            $api_request_args['catalog_group_id'] = $search_conditions['extra']['catalog_group_id'];
+        }
 
         /*
          * У нас может быть множественный запрос, если словоформы объединили много брендов в один.
-         * В таком случае в эестре присутствует массив всех брендов (wf_b) и genericArticleId (gid).
+         * В таком случае в экстре присутствует массив всех брендов (wf_b) и genericArticleId (gid).
          */
         if (is_array($search_conditions['extra']['gid']) || is_array($search_conditions['extra']['wf_b'])) {
 
@@ -150,7 +157,6 @@ class LinemediaAutoEventSelf
         	* Поиск по бренду, но словоформы переданы не были!
         	* например это клик по ссылке, а не переход из выбра каталогов
         	*/
-        	$wordforms = new LinemediaAutoWordForm;
         	$brands = $wordforms->getBrandWordforms($search_conditions['brand_title']);
 
 
@@ -231,14 +237,19 @@ class LinemediaAutoEventSelf
          */
         $parts = array();
         $catalogs = array();
+        $sought = array(); // искомые детали от БД кроссов
         foreach ($response['data'] as $req) {
             $parts 		= array_merge_recursive($parts, 	(array) $req['analogs']['parts']);
             $catalogs 	= array_merge_recursive($catalogs, 	(array) $req['analogs']['catalogs']);
+            if(is_array($req['sought'])) {
+                $sought[] = $req['sought'];
+            }
         }
 
         $response['data'] = array(
             'parts' => $parts,
             'catalogs' => $catalogs,
+            'sought' => $sought,
         );
 
         /*
@@ -254,64 +265,87 @@ class LinemediaAutoEventSelf
          * А не объединятся ли каталоги в словоформе потом?
          * ВЫПОЛНЯЕМ ПОВТОРНЫЙ ЗАПРОС!!!!!!!!
          */
-        if (count($api_catalogs) && count(LinemediaAutoSearch::getIntersectCatalogs($api_catalogs)) <= 1) {
-            $request = array();
-            foreach ($api_catalogs as $cat) {
-                $request []= array(
-                    'article' => $query,
-                    'brand_title' => $cat['brand_title'],
-                    'generic_article_id' => $cat['generic_article_id'],
+        if (count($api_catalogs) > 0) {
 
-                    'tecdoc_crosses' => ($LM_AUTO_MAIN_SEARCH_TECDOC_CROSSES == 'Y'),
-                    'tecdoc_crosses_original' => ($LM_AUTO_MAIN_SEARCH_TECDOC_CROSSES_ORIGINAL == 'Y'),
-                    'linemedia_crosses' => ($LM_AUTO_MAIN_SEARCH_LINEMEDIA_CROSSES == 'Y'),
-                );
+            $intersect_catalogs = LinemediaAutoSearch::getIntersectCatalogs($api_catalogs, $type);
+
+            if(count($intersect_catalogs) < 2) {
+
+                if(LinemediaAutoCrossesApiDriver::isEnabled()) {
+
+                    // каталоги объединились словоформами - получаем детали
+
+                    $api_catalogs = array();
+                    $response['data']['parts'] = $intersect_catalogs[0]['parts'];
+                    $response['data']['catalogs'] = null;
+
+
+                } else {
+
+                    $request = array();
+                    foreach ($api_catalogs as $cat) {
+                        $request []= array(
+                            'article' => $query,
+                            'brand_title' => $cat['brand_title'],
+                            'generic_article_id' => $cat['generic_article_id'],
+
+                            'tecdoc_crosses' => ($LM_AUTO_MAIN_SEARCH_TECDOC_CROSSES == 'Y'),
+                            'tecdoc_crosses_original' => ($LM_AUTO_MAIN_SEARCH_TECDOC_CROSSES_ORIGINAL == 'Y'),
+                            'linemedia_crosses' => ($LM_AUTO_MAIN_SEARCH_LINEMEDIA_CROSSES == 'Y'),
+                        );
+                    }
+
+                    /*
+                     * Запрос
+                     */
+                    try {
+                        $response = $api->query('getAnalogs2Multiple', $request);
+                    } catch (Exception $e) {
+                        LinemediaAutoDebug::add('Search Linemedia API:' . $e->GetMessage(), false, LM_AUTO_DEBUG_ERROR);
+                        return;
+                    }
+
+                    /*
+                     * Если запрос не прошёл
+                     */
+                    if ($response['status'] == 'error') {
+                        LinemediaAutoDebug::add('Linemedia API error:' . $response['error']['code'] . '('.$response['error']['error_text'].')', false, LM_AUTO_DEBUG_USER_ERROR);
+                        return;
+                    }
+
+                    /*
+                     * Объединим результат множественного запроса в одну простыню.
+                     * Потому что мы отсылали словоформы, и нам не важно на какую деталь какой ответ.
+                     */
+                    $parts = array();
+                    $catalogs = array();
+                    $sought = array(); // искомые детали от БД кроссов
+                    foreach ($response['data'] as $req) {
+                        $parts 		= array_merge_recursive($parts, 	(array) $req['analogs']['parts']);
+                        $catalogs 	= array_merge_recursive($catalogs, 	(array) $req['analogs']['catalogs']);
+                        if(is_array($req['sought'])) {
+                            $sought[] = $req['sought'];
+                        }
+                    }
+
+                    foreach ($parts as &$item) {
+                        if (empty($item['analog_type'])) {
+                            $item['analog_type'] = LinemediaAutoPart::ANALOG_GROUP_COMPARABLE;
+                        }
+                    }
+
+                    $response['data'] = array(
+                        'parts' => $parts,
+                        'catalogs' => $catalogs,
+                        'sought' => $sought,
+                    );
+
+                    $api_catalogs = array();
+
+                } // if(LinemediaAutoCrossesApiDriver::isEnabled())
             }
 
-            /*
-             * Запрос
-             */
-            try {
-                $response = $api->query('getAnalogs2Multiple', $request);
-            } catch (Exception $e) {
-                LinemediaAutoDebug::add('Search Linemedia API:' . $e->GetMessage(), false, LM_AUTO_DEBUG_ERROR);
-                return;
-            }
-
-            /*
-             * Если запрос не прошёл
-             */
-            if ($response['status'] == 'error') {
-                LinemediaAutoDebug::add('Linemedia API error:' . $response['error']['code'] . '('.$response['error']['error_text'].')', false, LM_AUTO_DEBUG_USER_ERROR);
-                return;
-            }
-
-            /*
-             * Объединим результат множественного запроса в одну простыню.
-             * Потому что мы отсылали словоформы, и нам не важно на какую деталь какой ответ.
-             */
-            $parts = array();
-            $catalogs = array();
-            foreach ($response['data'] as $req) {
-                $parts 		= array_merge_recursive($parts, 	(array) $req['analogs']['parts']);
-                $catalogs 	= array_merge_recursive($catalogs, 	(array) $req['analogs']['catalogs']);
-            }
-
-            foreach ($parts as &$item) {
-                if (empty($item['analog_type'])) {
-                    $item['analog_type'] = LinemediaAutoPart::ANALOG_GROUP_COMPARABLE;
-                }
-            }
-
-            $response['data'] = array(
-                'parts' => $parts,
-                'catalogs' => $catalogs,
-            );
-
-            $api_catalogs = array();
-
-        }
-
+        } // if (count($api_catalogs) > 0)
 
         /*
          ***************************************************************************************************
@@ -324,10 +358,16 @@ class LinemediaAutoEventSelf
             $api_catalogs = array();
         }
 
+        if(!is_array($catalogs_to_search)) {
+
+        }
+
         if (count($api_catalogs) > 0) {
-            $catalogs = array();
+
+            // ioannes 09.07.16
+            //$catalogs = array();
             foreach ($api_catalogs as $catalog) {
-                $catalogs []= array(
+                $catalogs_to_search[]= array(
                     'title' 		=> $catalog['title'],
                     'brand_title' 	=> $catalog['brand_title'],
                     'source' 		=> $catalog['source'],
@@ -337,7 +377,9 @@ class LinemediaAutoEventSelf
                     ),
                 );
 
-                $catalogs = self::getIntersectCatalogs($catalogs);
+                // ioannes 09.07.16
+                // зачем, если потом все равно объединять по словоформам?
+                //$catalogs = self::getIntersectCatalogs($catalogs);
             }
 
             /*
@@ -345,7 +387,8 @@ class LinemediaAutoEventSelf
              */
             LinemediaAutoDebug::add('Linemedia API returned catalogs', print_r($catalogs, 1));
 
-            $catalogs_to_search = array_merge_recursive($catalogs_to_search, $catalogs);
+            // ioannes 09.07.16
+            //$catalogs_to_search = array_merge_recursive($catalogs_to_search, $catalogs);
 
             return;
         }
@@ -363,6 +406,7 @@ class LinemediaAutoEventSelf
         $generic_ids = array();
 
         foreach ($response['data']['parts'] as $item) {
+
             $part = array(
                 'title'         => $item['title'],
                 'article'       => $item['article'],
@@ -401,6 +445,24 @@ class LinemediaAutoEventSelf
         }
 
         /*
+         * Для БД кроссов добавим инфо по искомой детали
+         */
+        if(is_array($response['data']['sought']) && count($response['data']['sought']) > 0) {
+            
+            foreach($response['data']['sought'] as $sought_part) {
+
+                $brand   = strtoupper($sought_part['brand_title']);
+                $article = LinemediaAutoPartsHelper::clearArticle($sought_part['article']);
+                $result_info[$brand][$article]['tecdoc'] = array(
+                    'article_id'            => $sought_part['article_id'],
+                    'oem'                   => $sought_part['oem'],
+                    'generic_article_id'    => $sought_part['generic_article_id']
+                );
+                $generic_ids[$sought_part['generic_article_id']] = $sought_part['generic_article_id'];
+            }
+        }
+
+        /*
          * #18706
          * Если в деталях оказалось несколько номенклатур
          */
@@ -424,9 +486,6 @@ class LinemediaAutoEventSelf
         $articles_to_search = array_merge_recursive($articles_to_search, $analogs);
         $catalogs_to_search = array_merge_recursive($catalogs_to_search, $catalogs);
     }
-
-
-
 
     /**
      * Добавляем в результаты поиска информацию от локальной БД
@@ -783,7 +842,7 @@ class LinemediaAutoEventSelf
         try {
 	        $api_time = LinemediaAutoModule::getApiConnectionTime();
 	        $api_time = number_format($api_time, 3);
-	        if($api_time <= 0.050) {
+	        if($api_time <= 0.120) {
 		        $api_ok = true;
 	        }
         } catch (Exception $e) {

@@ -778,8 +778,8 @@ foreach ($protocols as $pid => $protocol) {
                         </option>
 					<? } ?>
 					</select>
-					<input type="text" name="conversion[column_replacements][what][]" value="<?= htmlspecialchars($what) ?>" placeholder="<?= GetMessage('REPLACE_WHAT') ?>" size="15" />
-					<input type="text" name="conversion[column_replacements][with][]" value="<?= htmlspecialchars($with) ?>" placeholder="<?= GetMessage('REPLACE_WITH') ?>" size="15" />
+					<input type="text" name="conversion[column_replacements][what][]" value="<?= safe_htmlspecialchars($what) ?>" placeholder="<?= GetMessage('REPLACE_WHAT') ?>" size="15" />
+					<input type="text" name="conversion[column_replacements][with][]" value="<?= safe_htmlspecialchars($with) ?>" placeholder="<?= GetMessage('REPLACE_WITH') ?>" size="15" />
 					<input type="button" value="-" class="conversion-replacement-del" />
 				</div>
 			<?}?>

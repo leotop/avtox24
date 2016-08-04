@@ -93,6 +93,11 @@ class LinemediaAutoRemoteSuppliersIblockPropertyApi
 		    'title' => GetMessage('LM_AUTO_RS_ACCOUNT_TIMEOUT'),
 		    'type'  => 'float',
 	    );
+
+        $config['all_wordforms'] = array(
+            'title' => GetMessage('LM_AUTO_RS_ACCOUNT_WORDFORMS'),
+            'type'  => 'checkbox',
+        );
         
         $prefs = array('LMRSID'=>$supplier_id);
         foreach ($config as $config_code => $config_data) {
@@ -198,6 +203,11 @@ class LinemediaAutoRemoteSuppliersIblockPropertyApi
 		    'title' => GetMessage('LM_AUTO_RS_ACCOUNT_TIMEOUT'),
 		    'type'  => 'float',
 	    );
+
+        $config['all_wordforms'] = array(
+            'title' => GetMessage('LM_AUTO_RS_ACCOUNT_WORDFORMS'),
+            'type'  => 'checkbox',
+        );
         
         if ($arData===false) {
             $vals = $supplier->getOptions();

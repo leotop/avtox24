@@ -528,9 +528,9 @@ foreach($arAllStatuses as $key => $status)
 {
     if($status["PERM_VIEW"] == "N") $arStatusNA[] = $key;
 }
+$lmfilter->setNStatus($arStatusNA);
 
 $arStatusNA = array_unique($arStatusNA);
-$lmfilter->setNStatus($arStatusNA);
 
 $where_str = $lmfilter->filter();
 
@@ -641,8 +641,27 @@ $paysystems = LinemediaAutoOrder::getPaysystemsList();
 // Список доставок.
 $deliveries = LinemediaAutoOrder::getDeliveryList();
 
+$branch_groups = array(
+    COption::GetOptionInt('linemedia.autobranches', 'LM_AUTO_BRANCHES_USER_GROUP_MANAGERS'),
+    COption::GetOptionInt('linemedia.autobranches', 'LM_AUTO_BRANCHES_USER_GROUP_DIRECTOR'),
+    COption::GetOptionInt('linemedia.autobranches', 'LM_AUTO_BRANCHES_USER_GROUP_LOGIST'),
+    COption::GetOptionInt('linemedia.autobranches', 'LM_AUTO_BRANCHES_USER_GROUP_ADMINISTRATOR'),
+);
+
 // Список статусов.
-$statuses = LinemediaAutoOrder::getStatusesList();
+// Если используется модуль филиалов, пользователь состоит в группе филиалов и не админ
+if($autoBranches && CSite::InGroup($branch_groups) && !$USER->IsAdmin())
+{
+    $arFilialIds = LinemediaAutoGroup::getUserDealerId();
+    $statuses = LinemediaAutoBranchesStatus::GetList(array(
+        'filter' => array( 'BRANCH_ID'=> $arFilialIds['UF_DEALER_ID'])
+    ), true);
+
+}
+else
+{
+    $statuses = LinemediaAutoOrder::getStatusesList();
+}
 
 // Список типов плательщиков.
 $persons = LinemediaAutoOrder::getPersonTypesList();
@@ -1206,7 +1225,7 @@ $arHeaders = array(
 );
 
 if ($autoBranches) {
-    //TODO: разобратся с ORDER_MANAGER
+    //TODO: разобраться с ORDER_MANAGER
     $arHeaders[] = array(
         'id' => 'ORDER_MANAGER',
         'content' => GetMessage('ORDER_MANAGER'),
@@ -1248,6 +1267,16 @@ $lAdmin->AddHeaders($arHeaders);
 $arBasketItemIDs = array();
 
 while ($arBasketItem = $rsData->NavNext()) {
+
+    // Список статусов.
+    if($autoBranches && $arBasketItem['BRANCH_ID']>0 && $arBasketItem['BRANCH_ID']!=$branch_id_statuses)
+    {
+        $branch_id_statuses = $arBasketItem['BRANCH_ID'];
+        $branch_statuses = LinemediaAutoBranchesStatus::GetList(
+            array('filter' => array( 'BRANCH_ID'=> $arBasketItem['BRANCH_ID'])),
+            true
+        );
+    }
 
     /*
      * Nazarkov I. #16070 06.03.2015
@@ -1300,8 +1329,16 @@ while ($arBasketItem = $rsData->NavNext()) {
     $row->AddField('QUANTITY', $arBasketItem['QUANTITY']);
 
     // Статус заказа
-    $color = COption::GetOptionString('linemedia.auto', 'LM_AUTO_MAIN_STATUS_COLOR_' . $arOrder['STATUS_ID'], '#ffffff');
-    $row->AddViewField('STATUS_ID', '<span id="status-order-'.$arOrder['ID'].'-'.$arBasketItem['ID'].'" data-color="'.$color.'"></span>'.$statuses[$arOrder['STATUS_ID']]['NAME']. '<script>$("#status-order-'.$arOrder['ID'].'-'.$arBasketItem['ID'].'").parent("td").css("background-color", "'.$color.'")</script>');
+    if($autoBranches && count($branch_statuses))
+    {
+        $color = $branch_statuses[$arOrder['STATUS_ID']]['COLOR_ADMIN']?:'#ffffff';
+        $row->AddViewField('STATUS_ID', '<span id="status-order-' . $arOrder['ID'] . '-' . $arBasketItem['ID'] . '" data-color="' . $color . '"></span>' . $branch_statuses[$arOrder['STATUS_ID']]['SELLER_TITLE'] . '<script>$("#status-order-' . $arOrder['ID'] . '-' . $arBasketItem['ID'] . '").parent("td").css("background-color", "' . $color . '")</script>');
+    }
+    else
+    {
+        $color = COption::GetOptionString('linemedia.auto', 'LM_AUTO_MAIN_STATUS_COLOR_' . $arOrder['STATUS_ID'], '#ffffff');
+        $row->AddViewField('STATUS_ID', '<span id="status-order-' . $arOrder['ID'] . '-' . $arBasketItem['ID'] . '" data-color="' . $color . '"></span>' . $statuses[$arOrder['STATUS_ID']]['NAME'] . '<script>$("#status-order-' . $arOrder['ID'] . '-' . $arBasketItem['ID'] . '").parent("td").css("background-color", "' . $color . '")</script>');
+    }
 
     // Цена.
     if($base_currency != $user_currency) {
@@ -1334,14 +1371,26 @@ while ($arBasketItem = $rsData->NavNext()) {
     $row->AddField('USER', $user_link.$arUser['NAME'].' '.$arUser['LAST_NAME'].' ('.$arUser['EMAIL'].')');
 
     // Статус заказа.
-    $color = COption::GetOptionString('linemedia.auto', 'LM_AUTO_MAIN_STATUS_COLOR_' . $arBasketProps['status']['VALUE'], '#ffffff');
-    $sid = $arBasketItem['ID'];
+    if($autoBranches && count($branch_statuses))
+    {
+        $sid = $arBasketItem['ID'];
+        $color = $branch_statuses[$arBasketProps['status']['VALUE']]['COLOR_ADMIN']?:'#ffffff';
 
-    if ($_REQUEST['mode'] == 'frame') {
-        $jquery = '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>';
+        if ($_REQUEST['mode'] == 'frame') {
+            $jquery = '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>';
+        }
+        $row->AddViewField('STATUS', '<span id="status-item-'.$sid.'" data-color="'.$color.'"></span>'.$branch_statuses[$arBasketProps['status']['VALUE']]['SELLER_TITLE']. $jquery .'<script>$("#status-item-'.$sid.'").parent("td").css("background-color", "'.$color.'")</script>');
     }
-    $row->AddViewField('STATUS', '<span id="status-item-'.$sid.'" data-color="'.$color.'"></span>'.$statuses[$arBasketProps['status']['VALUE']]['NAME']. $jquery .'<script>$("#status-item-'.$sid.'").parent("td")
-    .css("background-color", "'.$color.'")</script>');
+    else
+    {
+        $color = COption::GetOptionString('linemedia.auto', 'LM_AUTO_MAIN_STATUS_COLOR_' . $arBasketProps['status']['VALUE'], '#ffffff');
+        $sid = $arBasketItem['ID'];
+
+        if ($_REQUEST['mode'] == 'frame') {
+            $jquery = '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>';
+        }
+        $row->AddViewField('STATUS', '<span id="status-item-'.$sid.'" data-color="'.$color.'"></span>'.$statuses[$arBasketProps['status']['VALUE']]['NAME']. $jquery .'<script>$("#status-item-'.$sid.'").parent("td").css("background-color", "'.$color.'")</script>');
+    }
 
     // Артикул.
     $row->AddField('ARTICLE', $arBasketProps['article']['VALUE']);

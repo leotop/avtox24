@@ -46,7 +46,12 @@ class LinemediaAutoWordForm
      * @var array $titles
      */
     protected $titles;
-    
+
+    /**
+     * В дальнейшем планируется использовать только этот массив
+     * @var array
+     */
+    protected $normalized = array();
     
     /**
      * Конструктор
@@ -58,6 +63,7 @@ class LinemediaAutoWordForm
             $vars = $obCache->GetVars();
             $this->groups = $vars["groups"];
             $this->titles = $vars["titles"];
+            $this->normalized = $vars["normalized"];
         } else {
             if ($obCache->StartDataCache()) {
                 global $DB;
@@ -69,14 +75,32 @@ class LinemediaAutoWordForm
                 
                 $groups = array();
                 $titles = array();
+
                 while ($form = $res->Fetch()) {
+
                     $groups[$form['group']][] = $form['brand_title'];
                     $titles[$form['brand_title']] = $form['group'];
+
+                    // создаем новую структуру нормализованных брендов
+                    $group_normal = self::normalize($form['group']);
+                    $brand_normal = self::normalize($form['brand_title']);
+
+                    $this->normalized['brands'][$brand_normal] = $group_normal;
+
+                    if(!array_key_exists($group_normal, $this->normalized['groups'])) {
+                        $this->normalized['groups'][$group_normal] = array(
+                            'title' => $form['group'],
+                            'forms' => array($brand_normal => $form['brand_title']),
+                        );
+                    } else {
+                        $this->normalized['groups'][$group_normal]['forms'][$brand_normal] = $form['brand_title'];
+                    }
                 }
                 
                 $obCache->EndDataCache(array(
-                    "groups"    => $groups,
-                    "titles"    => $titles
+                    "groups"        => $groups,
+                    "titles"        => $titles,
+                    "normalized"    => $this->normalized,
                 ));
                 $this->groups = $groups;
                 $this->titles = $titles;
@@ -98,23 +122,26 @@ class LinemediaAutoWordForm
      */
     public function getBrandWordforms($brand_title)
     {
-        $brand_title = strtoupper($brand_title);
-        
-        $group = $this->titles[$brand_title];
-        
-        if (isset($this->groups[$group])) {
-        	$wordforms = (array) $this->groups[$group];
-        } else {
-        	/*
-        	 * В качестве бренда передано название группы.
-        	 */
-	        $wordforms = (array) $this->groups[$brand_title];
+        $wordforms = null;
+
+        $brand_normal = self::normalize($brand_title);
+
+        if(array_key_exists($brand_normal, $this->normalized['groups'])) {
+
+            $wordforms = array_values($this->normalized['groups'][$brand_normal]['forms']);
+            $wordforms[] = $this->normalized['groups'][$brand_normal]['title'];
+
+        } else if(array_key_exists($brand_normal, $this->normalized['brands'])) {
+
+            $group_normal = $this->normalized['brands'][$brand_normal];
+
+            $wordforms = array_values($this->normalized['groups'][$group_normal]['forms']);
+            if(!in_array($this->normalized['groups'][$group_normal]['title'], $wordforms)) {
+                $wordforms[] = $this->normalized['groups'][$group_normal]['title'];
+            }
         }
-        
-        if(!in_array($brand_title, $wordforms))
-        	$wordforms[] = $brand_title;
-        
-        return $wordforms;
+
+        return array_unique($wordforms);
     }
     
     
@@ -123,9 +150,12 @@ class LinemediaAutoWordForm
      */
     public function getGroupWordforms($group)
     {
-        $group = strtoupper($group);
-        $wordforms = $this->groups[$group];
-        return $wordforms;
+        $group_normal = self::normalize($group);
+        if(array_key_exists($group_normal, $this->normalized['groups'])) {
+            return array_values($this->normalized['groups'][$group_normal]['forms']);
+        }
+
+        return null;
     }
     
     
@@ -134,8 +164,16 @@ class LinemediaAutoWordForm
      */
     public function getBrandGroup($brand_title)
     {
-        $brand_title = strtoupper($brand_title);
-        return $this->titles[$brand_title];
+        $brand_normal = self::normalize($brand_title);
+
+        if(array_key_exists($brand_normal, $this->normalized['groups'])) {
+            return $this->normalized['groups'][$brand_normal]['title'];
+        } else if(array_key_exists($brand_normal, $this->normalized['brands'])) {
+            $group_normal = $this->normalized['brands'][$brand_normal];
+            return $this->normalized['groups'][$group_normal]['title'];
+        }
+
+        return null;
     }
     
     
@@ -253,5 +291,15 @@ class LinemediaAutoWordForm
         $brands = array_unique($brands);
 
         return $brands;
+    }
+
+    public static function normalize($brand_title) {
+
+        $brand_title = mb_strtoupper($brand_title);
+        // Remove all non-alphanumeric characters
+        $brand_title = preg_replace('/[\s\W]+/u', '', $brand_title);
+        $brand_title = str_replace(array('?', '?', '?', '?', '?'), array('A', 'E', 'O', 'O', 'U'), $brand_title);
+
+        return $brand_title;
     }
 }

@@ -475,7 +475,13 @@ class linemedia_auto extends CModule
         //    'LinemediaAutoEventSelf',
         //    'OnSearchExecuteEnd_ModifySearchOutcome'
         //),
-        
+		array(
+		    'linemedia.auto',
+		    'OnSearchResultParts',
+		    'linemedia.auto',
+		    'LinemediaAutoEventSelf',
+		    'OnSearchResultParts_ModifySearchOutcome'
+		),
         array(
             'sale',
             'OnBeforeBasketAdd',

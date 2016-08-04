@@ -151,7 +151,6 @@ class AbcpRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                     $analogType = '0';
             }
 
-
             /*
              * Get stock info
              */
@@ -170,7 +169,6 @@ class AbcpRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
                     $quantity = $part['availability'];
                     break;
             }
-
 
 			/* if($this->response_type == 'parts') {
 				if (!$quantity) {
@@ -252,7 +250,6 @@ class AbcpRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
 
 		throw new Exception(self::$title.': '.'Remote part not found');
     }
-
 
     /**
      * Получение конфигурационных данных.

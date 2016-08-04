@@ -119,18 +119,17 @@ if ($arParams['SEF_MODE'] == 'Y') {
 
 $api = new LinemediaAutoApiDriver();
 
-try {
-
-	$account_info = $api->getAccountInfo();
-	$available_tecdoc = $account_info['data']['tecdoc']['available'];
-} catch (Exception $e) {
-	$available_tecdoc = false;
+if($arParams['AVAILABLE_TECDOC'] == 'N') {
+	$arResult['AVAILABLE_TECDOC'] = false;
+} else {
+	try {
+		$account_info = $api->getAccountInfo();
+		$available_tecdoc = $account_info['data']['tecdoc']['available'];
+	} catch (Exception $e) {
+		$available_tecdoc = false;
+	}
+	$arResult['AVAILABLE_TECDOC'] = $available_tecdoc;
 }
-
-
-
-$arResult['AVAILABLE_TECDOC'] = $available_tecdoc;
-
 
 switch($action){
 	case 'edit':

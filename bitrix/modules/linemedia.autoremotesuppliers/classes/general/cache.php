@@ -17,7 +17,6 @@ class LinemediaAutoSimpleCache {
     }
 }
 
-
 /**
  * ןנמסמעמי פאיכמגûי ךור
  * Class LinemediaAutoSimpleCache

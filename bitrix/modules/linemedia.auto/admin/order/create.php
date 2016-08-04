@@ -425,7 +425,7 @@ if ($REQUEST_METHOD == "POST" && $save_order_data == "Y" && empty($dontsave) && 
             $arErrors,
             $arWarnings
         );
-        
+       
         //change delivery price
         if (DoubleVal($arOrder["DELIVERY_PRICE"]) != $PRICE_DELIVERY) {
             $arOrder["PRICE"] = ($arOrder["PRICE"] - $arOrder["DELIVERY_PRICE"]) + $PRICE_DELIVERY;
@@ -486,7 +486,7 @@ if ($REQUEST_METHOD == "POST" && $save_order_data == "Y" && empty($dontsave) && 
             /*
              * »наче происходит задвоение корзин, сами корзины добавл€ютс€ ниже
              */
-            //unset($arOrder['BASKET_ITEMS']);
+            unset($arOrder['BASKET_ITEMS']);
 
             $tmpID = CSaleOrder::DoSaveOrder($arOrder, $arAdditionalFields, $ID, $arErrors, $arCupon);
             
@@ -923,25 +923,34 @@ if (isset($ORDER_AJAX) && $ORDER_AJAX == "Y" && check_bitrix_sessid()) {
         $tmpLocation = "";
         
         ob_start();
-        $GLOBALS["APPLICATION"]->IncludeComponent(
-                'bitrix:sale.ajax.locations',
-                '',
-                array(
-                    "SITE_ID" => $LID,
-                    "AJAX_CALL" => "Y",
-                    "COUNTRY_INPUT_NAME" => "ORDER_PROP_".$locid,
-                    "REGION_INPUT_NAME" => "REGION_ORDER_PROP_".$locid,
-                    "CITY_INPUT_NAME" => "CITY_ORDER_PROP_".$locid,
-                    "CITY_OUT_LOCATION" => "Y",
-                    "ALLOW_EMPTY_CITY" => "Y",
-                    "LOCATION_VALUE" => $location,
-                    "COUNTRY" => "",
-                    "ONCITYCHANGE" => "fRecalProduct('', '', 'N');",
-                ),
-                null,
-                array('HIDE_ICONS' => 'Y')
-        );
-        $tmpLocation = ob_get_contents();
+
+		CSaleLocation::proxySaleAjaxLocationsComponent(
+			array(
+				"SITE_ID" => $LID,
+				"AJAX_CALL" => "Y",
+				"COUNTRY_INPUT_NAME" => "ORDER_PROP_".$locid,
+				"REGION_INPUT_NAME" => "REGION_ORDER_PROP_".$locid,
+				"CITY_INPUT_NAME" => "CITY_ORDER_PROP_".$locid,
+				"CITY_OUT_LOCATION" => "Y",
+				"ALLOW_EMPTY_CITY" => "Y",
+				"LOCATION_VALUE" => $location,
+				"COUNTRY" => "",
+				"ONCITYCHANGE" => "fRecalProduct('', '', 'N');",
+			),
+			array(
+				"ID" => $location,
+				"CODE" => "",
+				"JS_CALLBACK" => 'fRecalProduct',
+				"SHOW_DEFAULT_LOCATIONS" => 'Y',
+				"JS_CONTROL_GLOBAL_ID" => 'saleOrderNew',
+			),
+			'',
+			true,
+			'location-block-wrapper'.(intval($locid) ? ' prop-'.intval($locid) : '')
+		);
+
+		$tmpLocation = ob_get_contents();
+	
         ob_end_clean();
 
         $arData = array();
@@ -1269,7 +1278,7 @@ if (isset($ORDER_AJAX) && $ORDER_AJAX == "Y" && check_bitrix_sessid()) {
         
         $arBaskets = (array) $basket->getOrderedBaskets($ID);
         
-        
+		
         /*
          * ѕересчет данных заказа.
          */
@@ -1322,7 +1331,8 @@ if (isset($ORDER_AJAX) && $ORDER_AJAX == "Y" && check_bitrix_sessid()) {
         // »зменение цены доставки
         $deliveryChangePrice = false;
         if ($delpricechange == "Y") {
-            $arOrder["PRICE"] = ($arOrder["PRICE"] - $arOrder["DELIVERY_PRICE"]) + $deliveryPrice;
+//			$arOrder["PRICE"] = ($arOrder["PRICE"] - $arOrder["DELIVERY_PRICE"]) + $deliveryPrice;
+			$arOrder["PRICE"] = $arOrder["PRICE"] + $deliveryPrice;
             $arOrder["DELIVERY_PRICE"] = $deliveryPrice;
             $arOrder["PRICE_DELIVERY"] = $deliveryPrice;
             $deliveryChangePrice = true;
@@ -1332,11 +1342,13 @@ if (isset($ORDER_AJAX) && $ORDER_AJAX == "Y" && check_bitrix_sessid()) {
             $arDelivery["DELIVERY_DEFAULT_DESCRIPTION"] = "";
             $arData[0]["DELIVERY"] = "";
         } else {
-            $arDelivery = fGetDelivery($location, $locationZip, $arOrder["ORDER_WEIGHT"], $arOrder["ORDER_PRICE"], $currency, $LID, $deliveryId);
+			$arDelivery = fGetDelivery($location, $locationZip, $arOrder["ORDER_WEIGHT"], $arOrder["ORDER_PRICE"], $currency, $LID, $deliveryId);
+			$arOrder['PRICE'] = $arOrder["PRICE"] + $arDelivery['DELIVERY_DEFAULT_PRICE'];
         }
         
         $arData[0]["ORDER_ID"] = $id;
         $arData[0]["DELIVERY"] = $arDelivery["DELIVERY"];
+		
         if (isset($arOrder["PRICE_DELIVERY"]) && floatval($arOrder["PRICE_DELIVERY"]) > 0) {
             $arData[0]["DELIVERY_PRICE"] = $arOrder["PRICE_DELIVERY"];
             $arData[0]["DELIVERY_PRICE_FORMAT"] = SaleFormatCurrency($arOrder["PRICE_DELIVERY"], $currency);
@@ -2110,7 +2122,7 @@ $arDeliveryOrder = fGetDelivery($locationID, $locationZipID, $productWeight, ($s
         </td>
         <td class="adm-detail-content-cell-r">
             <?
-                $deliveryPrice = roundEx($str_PRICE_DELIVERY, SALE_VALUE_PRECISION);;
+                $deliveryPrice = roundEx($str_PRICE_DELIVERY, SALE_VALUE_PRECISION);
                 if ($bVarsFromForm) {
                     $deliveryPrice = roundEx($PRICE_DELIVERY, SALE_VALUE_PRECISION);
                 }
@@ -2134,6 +2146,7 @@ $arDeliveryOrder = fGetDelivery($locationID, $locationZipID, $productWeight, ($s
                 {
                     document.getElementById("change_delivery_price").value = "N";
                     fRecalProduct('', '', 'N');
+					console.log(document.getElementById('DELIVERY_ID_PRICE').value);
                 }
             </script>
         </td>
@@ -2784,26 +2797,39 @@ $tabControl->BeginCustomField("BASKET_CONTAINER", GetMessage("NEWO_BASKET_CONTAI
             var quantity = $('#PRODUCT_' + id + '_QUANTITY').val();
             productData = "{'" + id + "': {'quantity':'" + quantity + "'}}";
         }
-        
-        if (BX('CITY_ORDER_PROP_' + locationID)) {
-            var selectedIndex = BX('CITY_ORDER_PROP_' + locationID).selectedIndex;
-            var selectedOption = BX('CITY_ORDER_PROP_' + locationID).options;
-        } else if (BX('ORDER_PROP_' + locationID)) {
-            var selectedIndex = BX('ORDER_PROP_' + locationID).selectedIndex;
-            var selectedOption = BX('ORDER_PROP_' + locationID).options;
-        }
 
-        if (locationID > 0 && selectedIndex > 0) {
-            location = selectedOption[selectedIndex].value;
-        }
+		<?if(CSaleLocation::isLocationProEnabled()):?>
+
+			input = document.querySelector('input[name="CITY_ORDER_PROP_' + locationID+'"]');
+
+			if(!BX.type.isDomNode(input))
+				input = document.querySelector('input[name="ORDER_PROP_' + locationID+'"]');
+
+			if(BX.type.isDomNode(input))
+				location = input.value;
+
+		<?else:?>
+
+			if (BX('CITY_ORDER_PROP_' + locationID))
+			{
+				selectedIndex = BX('CITY_ORDER_PROP_' + locationID).selectedIndex;
+				selectedOption = BX('CITY_ORDER_PROP_' + locationID).options;
+			}
+			else if (BX('ORDER_PROP_' + locationID))
+			{
+				selectedIndex = BX('ORDER_PROP_' + locationID).selectedIndex;
+				selectedOption = BX('ORDER_PROP_' + locationID).options;
+			}
+
+			if (locationID > 0 && selectedIndex > 0)
+				location = selectedOption[selectedIndex].value;
+
+		<?endif?>
+		
         if (BX('ORDER_PROP_' + locationZipID)) {
             locationZip = BX('ORDER_PROP_' + locationZipID).value;
         }
-        deliveryId = document.getElementById('DELIVERY_ID').value;
-        deliveryPrice = parseFloat(document.getElementById('DELIVERY_ID_PRICE').value);
-        if (isNaN(deliveryPrice)) {
-            deliveryPrice = 0;
-        }
+        
         paySystemId = document.getElementById('PAY_SYSTEM_ID').value;
         buyerTypeId = document.getElementById('buyer_type_id').value;
         cupon = document.getElementById('CUPON').value;
@@ -2811,96 +2837,123 @@ $tabControl->BeginCustomField("BASKET_CONTAINER", GetMessage("NEWO_BASKET_CONTAI
         var deliveryPriceChange = document.getElementById("change_delivery_price").value;
         var recomMore = document.getElementById('recom_more').value;
 
+		deliveryId = document.getElementById('DELIVERY_ID').value;
+        deliveryPrice = parseFloat(document.getElementById('DELIVERY_ID_PRICE').value);
+		
+        if (isNaN(deliveryPrice)) {
+            deliveryPrice = 0;
+        }
+		
         dateURL = '<?= bitrix_sessid_get() ?>&ORDER_AJAX=Y&id=<?= $ID ?>&LID=<?= CUtil::JSEscape($LID) ?>&recomMore='+recomMore+'&recommendet='+recommendet+'&delpricechange='+deliveryPriceChange+'&user_id=' + user_id + '&cupon=' + cupon + '&currency=' + currencyBase + '&deliveryId=' + deliveryId + '&paySystemId=' + paySystemId + '&deliveryPrice=' + deliveryPrice + '&buyerTypeId=' + buyerTypeId + '&locationID=' + locationID + '&location=' + location + '&locationZipID=' + locationZipID + '&locationZip=' + locationZip + '&product=' + productData;
-        
+
         BX.showWait();
         BX.ajax.post('/bitrix/admin/<?=$arPageSettings['NEW_PAGE']?>', dateURL, fRecalProductResult);
         
         RefreshBasket();
 		BX.closeWait();
     }
-    
-    
-    function fRecalProductResult(result)
-    {
-        BX.closeWait();
-        
-        if (result.length > 0) {
-            var res = eval( '('+result+')' );
-            
-            var changePriceProduct = "N";
-            
-            BX('DELIVER_ID_DESC').innerHTML = res[0]["DELIVERY_DESCRIPTION"];
-            BX('DELIVERY_ID_PRICE').value = res[0]["DELIVERY_PRICE"];
-            if (res[0]["DELIVERY"].length > 0) {
-                BX('DELIVERY_SELECT').innerHTML = res[0]["DELIVERY"];
-            }
-            
-            if (res[0]["ORDER_ERROR"] == "N") {
-                if (BX('town_location_'+res[0]["LOCATION_TOWN_ID"])) {
-                    if (res[0]["LOCATION_TOWN_ENABLE"] == 'Y') {
-                        BX('town_location_'+res[0]["LOCATION_TOWN_ID"]).style.display = 'table-row';
-                    } else {
-                        BX('town_location_'+res[0]["LOCATION_TOWN_ID"]).style.display = 'none';
-                    }
-                }
+	
+	function fRecalProductResult(result)
+	{
+	
+		BX.closeWait();
+		if (result.length > 0)
+		{
+			var res = eval( '('+result+')' );
 
-                BX('ORDER_TOTAL_PRICE').innerHTML = res[0]["PRICE_TOTAL"];
-                
-                if (res[0]["DISCOUNT_PRODUCT_VALUE"] > 0) {
-                    BX('ORDER_PRICE_WITH_DISCOUNT_DESC_VISIBLE').style.display = 'table-row';
-                    BX('ORDER_PRICE_WITH_DISCOUNT').innerHTML = res[0]["PRICE_WITH_DISCOUNT_FORMAT"];
-                } else {
-                    if (changePriceProduct == 'N') {
-                        BX('ORDER_PRICE_WITH_DISCOUNT_DESC_VISIBLE').style.display = 'none';
-                    } else {
-                        BX('ORDER_PRICE_WITH_DISCOUNT_DESC_VISIBLE').style.display = 'table-row';
-                        BX('ORDER_PRICE_WITH_DISCOUNT').innerHTML = res[0]["PRICE_WITH_DISCOUNT_FORMAT"];
-                    }
-                }
+			var changePriceProduct = "N";
+			
 
-                if (parseInt(res[0]["ORDER_ID"]) > 0) {
-                    if (parseFloat(res[0]["PAY_ACCOUNT_DEFAULT"]) >= parseFloat(res[0]["PRICE_TO_PAY_DEFAULT"])) {
-                        BX('PAY_CURRENT_ACCOUNT_DESC').innerHTML = res[0]["PAY_ACCOUNT"];
-                        BX('buyerCanBuy').style.display = 'block';
-                    } else {
-                        BX('buyerCanBuy').style.display = 'none';
-                    }
-                }
-                
-                BX('ORDER_DELIVERY_PRICE').innerHTML = res[0]["DELIVERY_PRICE_FORMAT"];
-                BX('ORDER_TAX_PRICE').innerHTML = res[0]["PRICE_TAX"];
-                BX('ORDER_WAIGHT').innerHTML = res[0]["PRICE_WEIGHT_FORMAT"];
-                BX('ORDER_PRICE_ALL').innerHTML = res[0]["PRICE_TO_PAY"];
-                
-                if (parseFloat(res[0]["DISCOUNT_VALUE"]) > 0) {
-                    BX('ORDER_DISCOUNT_PRICE_VALUE').style.display = "table-row";
-                    BX('ORDER_DISCOUNT_PRICE_VALUE_VALUE').innerHTML = res[0]["DISCOUNT_VALUE_FORMATED"];
-                }
-                
-                if (res[0]["RECOMMENDET_CALC"] == "Y") {
-                    if (res[0]["RECOMMENDET_PRODUCT"].length == 0) {
-                        BX('tab_1').style.display = "none";
-                        BX('user_recomendet').style.display = "none";
-                        
-                        if (BX('user_basket').style.display == "block")
-                            fTabsSelect('user_basket', 'tab_2');
-                        else if (BX('buyer_viewed').style.display == "block")
-                            fTabsSelect('buyer_viewed', 'tab_3');
-                        else if (BX('tab_2').style.display == "block")
-                            fTabsSelect('user_basket', 'tab_2');
-                        else if (BX('tab_3').style.display == "block")
-                            fTabsSelect('buyer_viewed', 'tab_3');
-                    } else {
-                        BX('user_recomendet').innerHTML = res[0]["RECOMMENDET_PRODUCT"];
-                    }
-                }
+			BX('DELIVER_ID_DESC').innerHTML = res[0]["DELIVERY_DESCRIPTION"];
+			BX('DELIVERY_ID_PRICE').value = res[0]["DELIVERY_PRICE"];
 
-                orderWeight = res[0]["PRICE_WEIGHT"];
-                orderPrice = res[0]["PRICE_WITH_DISCOUNT"];
-            }
-        }
-    }
+			if (res[0]["DELIVERY"].length > 0)
+				BX('DELIVERY_SELECT').innerHTML = res[0]["DELIVERY"];
+
+			if (res[0]["ORDER_ERROR"] == "N")
+			{
+				if (BX('town_location_'+res[0]["LOCATION_TOWN_ID"]))
+				{
+					if (res[0]["LOCATION_TOWN_ENABLE"] == 'Y')
+						BX('town_location_'+res[0]["LOCATION_TOWN_ID"]).style.display = 'table-row';
+					else
+						BX('town_location_'+res[0]["LOCATION_TOWN_ID"]).style.display = 'none';
+				}
+
+				BX('ORDER_TOTAL_PRICE').innerHTML = res[0]["PRICE_TOTAL"];
+
+				if (res[0]["DISCOUNT_PRODUCT_VALUE"] > 0)
+				{
+					BX('ORDER_PRICE_WITH_DISCOUNT_DESC_VISIBLE').style.display = 'table-row';
+					BX('ORDER_PRICE_WITH_DISCOUNT').innerHTML = res[0]["PRICE_WITH_DISCOUNT_FORMAT"];
+				}
+				else
+				{
+					if (changePriceProduct == 'N')
+						BX('ORDER_PRICE_WITH_DISCOUNT_DESC_VISIBLE').style.display = 'none';
+					else
+					{
+						BX('ORDER_PRICE_WITH_DISCOUNT_DESC_VISIBLE').style.display = 'table-row';
+						BX('ORDER_PRICE_WITH_DISCOUNT').innerHTML = res[0]["PRICE_WITH_DISCOUNT_FORMAT"];
+					}
+				}
+
+				if (parseInt(res[0]["ORDER_ID"]) > 0)
+				{
+					if (parseFloat(res[0]["PAY_ACCOUNT_DEFAULT"]) >= parseFloat(res[0]["PRICE_TO_PAY_DEFAULT"]))
+					{
+						BX('PAY_CURRENT_ACCOUNT_DESC').innerHTML = res[0]["PAY_ACCOUNT"];
+						BX('buyerCanBuy').style.display = 'block';
+					}
+					else
+					{
+						if (BX('buyerCanBuy'))
+							BX('buyerCanBuy').style.display = 'none';
+					}
+				}
+
+				BX('ORDER_DELIVERY_PRICE').innerHTML = res[0]["DELIVERY_PRICE_FORMAT"];
+				BX('ORDER_TAX_PRICE').innerHTML = res[0]["PRICE_TAX"];
+				BX('ORDER_WAIGHT').innerHTML = res[0]["PRICE_WEIGHT_FORMAT"];
+				BX('ORDER_PRICE_ALL').innerHTML = res[0]["PRICE_TO_PAY"];
+				BX('ORDER_DISCOUNT_PRICE_VALUE_VALUE').innerHTML = res[0]["DISCOUNT_VALUE_FORMATED"];
+
+				if (parseFloat(res[0]["DISCOUNT_VALUE"]) > 0)
+					BX('ORDER_DISCOUNT_PRICE_VALUE').style.display = "table-row";
+
+				if (res[0]["RECOMMENDET_CALC"] == "Y")
+				{
+					if (res[0]["RECOMMENDET_PRODUCT"].length == 0)
+					{
+						BX('tab_1').style.display = "none";
+						BX('user_recomendet').style.display = "none";
+
+						if (BX('user_basket').style.display == "block")
+							fTabsSelect('user_basket', 'tab_2');
+						else if (BX('buyer_viewed').style.display == "block")
+							fTabsSelect('buyer_viewed', 'tab_3');
+						else if (BX('tab_2').style.display == "block")
+							fTabsSelect('user_basket', 'tab_2');
+						else if (BX('tab_3').style.display == "block")
+							fTabsSelect('buyer_viewed', 'tab_3');
+					}
+					else
+					{
+						BX('user_recomendet').innerHTML = res[0]["RECOMMENDET_PRODUCT"];
+						if (BX('user_basket').style.display != "block" && BX('buyer_viewed').style.display != "block")
+							fTabsSelect('user_recomendet', 'tab_1');
+						else
+							BX('tab_1').style.display = "block";
+					}
+				}
+
+				orderWeight = res[0]["PRICE_WEIGHT"];
+				orderPrice = res[0]["PRICE_WITH_DISCOUNT"];
+
+			}
+		}
+	}
+    	
 
     /*
      * click on recommendet More

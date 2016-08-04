@@ -80,7 +80,6 @@ class LinemediaAutoRemoteSuppliersEventLinemediaAuto
          */
         $wordforms = new LinemediaAutoWordForm();
         
-        
         /*
          * Использование кроссов от удаленных поставщиков.
          */
@@ -131,42 +130,43 @@ class LinemediaAutoRemoteSuppliersEventLinemediaAuto
 	         * Используем тот бренд, что вернул именно этот поставщик
 	         */
 	        $brand_title = isset($search_conditions['extra'][hash("crc32", $api, false).'bt']) ? $search_conditions['extra'][hash("crc32", $api, false).'bt'] : $search_conditions['brand_title'];
-	        
+
+            $brand_titles = is_array($brand_title) ? $brand_title : array($brand_title);
+
+            $use_all_wordforms = (bool) $supplier['PROPS']['api']['VALUE']['all_wordforms'];
+
             /*
-             * Проверим наличие словоформ.
+             * Бывает такое, что надо сделать несколько запросов к одному поставщику
+             * Например, автопитер находит отдельно TRW и LUCAS/TRW
              */
 
-			/*
-			 * Если бренд находится в группе словоформ, то выбираем название группы и подменяем
-			 * текущий бренд на него, чтобы поиск осуществлялся по всем брендам в словоформе.
-			 */
+            if($use_all_wordforms) {
 
-			$brand_title = (string) $wordforms->getBrandGroup($brand_title) ?: $brand_title;
+                /*
+                 * Если бренд находится в группе словоформ, то выбираем название группы и подменяем
+                 * текущий бренд на него, чтобы поиск осуществлялся по всем брендам в словоформе.
+                 */
+                $brand_title = (string) $wordforms->getBrandGroup($brand_title) ?: $brand_title;
+                $brand_titles = (array) $wordforms->getGroupWordforms($brand_title);
 
-            $brand_titles = (array) $wordforms->getGroupWordforms($brand_title);
-            
-            
-            /*
-            * $brand_title может быть не один, если он тоже попал под словоформы на этапе группировки каталога
-            *  [avdmotorsbt] => Array
-            *    (
-            *        [0] => TOYOTA
-            *        [1] => DAIHATSU
-            *        [2] => LEXUS
-            *    )
-            */
-            if (is_array($brand_title)) {
-            	$brand_titles = array_merge($brand_titles, $brand_title);
-            } else {
-	            $brand_titles []= $brand_title;
+                /*
+                * $brand_title может быть не один, если он тоже попал под словоформы на этапе группировки каталога
+                *  [avdmotorsbt] => Array
+                *    (
+                *        [0] => TOYOTA
+                *        [1] => DAIHATSU
+                *        [2] => LEXUS
+                *    )
+                */
+                if (is_array($brand_title)) {
+                    $brand_titles = array_merge($brand_titles, $brand_title);
+                } else {
+                    $brand_titles []= $brand_title;
+                }
+
+                $brand_titles = array_unique($brand_titles);
             }
-            
-            $brand_titles = array_unique($brand_titles);
-            
-	        /*
-	         * Бывает такое, что надо сделать несколько запросов к одному поставщику
-	         * Например, автопитер находит отдельно TRW и LUCAS/TRW
-	         */
+
         	for ($i = 0; $i < count($brand_titles); $i++) {
 		        /*
 	        	 * Переделаем массивы в экстре на нормальные значения для каждого из запросов
@@ -372,6 +372,8 @@ class LinemediaAutoRemoteSuppliersEventLinemediaAuto
 
 		        	$catalogs[$i]['source'] = $job_code;
 		        	$catalogs[$i]['extra'][hash("crc32", $api, false). 'bt'] = $catalogs[$i]['brand_title'];
+                    // указатель, что элемент пришел от удаленного поставщика
+                    $catalogs[$i]['is_remote_supplier'] = 1;
 	        	}
 	        	
 		        $catalogs_to_search = array_merge_recursive($catalogs_to_search, $catalogs);
@@ -433,6 +435,8 @@ class LinemediaAutoRemoteSuppliersEventLinemediaAuto
                             }
                         }
 			        	$groups[$group][$i]['supplier_id'] = $supplier_id;
+                        // указатель, что элемент пришел от удаленного поставщика
+                        $groups[$group][$i]['is_remote_supplier'] = 1;
 		        	}
 	        	}
                 
@@ -560,6 +564,10 @@ class LinemediaAutoRemoteSuppliersEventLinemediaAuto
             $data['title']       = iconv('UTF-8', 'CP1251', $data['title']);
             $data['brand_title'] = iconv('UTF-8', 'CP1251', $data['brand_title']);
         }
+		
+		// Добавление данных о максимально доступном количестве товара
+		$additional['max_available_quantity'] = $data['quantity'];
+		
         $data['quantity'] = 0;
         
         // Добавление данных о сроке доставки.

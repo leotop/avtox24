@@ -31,7 +31,7 @@ $MESS['LM_AUTO_PHP_NO_SHELL'] = ' </br>Или для php установлен з
 $MESS['LM_AUTO_JAVA_AVAILABLE'] = 'Установлена Java';
 $MESS['LM_AUTO_NO_JAVA'] = 'Установите на сервер программу <b>Java</b> с помощью команды <u>yum install java</u>';
 
-$MESS['LM_AUTO_API_AVAILABLE_TIME'] = 'Доступность сервера Linemedia API (Ваше время соединения - #TIME# сек., средне допустимое - 0.050 сек.)';
+$MESS['LM_AUTO_API_AVAILABLE_TIME'] = 'Доступность сервера Linemedia API (Ваше время соединения - #TIME# сек., средне допустимое - 0.120 сек.)';
 $MESS['LM_AUTO_API_AVAILABLE'] = 'Доступность сервера Linemedia API';
 $MESS['LM_AUTO_API_RECOMMENDATIONS'] = 'Время соединения с сервером API превышает средне допустимое. Возможны перебои на линии. Попробуйте запустить проверку позже.';
 

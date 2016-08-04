@@ -29,6 +29,14 @@ class LinemediaAutoPartsHelper
  	* Статический кеш
  	*/
  	static $cache;
+
+    public static $EXTRA_KEYS = array(
+        'catalog_code',
+        'catalog_group_id',
+        'gid',
+        'modification_id',
+        'wf_b',
+    );
  	
     /**
 	 * Очистка артикула от лишних символов.
@@ -136,6 +144,27 @@ class LinemediaAutoPartsHelper
         }
         return $result;
      }
+
+    public static function clearExtra($extra, $allowed_keys = array()) {
+
+        if(!is_array($extra) || count($extra) < 1) {
+            return $extra;
+        }
+
+        $allowed_keys = (array) $allowed_keys;
+        $allowed_keys = array_merge($allowed_keys, self::$EXTRA_KEYS);
+
+        foreach($extra as $key => &$value) {
+
+            if(!in_array($key, $allowed_keys)) {
+                unset($extra[$key]);
+            } else if(is_array($value)) {
+                $value = array_unique($value);
+            }
+        }
+
+        return $extra;
+    }
 }
 
 

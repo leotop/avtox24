@@ -69,6 +69,13 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
+	),
+	Array(
+		"Новая тестовая версия", 
+		"/html/", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
 ?>

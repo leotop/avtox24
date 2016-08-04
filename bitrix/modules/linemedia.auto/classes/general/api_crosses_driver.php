@@ -16,7 +16,7 @@ class LinemediaAutoCrossesApiDriver {
 
     const DEFAULT_ENCODING = 'UTF-8';
 
-    static $BASE_URL = 'http://78.46.101.198/json.php';
+    static $BASE_URL = 'http://ws.auto-expert.info/json.php';
     static $LOGIN = null;
     static $PASSWORD = null;
     static $ENABLED = null;
@@ -31,6 +31,7 @@ class LinemediaAutoCrossesApiDriver {
         'subanalogs_non_oem' => false,
         'subanalogs_oem' => true,
         'subanalogs_appliance' => false,
+        'include_sought' => true,
         'min_weight' => 20,
     );
 
@@ -42,6 +43,9 @@ class LinemediaAutoCrossesApiDriver {
 
         if(!is_null(self::$ENABLED)) {
             return self::$ENABLED;
+        }
+        if(isset($_SESSION['LM_AUTO_CROSSES_ENABLED'])) {
+            return $_SESSION['LM_AUTO_CROSSES_ENABLED'];
         }
         if(!self::getLogin()) {
             self::$ERROR = array(
@@ -71,9 +75,11 @@ class LinemediaAutoCrossesApiDriver {
         $ver_info = self::query('Crosses_getVersion', array(), false);
         if($ver_info['status'] == 'ok') {
             self::$ENABLED = true;
+            $_SESSION['LM_AUTO_CROSSES_ENABLED'] = true;
             return true;
         } else {
             self::$ERROR = $ver_info['error'];
+            LinemediaAutoDebug::add('Linemedia crosses not enabled!', false, LM_AUTO_DEBUG_ERROR);
         }
         self::$ENABLED = false;
         return false;
@@ -204,6 +210,30 @@ class LinemediaAutoCrossesApiDriver {
         }
 
         /*
+         * Группируем запросы по артикулу, считая, что набор опций у кажого запроса одинаковый,
+         * и множественные запросы возникают только из за словоформ
+         */
+        $group_args_by_article = array();
+
+        foreach($args as $arg) {
+
+            $article = LinemediaAutoPartsHelper::clearArticle($arg['article']);
+
+            if(strlen($article) < 1) {
+                continue;
+            }
+
+            if(array_key_exists($article, $group_args_by_article)) {
+                $group_args_by_article[$article]['brand_title'][] = $arg['brand_title'];
+            } else {
+                $arg['brand_title'] = array($arg['brand_title']);
+                $group_args_by_article[$article] = $arg;
+            }
+        }
+
+        $args = array_values($group_args_by_article);
+
+        /*
          * Если идет множественный запрос - не запрашиваем субаналоги
          */
         if(count($args) > 1) {
@@ -241,6 +271,12 @@ class LinemediaAutoCrossesApiDriver {
                 if(array_key_exists('modification_id', $req_data)) {
                     $api_args['options']['modification_id'] = (int) $req_data['modification_id'];
                 }
+                if(array_key_exists('catalog_code', $req_data)) {
+                    $api_args['options']['catalog_code'] = (string) $req_data['catalog_code'];
+                }
+                if(array_key_exists('catalog_group_id', $req_data)) {
+                    $api_args['options']['catalog_group_id'] = (int) $req_data['catalog_group_id'];
+                }
 
                 $res = self::query('Crosses_search', $api_args);
 
@@ -265,6 +301,34 @@ class LinemediaAutoCrossesApiDriver {
         return $response;
     }
 
+    public function getCatalogAnalogs($args) {
+
+        $api_args = array(
+            'typ_id' => (int) $args['typ_id'],
+            'ga_base' => (array) $args['ga_base'],
+        );
+
+        if(array_key_exists('include_oem', $args)) {
+            $api_args['include_oem'] = (bool) $args['include_oem'];
+        } else {
+            $api_args['include_oem'] = false;
+        }
+
+        if(count($api_args) > 0) {
+            $no_cache = false;
+            if($args['no_cache'] && $args['no_cache'] != 'N') {
+                $no_cache = true;
+            }
+            return self::query('Catalog_getAnalogs', array(
+                'typ_id'        => $api_args['typ_id'],
+                'ga_base'       => $api_args['ga_base'],
+                'include_oem'   => $api_args['include_oem'],
+                'no_cache'      => $no_cache)
+            );
+        }
+        return null;
+    }
+
     public static function query($cmd, $data = array(), $check_enabled = true) {
 
         if($check_enabled && !self::isEnabled()) {
@@ -277,9 +341,9 @@ class LinemediaAutoCrossesApiDriver {
         $url = self::$BASE_URL . '?f=' . $cmd . '&out=json';
 
         if(defined('JSON_UNESCAPED_UNICODE')) {
-            $post_data_enc = json_encode($data, JSON_UNESCAPED_UNICODE);
+            $post_data_enc = safe_json_encode($data, JSON_UNESCAPED_UNICODE);
         } else {
-            $post_data_enc = json_encode($data);
+            $post_data_enc = safe_json_encode($data);
         }
 
         $login =
@@ -346,7 +410,10 @@ class LinemediaAutoCrossesApiDriver {
              * Преобразование кодировки.
              */
             if (!defined('BX_UTF') || BX_UTF != true) {
+
+                $response = json_decode($response, 1);
                 $response = self::iconvArray($response, self::DEFAULT_ENCODING, 'WINDOWS-1251//TRANSLIT');
+                return $response;
             }
 
             setlocale(LC_COLLATE, 0);
@@ -360,10 +427,14 @@ class LinemediaAutoCrossesApiDriver {
     /**
      * Конвертация пришедшего от сервера базы кросов массива
      */
-    protected function iconvArray($array, $from = 'UTF-8', $to = 'cp1251')
+    protected static function iconvArray($array, $from = 'UTF-8', $to = 'cp1251')
     {
-        if (empty($array) || !is_array($array)) {
-            return array();
+        if(is_object($array)) {
+            $array = self::objectToArray($array);
+        }
+
+        if (!is_array($array)) {
+            return iconv($from, $to, $array);
         }
 
         $result = array();
@@ -375,5 +446,18 @@ class LinemediaAutoCrossesApiDriver {
             }
         }
         return $result;
+    }
+
+    protected static function objectToArray($obj) {
+
+        if(is_object($obj)) $obj = (array) $obj;
+        if(is_array($obj)) {
+            $new = array();
+            foreach($obj as $key => $val) {
+                $new[$key] = objectToArray($val);
+            }
+        }
+        else $new = $obj;
+        return $new;
     }
 }

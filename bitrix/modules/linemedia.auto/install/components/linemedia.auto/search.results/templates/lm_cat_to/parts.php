@@ -70,14 +70,14 @@ function printPartsTable($parts, $group_id, $params = array()) {
     </tr>
 
     <? foreach ($parts as $part) { ?>
-     <? $hash = md5(json_encode($part)); ?>
+     <? $hash = md5(safe_json_encode($part)); ?>
      <? $selected = ($params['SELECTED']['part_id'] == $part['id'] && $params['SELECTED']['hash'] == $part['extra']['hash']) ?>
     <tr 
     	data-supplier_id="<?= $part['supplier_id'] ?>"
     	data-brand_title="<?= $part['brand_title'] ?>"
     	data-article="<?= $part['article'] ?>" 
     	data-part_id="<?= $part["id"] ?>"
-    	data-extra='<?= json_encode($part['extra']) ?>'
+    	data-extra='<?= safe_json_encode($part['extra']) ?>'
     	class="<?= ($selected) ? ('selected') : ('') ?>"
     	style="<?= ($selected) ? ('background-color: #c7fba9') : ('') ?>"
     >

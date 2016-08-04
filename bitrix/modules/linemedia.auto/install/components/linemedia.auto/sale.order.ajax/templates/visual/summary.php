@@ -39,7 +39,7 @@
                         echo $val["NAME"]." ~ ".$time_deliv." ".GetMessage('LM_AUTO_DAYS').".<br />";
                         continue;
                     }
-                    
+
 					echo $val["NAME"].": ".$val["VALUE"]."<br />";
 				}
 				?>

@@ -42,6 +42,8 @@ class LinemediaAutoDownloaderHttpProtocol extends LinemediaAutoProtocol implemen
      */
     protected $url;
 
+    protected $header_file_name = null;
+
     /**
      * Создает объект, инициализирует параметры соединения
      * @param array $data
@@ -91,6 +93,7 @@ class LinemediaAutoDownloaderHttpProtocol extends LinemediaAutoProtocol implemen
             CURLOPT_FOLLOWLOCATION  => true,
             CURLOPT_MAXREDIRS       => 4,
             CURLOPT_USERAGENT       => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11 Linemedia Autoexpert Downloader',
+            CURLOPT_HEADERFUNCTION  => array(&$this,'readHeaderFileName')
         );
         curl_setopt_array($ch, $options);
         curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -154,6 +157,14 @@ class LinemediaAutoDownloaderHttpProtocol extends LinemediaAutoProtocol implemen
         curl_close($ch); 
         fclose($fp);
         
+        /*
+         * задержка 1 секунда, как временное решение проблемы с конвертацией на некоторых серверах -  
+         * на них возникает странная проблема с файловой системой, файл не успевает разблокироваться, 
+         * а скрипт с ним уже пытается работать, в результате конвертация не происходит.
+         * для остальных эта задержка несущественна, если будет критично сделаем параметр
+         */ 
+        sleep(1); 
+        
         self::log('Success downloading, saved to: ' . $temp_filename);
         
         return $temp_filename;
@@ -209,7 +220,33 @@ class LinemediaAutoDownloaderHttpProtocol extends LinemediaAutoProtocol implemen
      * @return string
      */
     public function getOriginalFileName() {
-        return basename($this->url);
+
+        if($this->header_file_name) {
+            return $this->header_file_name;
+        }
+
+        $filename = basename($this->url);
+        $filename = preg_replace("/[^a-zA-Z0-9_#\(\)\[\]\.+-=]/", "",$filename);
+
+        return $filename;
+    }
+
+    private function readHeaderFileName($ch, $header) {
+
+        //self::log('Header: ' . $header);
+
+        if(preg_match('/Content-Disposition: .*filename=([^ ]+)/', $header, $matches)) {
+
+            $file_name = preg_replace("/[\n\r]/", "", $matches[1]);
+            $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+            // если это правильное имя
+            if(in_array(strtolower($ext), array('xls', 'xlsx', 'csv', 'zip', 'txt'))) {
+                $this->header_file_name = $file_name;
+            }
+        }
+
+        return strlen($header);
     }
 
     /**

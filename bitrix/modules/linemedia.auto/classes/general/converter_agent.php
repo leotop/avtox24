@@ -92,10 +92,10 @@ class LinemediaAutoConverterAgent
 
         $tasks = $agent->getPendingTasks();
 
-         
-        
-        
-        
+
+
+
+
 		/*
 		 * Нет задач.
 		 */
@@ -251,8 +251,8 @@ class LinemediaAutoConverterAgent
 			rename($filename, $new_filename);
 			$filename = $new_filename;
 
-			
-			
+
+
 			/*
 	         * Cобытие начала конвертации прайса
 	         */
@@ -270,10 +270,6 @@ class LinemediaAutoConverterAgent
 			* Если необходимоо, распакуем архив
 			*/
 			$filename = $this->unzipFile($filename, $task);
-
-
-
-
 
 			/*
 			 * Сначала тип файла
@@ -377,7 +373,6 @@ class LinemediaAutoConverterAgent
 				self::log('Missing file to open,possibly ssconvert returned error');
 				continue;
 			}
-
 
 			/*
 			 * Теперь кодировка
@@ -484,9 +479,7 @@ class LinemediaAutoConverterAgent
 		        }
 	        }
 	        $task['conversion']['column_replacements'] = $new_replacements;
-	        
-	        
-	        
+
 	        /*
 	         * Пропустим пару строк?
 	         */
@@ -495,7 +488,22 @@ class LinemediaAutoConverterAgent
 	        }
 
 	        self::log('String-by-string conversion started');
-	        
+
+			// для сайтов в 1251 перекодируем $task['conversion']['column_replacements']
+			if(!defined('BX_UTF') || BX_UTF != true) {
+
+				$new_replacements = array();
+
+				foreach($task['conversion']['column_replacements'] as $index => $replacements) {
+
+					foreach($replacements as $key => $value) {
+						$key = mb_convert_encoding($key, "utf-8", "windows-1251");
+						$value = mb_convert_encoding($value, "utf-8", "windows-1251");
+						$new_replacements[$index][$key] = $value;
+					}
+				}
+				$task['conversion']['column_replacements'] = $new_replacements;
+			}
 	        
             /*
              * Построчно конвертируем данные

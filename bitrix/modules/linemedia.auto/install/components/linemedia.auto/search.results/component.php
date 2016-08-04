@@ -150,8 +150,21 @@ if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR
         if (isset($_REQUEST['MULTIPLY_BASKET']) && $_REQUEST['MULTIPLY_BASKET'] == 'Y' && is_array($_REQUEST['part_id'])) {
 
             foreach((array)$_REQUEST['part_id'] as $key => $id) {
+                // если $id = 0, то товар пришел от удаленного поставщика.
+                // в этом случае в $extra будет весь массив $_REQUEST['extra'] по ключу $key
+                // сделано для задачи №21625
+                if($id == 0) {
+                    $extra = array(
+                        'hash' => $_REQUEST['extra']['hash'][$key],
+                        'bg_bid' => $_REQUEST['extra']['bg_bid'][$key],
+                        'bg_wid' => $_REQUEST['extra']['bg_wid'][$key],
+                        'bg_wht' => $_REQUEST['extra']['bg_wht'][$key],
+                        'article_original' => $_REQUEST['extra']['article_original'][$key],
+                    );
+                } else {
+                    $extra = (array) $_REQUEST['extra'][$key];
+                }
 
-                $extra = (array) $_REQUEST['extra'][$key];
                 $extra['need_vin'] = ($_REQUEST['need_vin'][$key] == 'Y');
 
                 $arAddToBasket[$key] = array(
@@ -258,7 +271,7 @@ if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR
             exit();
         } else {
             die(
-            json_encode(
+            safe_json_encode(
                 array(
                     'status' => 'ok',
                     'basket_id' => $basket_id,
@@ -473,7 +486,7 @@ switch ($search->getResultsType()) {
         ksort($arResult['CATALOGS']);
 		
         if ($AJAX) {
-            die(json_encode(array(
+            die(safe_json_encode(array(
                 'type' => 'catalogs',
                 'data' => $arResult['CATALOGS'],
             )));
@@ -608,8 +621,18 @@ switch ($search->getResultsType()) {
                 /*
                  * Бренд
                 */
-                $arResult['PARTS'][$group_id][$i]['brand']['title'] = $spare['brand_title'];
-        
+                $use_wordform = COption::GetOptionString('linemedia.auto', 'LM_AUTO_MAIN_SHOW_WORDFORM_PARTS' ,'N');
+                if ($use_wordform == 'Y') {
+                    $wordforms = new LinemediaAutoWordForm();
+                    $wordform = $wordforms->getBrandGroup($spare['brand_title']);
+                    if (!empty($wordform)) {
+                        $arResult['PARTS'][$group_id][$i]['brand']['title'] = $wordform;
+                    } else {
+                        $arResult['PARTS'][$group_id][$i]['brand']['title'] = $spare['brand_title'];
+                    }
+                } else {
+                    $arResult['PARTS'][$group_id][$i]['brand']['title'] = $spare['brand_title'];
+                }
                 
                 /*
                  * Поставщик
@@ -771,7 +794,7 @@ switch ($search->getResultsType()) {
                     $arResult['PARTS'][$group][$i]['supplier']['PROPS']['visual_title']['VALUE'] = $spare['supplier']['PROPS']['visual_title']['VALUE'];
                 }
             }
-            die(json_encode(array(
+            die(safe_json_encode(array(
                 'type' => 'parts',
                 'data' => $arResult['PARTS'],
             )));
@@ -815,7 +838,7 @@ switch ($search->getResultsType()) {
     */
     default:
         if ($AJAX) {
-            die(json_encode(array(
+            die(safe_json_encode(array(
                 'type' => 'errors',
             )));
         }

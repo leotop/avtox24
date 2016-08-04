@@ -127,6 +127,7 @@ $classes = array(
     'LinemediaPictureHelper'                 => 'classes/general/picture_helper.php',
 
 
+
     'LinemediaAutoDirections'               => "classes/general/directions.php",
     'LinemediaAutoUser'                     => "classes/general/user.php",
 
@@ -202,9 +203,9 @@ $classes = array(
 
 /*Работа с группами пользователей*/
 if(CheckVersion(SM_VERSION, "16.0.1")) {
-    $classes['LinemediaAutoGroup'] = 'classes/general/user_static.php';
-} else {
     $classes['LinemediaAutoGroup'] = 'classes/general/user.php';
+} else {
+    $classes['LinemediaAutoGroup'] = 'classes/general/user_old.php';
 }
 
 

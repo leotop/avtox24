@@ -48,6 +48,7 @@ function fGetBaskets($ID = false)
         </tr>
         <tr></tr>
     <?
+	//file_put_contents($_SERVER['DOCUMENT_ROOT']. '/testing_add_order_to_cart.txt', date('d.m.Y H:i:s') . PHP_EOL . 'test_3: ' . print_r($arBaskets, true) . PHP_EOL, FILE_APPEND);
     foreach ($arBaskets as $val) {
         $arProps = LinemediaAutoBasket::getProps($val['ID']); 
         
@@ -567,27 +568,34 @@ function fGetBuyerType($PERSON_TYPE_ID, $LID, $USER_ID = '', $ORDER_ID = 0, $for
             $locationID = $curVal;
             $tmpLocation = '';
 
-            ob_start();
-            $tmpLocation = $GLOBALS["APPLICATION"]->IncludeComponent(
-                        'bitrix:sale.ajax.locations',
-                        '',
-                        array(
-                            "SITE_ID" => $LID,
-                            "AJAX_CALL" => "N",
-                            "COUNTRY_INPUT_NAME" => "ORDER_PROP_".$arProperties["ID"],
-                            "REGION_INPUT_NAME" => "REGION_ORDER_PROP_".$arProperties["ID"],
-                            "CITY_INPUT_NAME" => "CITY_ORDER_PROP_".$arProperties["ID"],
-                            "CITY_OUT_LOCATION" => "Y",
-                            "ALLOW_EMPTY_CITY" => "Y",
-                            "LOCATION_VALUE" => $curVal,
-                            "COUNTRY" => "",
-                            "ONCITYCHANGE" => "fRecalProduct('', '', 'N');",
-                            "PUBLIC" => "N",
-                        ),
-                        null,
-                        array('HIDE_ICONS' => 'Y')
-            );
-            $tmpLocation = ob_get_contents();
+            ob_start();	
+            
+			$tmpLocation = CSaleLocation::proxySaleAjaxLocationsComponent(
+				array(
+					"SITE_ID" => $LID,
+					"AJAX_CALL" => "N",
+					"COUNTRY_INPUT_NAME" => "ORDER_PROP_".$arProperties["ID"],
+                    "REGION_INPUT_NAME" => "REGION_ORDER_PROP_".$arProperties["ID"],
+                    "CITY_INPUT_NAME" => "CITY_ORDER_PROP_".$arProperties["ID"],
+					"CITY_OUT_LOCATION" => "Y",
+					"ALLOW_EMPTY_CITY" => "Y",
+					"LOCATION_VALUE" => $curVal,
+					"COUNTRY" => "",
+					"ONCITYCHANGE" => "fRecalProduct('', '', 'N');",
+				),
+				array(
+					"ID" => $curVal,
+					"CODE" => "",
+					"JS_CALLBACK" => 'fRecalProduct',
+					"SHOW_DEFAULT_LOCATIONS" => 'Y',
+					"JS_CONTROL_GLOBAL_ID" => 'saleOrderNew',
+				),
+				'',
+				true,
+				'location-block-wrapper'.(intval($arProperties["ID"]) ? ' prop-'.intval($arProperties["ID"]) : '')
+			);
+
+			$tmpLocation = ob_get_contents();
             ob_end_clean();
 
             $resultHtml .= '<script>var locationID = \''.$arProperties["ID"].'\';</script>';
@@ -715,11 +723,11 @@ function fGetPayFromAccount($USER_ID, $CURRENCY)
 function fGetDelivery($location, $locationZip, $weight, $price, $currency, $siteId, $defaultDelivery)
 {
     $arResult = array();
-    $delivery = "<select name=\"DELIVERY_ID\" id=\"DELIVERY_ID\" OnChange=\"fChangeDelivery();\">";
+    $delivery = "<select name=\"DELIVERY_ID\" id=\"DELIVERY_ID\" onchange=\"fChangeDelivery();\">";
     $delivery .= "<option value=\"\">".GetMessage('NEWO_DELIVERY_NO')."</option>";
     
     $arDelivery = CSaleDelivery::DoLoadDelivery($location, $locationZip, $weight, $price, $currency, $siteId);
-    $price = 0;
+	$price = 0;
     $description = "";
     $error = "";
     if (count($arDelivery) > 0) {
