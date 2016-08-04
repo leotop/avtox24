@@ -1,78 +1,76 @@
 function prepareImage()
 {
-	var img = jQuery('img.dragger');
-	
-	var width = img.prop("naturalWidth");
-	var height = img.prop("naturalHeight"); 
-    
-    console.log(width + " " + height); 
+    var img = jQuery('img.dragger');
 
-	img.attr('owidth', width);
-	img.attr('oheight', height);
+    var width = img.prop("naturalWidth");
+    var height = img.prop("naturalHeight"); 
 
-	jQuery('div.dragger').each(function(idx){
-		var el = jQuery(this);
-		el.attr('owidth', parseInt(el.css('width')));
-		el.attr('oheight', parseInt(el.css('height')));
-		el.attr('oleft', parseInt(el.css('margin-left')));
-		el.attr('otop', parseInt(el.css('margin-top')));
-	});
+    img.attr('owidth', width);
+    img.attr('oheight', height);
+
+    jQuery('div.dragger').each(function(idx){
+        var el = jQuery(this);
+        el.attr('owidth', parseInt(el.css('width')));
+        el.attr('oheight', parseInt(el.css('height')));
+        el.attr('oleft', parseInt(el.css('margin-left')));
+        el.attr('otop', parseInt(el.css('margin-top')));
+    });
 }
 
 function rescaleImage(delta) {
-	var img = jQuery('img.dragger');
-		
-	var original_width = img.attr('owidth');
-	var original_height = img.attr('oheight');
+    var img = jQuery('img.dragger');
 
-	if (!original_width)
-	{
-		prepareImage();
+    var original_width = img.attr('owidth');
+    var original_height = img.attr('oheight');
 
-		original_width = img.attr('owidth');
-		original_height = img.attr('oheight');
-	}
+    if (!original_width)
+    {
+        prepareImage();
 
-	var current_width = img.innerWidth();
-	var current_height = img.innerHeight();
+        original_width = img.attr('owidth');
+        original_height = img.attr('oheight');
+    }
 
-	var scale = current_width / original_width;
+    var current_width = img.innerWidth();
+    var current_height = img.innerHeight();
 
-	var cont = jQuery('#viewport');
-		
-	var view_width = parseInt(cont.css('width'));
-	var view_height = parseInt(cont.css('height'));
-		
-	var minScale = Math.min(view_width / original_width, view_height / original_height);
+    var scale = current_width / original_width;
 
-	var newscale = scale + (delta / 10);
-	if (newscale < minScale)
-		newscale = minScale;
+    var cont = jQuery('#viewport');
 
-	if (newscale > 1)
-		newscale = 1;
+    var view_width = parseInt(cont.css('width'));
+    var view_height = parseInt(cont.css('height'));
 
-	var correctX = Math.max(0, (view_width - original_width*newscale) / 2);
-	var correctY = Math.max(0, (view_height - original_height*newscale) / 2);
+    var minScale = Math.min(view_width / original_width, view_height / original_height);
 
-	img.attr('width', original_width*newscale);
-	img.attr('height', original_height*newscale);
-	img.css('margin-left', correctX + 'px');
-	img.css('margin-top', correctY + 'px');
+    var newscale = scale + (delta / 10);
+    if (newscale < minScale)
+        newscale = minScale;
 
-	jQuery('div.dragger').each(function(idx){
-		var el = jQuery(this);
-		el.css('margin-left', (el.attr('oleft')*newscale + correctX) + 'px');
-		el.css('margin-top', (el.attr('otop')*newscale + correctY) + 'px');
-		el.css('width', el.attr('owidth')*newscale + 'px');
-		el.css('height', el.attr('oheight')*newscale + 'px');
-	});
+    if (newscale > 1)
+        newscale = 1;
+
+    var correctX = Math.max(0, (view_width - original_width*newscale) / 2);
+    var correctY = Math.max(0, (view_height - original_height*newscale) / 2);
+
+    img.attr('width', original_width*newscale);
+    img.attr('height', original_height*newscale);
+    img.css('margin-left', correctX + 'px');
+    img.css('margin-top', correctY + 'px');
+
+    jQuery('div.dragger').each(function(idx){
+        var el = jQuery(this);
+        el.css('margin-left', (el.attr('oleft')*newscale + correctX) + 'px');
+        el.css('margin-top', (el.attr('otop')*newscale + correctY) + 'px');
+        el.css('width', el.attr('owidth')*newscale + 'px');
+        el.css('height', el.attr('oheight')*newscale + 'px');
+    });
 }
 
 function fitToWindow() {
-	var t = jQuery('#g_container');
-	var width = t.innerWidth() - (parseInt(t.css('padding-right')) || 0) - (parseInt(t.css('padding-left')) || 0);
-	jQuery('#viewport, #viewtable').css('width', Math.ceil(width*0.48));
+    var t = jQuery('#g_container');
+    var width = t.innerWidth() - (parseInt(t.css('padding-right')) || 0) - (parseInt(t.css('padding-left')) || 0);
+    jQuery('#viewport, #viewtable').css('width', Math.ceil(width*0.48));
 }
 
 var el_name;
@@ -142,30 +140,30 @@ function SubscribeDblClick(selector)
 jQuery(document).ready(function($){
 
     /*
-	jQuery('.dragger, #viewport').bind('mousewheel', function(event, delta) {
-		rescaleImage(delta);
-		return false;
-	});
+    jQuery('.dragger, #viewport').bind('mousewheel', function(event, delta) {
+    rescaleImage(delta);
+    return false;
+    });
     */
-    
-	jQuery('#viewport').dragscrollable({dragSelector: '.dragger, , #viewport', acceptPropagatedEvent: false});
 
-	jQuery('#viewport div').tooltip({ 
-	    track: true, 
-	    delay: 0, 
-	    showURL: false, 
-	    fade: 250,
-	    bodyHandler: function() {
-			var name = jQuery(this).attr('name');
+    //jQuery('#viewport').dragscrollable({dragSelector: '.dragger, , #viewport', acceptPropagatedEvent: false});
 
-			var items = jQuery('tr[name='+name+'] td[name=c_name]');
-			
-			if (items.length == 0)
-				return false;
+    jQuery('#viewport div').tooltip({ 
+        track: true, 
+        delay: 0, 
+        showURL: false, 
+        fade: 250,
+        bodyHandler: function() {
+            var name = jQuery(this).attr('name');
 
-			return jQuery(items[0]).text();
-		}
-	});
+            var items = jQuery('tr[name='+name+'] td[name=c_name]');
+
+            if (items.length == 0)
+                return false;
+
+            return jQuery(items[0]).text();
+        }
+    });
 
     jQuery('tr.g_highlight').click(function() {
         var name = jQuery(this).attr('name');
@@ -184,30 +182,30 @@ jQuery(document).ready(function($){
 
         /*var scrolled = false;
         tr.each(function(){
-            if (!scrolled)
-                jQuery.scrollTo(this);
-            //new Fx.Scroll(jQuery('#viewtable')).toElement(this);
-            scrolled = true;
+        if (!scrolled)
+        jQuery.scrollTo(this);
+        //new Fx.Scroll(jQuery('#viewtable')).toElement(this);
+        scrolled = true;
         });*/
     });
 
-	jQuery('#viewport div, #viewport div img').hover(
-		function () {
-			hl(this, 'in');
-		}, 
-		function () {
-			hl(this, 'out');
-		}
-	);
+    jQuery('#viewport div, #viewport div img').hover(
+        function () {
+            hl(this, 'in');
+        }, 
+        function () {
+            hl(this, 'out');
+        }
+    );
 
-	jQuery(window).bind("resize", function() {
-		fitToWindow();
-	});
+    jQuery(window).bind("resize", function() {
+        fitToWindow();
+    });
 
-	fitToWindow();
+    fitToWindow();
 
-	if ((document.all)?false:true)
-		jQuery('#g_container div table').attr('width', '100%');
+    if ((document.all)?false:true)
+        jQuery('#g_container div table').attr('width', '100%');
 
     jQuery('.guayaquil_zoom').colorbox({
         'href': function () {
@@ -265,10 +263,16 @@ jQuery(document).ready(function($){
     });
 
     SubscribeDblClick('#viewport div');
-    
-    
+
+
     //дополнительный функции
     $(".unit-resize-image").on("click", function() {
         $(this).toggleClass("resized");
+        $("#g_container").toggleClass("resized");
+        if ($("#g_container").hasClass("resized")) {
+            rescaleImage(2);
+        } else {
+            rescaleImage(0);    
+        }
     })
 });

@@ -639,6 +639,24 @@
     position: relative;
     border: 1px solid #dadada !important;
     border-radius: 10px;
+    background: #fff;
+}   
+
+#g_container.resized {
+    height: 1600px !important;
+}
+
+#g_container.resized #viewport{
+    width: 1198px !important;
+}
+
+#g_container.resized .details-tree {
+    height: 1600px !important;
+    width: 1200px !important;
+}
+
+#g_container.resized .details-tree #viewport {
+    height: 1598px !important;
 }
 
 #g_container .details-tree #viewport {
@@ -650,9 +668,6 @@
     border-radius: 10px;
 }
 
-.laximo-unit-page-wrapper {
-    height: 980px;
-}
 
 .laximo-unit-page-wrapper #viewtable {
     left: 0 !important;
