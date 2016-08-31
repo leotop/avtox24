@@ -1,56 +1,65 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("description", "Более 80 000 0000 товаров на сайте.");
-$APPLICATION->SetPageProperty("tags", "оригинал, неоригинал, запчасти, доставка по Росиии");
-$APPLICATION->SetPageProperty("keywords_inner", "Оригинальные и неоригинальные  запчасти");
-$APPLICATION->SetPageProperty("title", "Автозапчасти для иномарок");
-$APPLICATION->SetTitle("AvtoX24.ru");
+    require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+    $APPLICATION->SetPageProperty("description", "Более 80 000 0000 товаров на сайте.");
+    $APPLICATION->SetPageProperty("tags", "оригинал, неоригинал, запчасти, доставка по Росиии");
+    $APPLICATION->SetPageProperty("keywords_inner", "Оригинальные и неоригинальные  запчасти");
+    $APPLICATION->SetPageProperty("title", "Автозапчасти для иномарок");
+    $APPLICATION->SetTitle("AvtoX24.ru");
 ?>
+<script src="<?echo 'guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.js'?>"></script>
 <?php
-// Include soap request class
-include('guayaquillib'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'requestOem.php');
-// Include view class
-include('guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.php');
-include('extender.php');
+    // Include soap request class
+    include('guayaquillib'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'requestOem.php');
+    // Include view class
+    include('guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.php');
 
-class WizardExtender extends CommonExtender { 
-	function FormatLink($type, $dataItem, $catalog, $renderer)
-	{
-		if ($type == 'vehicles') {
-			return 'vehicles.php?ft=findByWizard2&c='.$catalog.'&ssd='.$_GET['ssd'];
-        }
-		else
-			return 'wizard2.php?c='.$catalog.'&ssd=$ssd$';
-	}	
-}
+    include('extender.php');
 
-// Create request object
-$request = new GuayaquilRequestOEM($_GET['c'], $_GET['ssd'], Config::$catalog_data);
-if (Config::$useLoginAuthorizationMethod) {
-    $request->setUserAuthorizationMethod(Config::$userLogin, Config::$userKey);
-}
+    class WizardExtender extends CommonExtender { 
+        function FormatLink($type, $dataItem, $catalog, $renderer)
+        {
+            if ($type == 'vehicles') {
+                return 'vehicles.php?ft=findByWizard2&c='.$catalog.'&ssd='.$_GET['ssd'];
+            }
+            else
+                return 'wizard2.php?c='.$catalog.'&ssd=$ssd$';
+        }	
+    }
 
-// Append commands to request
-$request->appendGetCatalogInfo();
-$request->appendGetWizard2($_GET['ssd']);
+    // Create request object
+    $request = new GuayaquilRequestOEM($_GET['c'], $_GET['ssd'], Config::$catalog_data);
+    if (Config::$useLoginAuthorizationMethod) {
+        $request->setUserAuthorizationMethod(Config::$userLogin, Config::$userKey);
+    }
 
-// Execute request
-$data = $request->query();
+    // Append commands to request
+    $request->appendGetCatalogInfo();
+    $request->appendGetWizard2($_GET['ssd']);
 
-// Check errors
-if ($request->error != '')
-{
-    echo $request->error;
-}
-else
-{
-  $wizard = $data[1];
-  $cataloginfo = $data[0]->row;
+    // Execute request
+    $data = $request->query();
 
-	echo '<h1>'.CommonExtender::LocalizeString('Search by wizard').' - '.$cataloginfo['name'].'</h1>';
+    // Check errors
+    if ($request->error != '')
+    {
+        echo $request->error;
+    }
+    else
+    {
+        $wizard = $data[1];
+        $cataloginfo = $data[0]->row;
 
-	$renderer = new GuayaquilWizard(new WizardExtender());
-	echo $renderer->Draw($_GET['c'], $wizard);
-}
+        echo '<h2>'.CommonExtender::LocalizeString('Search by wizard').' - '.$cataloginfo['name'].'</h2>';
+    ?>
+    <div id="wizard-wrap">
+        <div class="wizardSearchWrapper">
+            <?
+                $renderer = new GuayaquilWizard(new WizardExtender());
+                echo $renderer->Draw($_GET['c'], $wizard);
+            ?>
+        </div>
+    </div>
+    <?
+    }
 ?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

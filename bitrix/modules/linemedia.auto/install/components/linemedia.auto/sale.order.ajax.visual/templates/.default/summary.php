@@ -10,7 +10,7 @@
 
 ?>
 
-<table class="sale_data-table summary">
+<table class="sale_data-table summary silver-table ">
 <thead>
 	<tr>
         <?= !in_array('IMAGE', $arParams['COLUMNS_LIST']) ? '<th>'.GetMessage("SOA_TEMPL_SUM_PICTURE").'</th>' : '';?>
@@ -32,8 +32,10 @@
 		<tr>
 
 			<?= !in_array('IMAGE', $arParams['COLUMNS_LIST']) ? '<td>'.fillPicture($arBasketItems, $arParams).'</td>' : ''?>
-			<?= !in_array('NAME', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["NAME"].'</td>' : ''?>
+			<?= !in_array('NAME', $arParams['COLUMNS_LIST']) ? '<td><div class="col-xs-6">'.$arBasketItems["NAME"].'</div><div class="col-xs-6">'.$paramString.'</div></td>' : ''?>
+		<!--
 			<?= !in_array('PROPS', $arParams['COLUMNS_LIST']) && (bool) $paramString ? '<td>'.$paramString.'</td>' : ''?>
+		-->
 			<?= !in_array('DISCOUNT', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["DISCOUNT_PRICE_PERCENT_FORMATED"].'</td>' : ''?>
 			<?= !in_array('WEIGHT', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["WEIGHT_FORMATED"].'</td>' : ''?>
 			<?= !in_array('QUANTITY', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["QUANTITY"].'</td>' : ''?>

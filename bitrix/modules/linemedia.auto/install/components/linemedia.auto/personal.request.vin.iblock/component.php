@@ -2,7 +2,7 @@
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();
 
 /*
- * Компонент отправляет запрос по VIN, работает на инфоблоках
+ * ????????? ?????????? ?????? ?? VIN, ???????? ?? ??????????
  */
 
 if (!CModule::IncludeModule('linemedia.auto')) {
@@ -20,12 +20,12 @@ if (!$USER->IsAuthorized()){
 	return;
 }
 
-// получаем роль текущего пользователя
-// убрано на основании задачи 12944
+// ???????? ???? ???????? ????????????
+// ?????? ?? ????????? ?????? 12944
 
 //$arTasksFilter = array("BINDING" => LM_AUTO_ACCESS_BINDING_VIN);
-//$curUserGroup = $USER->GetUserGroupArray();  //массив групп пользователя
-//$maxRole = LinemediaAutoGroup::getMaxPermissionId("linemedia.auto", $curUserGroup, $arTasksFilter); //максимальная роль пользователя
+//$curUserGroup = $USER->GetUserGroupArray();  //?????? ????? ????????????
+//$maxRole = LinemediaAutoGroup::getMaxPermissionId("linemedia.auto", $curUserGroup, $arTasksFilter); //???????????? ???? ????????????
 //if($maxRole == "D")
 //{
  //   $APPLICATION->AuthForm(GetMessage('LM_AUTO_VIN_ACCESS_DENIED'), false, false, 'N', false);
@@ -42,6 +42,8 @@ if($iblock['ID'] < 1) {
 	return;
 }
 $arParams["SET_PAGE_TITLE"] = ($arParams["SET_PAGE_TITLE"] == "N" ? "N" : "Y" );
+$arParams["REDIRECT_NEW_TICKET_PAGE"] = ($arParams["REDIRECT_NEW_TICKET_PAGE"] == "N" ? "N" : "Y");
+
 
 $arParams['MODIFICATIONS_SET'] = $arParams['MODIFICATIONS_SET'] ? : 'default';
 
@@ -135,14 +137,14 @@ switch($action){
 	case 'edit':
 
 		if ($response['data']['tecdoc']['available'] != 1) {
-			$fields_hidden = Array('brand_id', 'model_id', 'modification_id'); //поля, которые показываем в hidden
-			$fields_main = Array('vin', 'year', 'month', 'extra', 'horsepower', 'displacement','brand', 'model','modification' ); //основной раздел
+			$fields_hidden = Array('brand_id', 'model_id', 'modification_id'); //????, ??????? ?????????? ? hidden
+			$fields_main = Array('vin', 'year', 'month', 'extra', 'horsepower', 'displacement','brand', 'model','modification' ); //???????? ??????
 		} else {
 			$fields_hidden = Array('brand', 'brand_id', 'model', 'model_id', 'modification', 'modification_id'); //????, ??????? ?????????? ? hidden
 			$fields_main = Array('vin', 'year', 'month', 'extra', 'horsepower', 'displacement'); //???????? ??????
 		}
 
-		$fields_disabled = Array('request', 'manager', 'answer', 'answer_date', 'answer_manager', 'site_id'); //поля, которые совсем не выводим
+		$fields_disabled = Array('request', 'manager', 'answer', 'answer_date', 'answer_manager', 'site_id'); //????, ??????? ?????? ?? ???????
 
 		$arResult['ID'] = (intval($arResult["VARIABLES"]["ID"]) > 0)?intval($arResult["VARIABLES"]["ID"]):0;
 		$arResult["TICKET_LIST_URL"] = trim($arResult["FOLDER"].$arResult["URL_TEMPLATES"]["list"]);
@@ -152,7 +154,7 @@ switch($action){
 		$arResult['ERRORS'] = array();
 		$arResult['HTML'] = array();
 
-		//менеджер пользователя
+		//???????? ????????????
 		$arResult['MANAGER'] = false;
 		if(CModule::IncludeModule('linemedia.autobranches')){
 			$branch_user = new LinemediaAutoBranchesUser( $USER->GetID() );
@@ -165,7 +167,7 @@ switch($action){
 
 
 		if($arResult['ID'] > 0){
-			//показываем созданный запрос
+			//?????????? ????????? ??????
 			$template = 'show';
 			$item_res = CIBlockElement::GetByID($arResult['ID'])->GetNextElement();
 			if($item_res === false){
@@ -173,7 +175,7 @@ switch($action){
 				exit();
 			}
 			$arResult['DETAIL']['FIELDS'] = $item_res->GetFields();
-			//если это чужой запрос, отправляем на список
+			//???? ??? ????? ??????, ?????????? ?? ??????
 			if($arResult['DETAIL']['FIELDS']['CREATED_BY'] != $USER->GetID()){
 				LocalRedirect($arResult["TICKET_LIST_URL"]);
 				exit();
@@ -194,11 +196,11 @@ switch($action){
 				unset($prop_value, $prop_key);
 			}
 		}else{
-			//показываем форму для запроса
+			//?????????? ????? ??? ???????
 			$template = 'add';
 
 			/*
-			 * Событие для других модулей: получение дополнительного HTML для вывода.
+			 * ??????? ??? ?????? ???????: ????????? ??????????????? HTML ??? ??????.
 			 */
 			$events = GetModuleEvents("linemedia.auto", "OnVinShowIBlockHTML");
 			while ($arEvent = $events->Fetch()) {
@@ -208,18 +210,18 @@ switch($action){
 			$properties = Array();
 			$property_res = CIBlockProperty::GetList(Array('sort' => 'ASC'), Array('ACTIVE' => 'Y', 'IBLOCK_CODE' => 'lm_auto_vin'));
 			while($property = $property_res->Fetch()){
-				//пропустим свойство запроса
+				//????????? ???????? ???????
 				if($property['CODE'] == 'request'){
 					$arResult['REQUEST'] = $property;
 					continue;
 				}
 
-				//игнорируем не нужные свойства
+				//?????????? ?? ?????? ????????
 				if(in_array($property['CODE'], $fields_disabled)){
 					continue;
 				}
 
-				//выберем значения для свойств типа "список"
+				//??????? ???????? ??? ??????? ???? "??????"
 				if($property['PROPERTY_TYPE'] === 'L'){
 					$prop_enum = CIBlockProperty::GetPropertyEnum($property['ID'], Array('SORT' => 'ASC'));
 					while($enum = $prop_enum->Fetch()){
@@ -228,7 +230,7 @@ switch($action){
 					unset($prop_enum, $enum);
 				}
 
-				//отправляемые значения
+				//???????????? ????????
 				if(!empty($_REQUEST['save']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 					if(isset($_REQUEST[$property['CODE']]) && !empty($_REQUEST[$property['CODE']])){
 						$property['VALUE'] = trim($_REQUEST[$property['CODE']]);
@@ -237,15 +239,15 @@ switch($action){
 					}
 				}
 
-				//основные поля
+				//???????? ????
 				if(in_array($property['CODE'], $fields_main)){
 					$arResult['FIELDS']['MAIN'][$property['CODE']] = $property;
 				}
-				//скрытые поля
+				//??????? ????
 				if(in_array($property['CODE'], $fields_hidden)){
 					$arResult['FIELDS']['HIDDEN'][$property['CODE']] = $property;
 				}
-				//дополнительные поля
+				//?????????????? ????
 				if(!in_array($property['CODE'], $fields_main) && !in_array($property['CODE'], $fields_hidden)){
 					$arResult['FIELDS']['EXTRA'][$property['CODE']] = $property;
 				}
@@ -255,14 +257,14 @@ switch($action){
 			unset($property_res);
 
 			if (!empty($_REQUEST['save']) && $_SERVER['REQUEST_METHOD'] == 'POST' && check_bitrix_sessid()) {
-				//проверка авторизации
+				//???????? ???????????
 				if(!$USER->IsAuthorized()){
 					$arResult['ERRORS'][] = GetMessage('LM_AUTO_VIN_AUTH_ERROR');
 				}
-				//добавление авто в гараж
+				//?????????? ???? ? ?????
 				$arResult['AUTO_ADD'] = (isset($_REQUEST['AutoAdd']) && $_REQUEST['AutoAdd'] === 'Y')?'Y':'N';
 
-				//содержание запроса
+				//?????????? ???????
 				$arResult['REQUEST']['VALUE'] = Array();
 				$request_isset = false;
 				if(is_array($_REQUEST['request']['title']) && count($_REQUEST['request']['title']) > 0){
@@ -291,11 +293,11 @@ switch($action){
 					$arResult['ERRORS'][] = GetMessage('LM_AUTO_VIN_ERROR_PARTS');
 				}
 
-				//все хорошо, добавляем запрос
+				//??? ??????, ????????? ??????
 				if (empty($arResult['ERRORS'])) {
 
 					/*
-					 * Событие для гаража: сохранение авто в гараж
+					 * ??????? ??? ??????: ?????????? ???? ? ?????
 					 */
 					if ($arResult['IS_GARAGE'] && $arResult['AUTO_ADD'] === 'Y'){
 						$events = GetModuleEvents("linemedia.auto", "OnVinAutoAdd");
@@ -332,17 +334,17 @@ switch($action){
 						}
 					}
 					unset($prop_code, $property);
-					//запрос
+					//??????
 					$element_fields['PROPERTY_VALUES']['request'] =  Array('VALUE' => Array('TYPE' => 'TEXT', 'TEXT' => @serialize($arResult['REQUEST']['VALUE'])));
-					//менеджер
+					//????????
 					if($arResult['MANAGER']){
 						$element_fields['PROPERTY_VALUES']['manager'] = $arResult['MANAGER']['ID'];
 					}
 
-					$element_fields['PROPERTY_VALUES']['site_id'] = SITE_ID; //текущий сайт
+					$element_fields['PROPERTY_VALUES']['site_id'] = SITE_ID; //??????? ????
 
 					/*
-					 * Событие для других модулей: до сохранения элемента
+					 * ??????? ??? ?????? ???????: ?? ?????????? ????????
 					 */
 					$events = GetModuleEvents('linemedia.auto', 'OnVinIBlockBeforeRequest');
 					while ($arEvent = $events->Fetch()) {
@@ -355,12 +357,12 @@ switch($action){
 
 					$oIblockElement = new CIBlockElement;
 					if($element_id = $oIblockElement->Add($element_fields)){
-						//успешно сохранили элемент
+						//??????? ????????? ???????
 						$arResult['MESSAGE'] = GetMessage('LM_AUTO_VIN_ADD_SUCCESS');
 
 						$user = $USER->GetByID($USER->GetID())->Fetch();
 
-						//уведомление пользователю
+						//??????????? ????????????
 						$arEventFields = Array(
 							'ID'         => $element_id,
 							'VIN'        => $properties['vin']['VALUE'],
@@ -371,7 +373,7 @@ switch($action){
 						$eventId = CEvent::Send('LM_AUTO_VIN_IBLOCK_SEND_MAIL', SITE_ID, $arEventFields);
 						unset($arEventFields);
 
-						//уведомление администратор
+						//??????????? ?????????????
 						$arEventFields = Array(
 							'ID'             => $element_id,
 							'USER_ID'        => $user['ID'],
@@ -385,7 +387,7 @@ switch($action){
 						$eventId = CEvent::Send('LM_AUTO_VIN_IBLOCK_SEND_MAIL_ADMIN', SITE_ID, $arEventFields);
 						unset($arEventFields);
 
-						//уведомление менеджеру
+						//??????????? ?????????
 						if($arResult['MANAGER'] !== false){
 							$arEventFields = Array(
 								'ID'             => $element_id,
@@ -407,7 +409,7 @@ switch($action){
                     }
 
 					/*
-					 * Событие для других модулей: после сохранения элемента
+					 * ??????? ??? ?????? ???????: ????? ?????????? ????????
 					 */
 					$events = GetModuleEvents('linemedia.auto', 'OnVinIBlockAfterRequest');
 					while ($arEvent = $events->Fetch()) {
@@ -423,7 +425,7 @@ switch($action){
 			}
 		}
 
-		//устанавливаем заголовок
+		//????????????? ?????????
 		if ($arParams["SET_PAGE_TITLE"] == "Y") {
 			if (intval($arResult['ID']) > 0) {
 				$APPLICATION->SetTitle(GetMessage("LM_AUTO_VIN_SHOW_TICKET_TITLE", array("#ID#" => $arResult['ID'])));
@@ -434,7 +436,7 @@ switch($action){
 		break;
 	case 'list':
 
-		//Параметры фильтра
+		//????????? ???????
 		$arFilter = array(
 			'ACTIVE'            => 'Y',
 			"IBLOCK_CODE"         => 'lm_auto_vin',
@@ -442,7 +444,7 @@ switch($action){
 			"PROPERTY_site_id"  => SITE_ID,
 		);
 
-		//параметры компонента
+		//????????? ??????????
 		$arResult["TICKET_EDIT_TEMPLATE"] = $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["edit"];
 		$arResult["TICKET_EDIT_TEMPLATE"] = (strlen($arResult["TICKET_EDIT_TEMPLATE"]) > 0 ? htmlspecialchars($arResult["TICKET_EDIT_TEMPLATE"]) : "edit.php?ID=#ID#");
 		$arParams["TICKET_SORT_ORDER"] = (strtoupper($arParams["TICKET_SORT_ORDER"]) == "ASC" ? "ASC" : "DESC" );
@@ -459,7 +461,7 @@ switch($action){
 		$arResult["CURRENT_PAGE"] = htmlspecialchars($APPLICATION->GetCurPage());
 		$arResult["NEW_TICKET_PAGE"] = htmlspecialchars(CComponentEngine::MakePathFromTemplate($arResult["TICKET_EDIT_TEMPLATE"], Array("ID" => "0")));
 
-		if(intval($rsItems->SelectedRowsCount()) === 0){
+		if(intval($rsItems->SelectedRowsCount()) === 0 && $arParams["REDIRECT_NEW_TICKET_PAGE"] == "Y"){
 			LocalRedirect($arResult["NEW_TICKET_PAGE"]);
 			exit();
 		}

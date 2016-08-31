@@ -82,14 +82,14 @@ class GuayaquilFrameSearchForm extends GuayaquilTemplate
 
     function DrawFrameExample($cataloginfo)
     {
-        return $this->GetLocalizedString('InputFrame', array($this->GetFrameExample($cataloginfo))) . '<br>';
+        return "<div class='formExampleText'>".$this->GetLocalizedString('InputFrame', array($this->GetFrameExample($cataloginfo))) . '</div>';
     }
 
     function DrawFrameForm($catalog, $prevframe, $prevframeno)
     {
         $html = '<form name="findByFrame" onSubmit="return checkFrameValue(this.frame.value, this.frameNo.value, this.vinSubmit);" id="findByFrame" >';
         $html .= '<div id="FrameInput" class="g_input"><input name="frame" type="text" id="frame" size="17" width="90" value="' . $prevframe . '"/></div>';
-        $html .= '-';
+        $html .= '<span class="inputSeparator">&dash;</span>';
         $html .= '<div id="FrameNoInput" class="g_input"><input name="frameNo" type="text" id="frameNo" size="17" width="120" value="' . $prevframeno . '"/></div>';
         $html .= '<input type="submit" name="vinSubmit" value="' . $this->GetLocalizedString('Search') . '" id="vinSubmit" />';
         $html .= '</form>';

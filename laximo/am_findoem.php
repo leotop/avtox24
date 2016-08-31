@@ -14,8 +14,8 @@ include('extender.php');
 include('guayaquillib'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'requestAm.php');
 
 $brand = @$_GET['brand'] ? $_GET['brand'] : null;
-$oem = @$_GET['oem'];
-$options = @$_GET['options'];
+$oem = @htmlspecialchars($_GET['oem']);
+$options = @htmlspecialchars($_GET['options']);
 
 if ($options) {
     $options = implode($options, ',');

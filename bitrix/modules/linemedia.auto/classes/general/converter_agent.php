@@ -282,12 +282,14 @@ class LinemediaAutoConverterAgent
 				/*
 				 * Если тип не CSV.
 				 */
-				if (!in_array($task['conversion']['type'], array('csv'))) {
+				$type = strtolower($task['conversion']['type']);
+				if (!in_array($type, array('csv'))) {
 					/*
 					 * Да и файл не из CSV, TXT
 					 */
 					$fileinfo = pathinfo($filename);
-					if (!in_array($fileinfo['extension'], array('txt', 'csv'))) {
+					$fileinfo_ext = strtolower($fileinfo['extension']);
+					if (!in_array($fileinfo_ext, array('txt', 'csv'))) {
 						self::log('File skipped! Conversion not supported (install ssconvert) ' . $filename);
 						rename($filename, $_SERVER['DOCUMENT_ROOT'] . '/upload/linemedia.auto/pricelists/converting_error/' . $file);
 						continue;
@@ -324,7 +326,8 @@ class LinemediaAutoConverterAgent
 			/*
 			 * Перевод в CSV
 			 */
-			switch ($task['conversion']['type']) {
+			$conversion_type = strtolower($task['conversion']['type']);
+			switch ($conversion_type) {
 				case 'xls':
 					$filename = $this->convert2CSV($filename, 'xls');
                     break;
@@ -339,7 +342,8 @@ class LinemediaAutoConverterAgent
 				case '':
 				default:
 					$fileinfo = pathinfo($filename);
-					switch ($fileinfo['extension']) {
+					$file_extension = strtolower($fileinfo['extension']);
+					switch ($file_extension) {
 						case 'xls':
 							$filename = $this->convert2CSV($filename, 'xls');
                             break;
@@ -456,7 +460,8 @@ class LinemediaAutoConverterAgent
 	        /*
 	         * Разделитель
 	         */
-	        if ($task['conversion']['type'] == 'csv') {
+			$task_conversion_type = strtolower($task['conversion']['type']);
+	        if ($task_conversion_type == 'csv') {
 		        $separator = $task['conversion']['separator'] ? $task['conversion']['separator'] : ';';
 
                 if($separator == "\\t") {
@@ -571,7 +576,11 @@ class LinemediaAutoConverterAgent
              * Если это тестовый режим, то отправим письмо и переместим прайс в папку для тестов.
              */
             if ($task['mode'] == LinemediaAutoTask::MODE_TEST) {
-                $import_file = $task['supplier_id'] . '_' . basename($filename);
+			
+				$test_file_name = pathinfo($filename);
+				$filename_for_test = $test_file_name['filename'] . '.' . strtolower($test_file_name['extension']);
+                
+				$import_file = $task['supplier_id'] . '_' . basename($filename_for_test);
                 $import_name = '/upload/linemedia.auto/pricelists/testing/' . $import_file;
                 self::log('Conversion completed, move new csv to testing. '.$i.' strings, moved to '.$import_name);
                 rename($filename . '.result', $_SERVER['DOCUMENT_ROOT'].$import_name);
@@ -594,8 +603,11 @@ class LinemediaAutoConverterAgent
     			 * Отправим файл на импорт
     			 * Первой составляющей имени файла должен быть ID поставщика
     			 */
-    			$import_name = $_SERVER['DOCUMENT_ROOT'].'/upload/linemedia.auto/pricelists/new/'.$task['supplier_id'].'_'.basename($filename);
-    			self::log('Conversion completed, move new csv to import. '.$i.' strings, moved to '.$import_name);
+				$info_import_name = pathinfo($filename);
+				$filename_for_import = $info_import_name['filename'] . '.' . strtolower($info_import_name['extension']);
+				
+    			$import_name = $_SERVER['DOCUMENT_ROOT'].'/upload/linemedia.auto/pricelists/new/'.$task['supplier_id'].'_'.basename($filename_for_import);
+				self::log('Conversion completed, move new csv to import. '.$i.' strings, moved to '.$import_name);
     			rename($filename . '.result', $import_name);
 			}
 
@@ -674,7 +686,9 @@ class LinemediaAutoConverterAgent
 		foreach(glob($pattern) AS $unzipped_file) {
 
 			$info = pathinfo($unzipped_file);
-			if(!in_array($info['extension'], array('csv', 'xls', 'xlsx', 'txt')))
+			
+			$info_extensions = strtolower($info['extension']);
+			if(!in_array($info_extensions, array('csv', 'xls', 'xlsx', 'txt')))
 				continue;
 
 			self::log('File found: ' . $unzipped_file);

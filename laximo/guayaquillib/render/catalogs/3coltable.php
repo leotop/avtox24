@@ -31,7 +31,7 @@ class GuayaquilCatalogsList extends GuayaquilTemplate
 			if ($index == 1 || $index == $divide1+1 || $index == $divide2+1)
 			{
 				$html .= '<table class="guayaquil_tablecatalog" border="0">';
-				$html .= $this->DrawHeader();
+				//$html .= $this->DrawHeader();
 			}
 			$html .= $this->DrawRow($row, $link);
 
@@ -44,7 +44,6 @@ class GuayaquilCatalogsList extends GuayaquilTemplate
 		} 
 
 		$html .= '</td></tr></table>';
-		$html .= '<div style="visibility: visible; display: block; height: 20px; text-align: right;"><a href="http://dev.laximo.ru" rel="follow" style="visibility: visible; display: inline; font-size: 10px; font-weight: normal; text-decoration: none;">guayaquil</a></div>';
 
 		return $html;
 	}

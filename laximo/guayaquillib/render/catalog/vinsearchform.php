@@ -63,7 +63,7 @@ class GuayaquilVinSearchForm extends GuayaquilTemplate
 
     function DrawVinExample($cataloginfo)
     {
-        return $this->GetLocalizedString('InputVIN', array($this->GetVinExample($cataloginfo))) . '<br>';
+        return "<div class='formExampleText'>".$this->GetLocalizedString('InputVIN', array($this->GetVinExample($cataloginfo))) . '</div>';
     }
 
     function DrawVinForm($catalog, $prevvin)

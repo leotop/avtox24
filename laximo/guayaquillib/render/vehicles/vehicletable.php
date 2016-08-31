@@ -47,7 +47,6 @@ class GuayaquilVehiclesList extends GuayaquilTemplate
             $html .= $this->DrawRow($row, $catalog);
 
         $html .= '</table>';
-        $html .= '<div style="visibility: visible; display: block; height: 20px; text-align: right;"><a href="http://dev.laximo.ru" rel="follow" style="visibility: visible; display: inline; font-size: 10px; font-weight: normal; text-decoration: none;">guayaquil</a></div>';
 
         return $html;
     }
@@ -125,12 +124,12 @@ class GuayaquilVehiclesList extends GuayaquilTemplate
     {
         foreach ($row->attributes() as $key => $value){
             if (strtolower($key) == $column){
-                return '<span class = "item">'. (string)$name . ':' . '<span style="display:inline-block; max-width:300px; float:right">' . (string)$value . '</span></span>';
+                return '<span class = "item">'. (string)$name . ':' . '<span style="display:inline-block; max-width:1000px; float:right">' . (string)$value . '</span></span>';
             }
         }
         foreach ($row->attribute as $attr){
             if (strtolower($attr->attributes()->key) == $column){
-                return '<span class = "item">'. (string)$name . ':' . '<span style=" display:inline-block; max-width:300px; float:right">' . (string)$attr->attributes()->value . '</span></span>';
+                return '<span class = "item">'. (string)$name . ':' . '<span style=" display:inline-block; max-width:1000px; float:right">' . (string)$attr->attributes()->value . '</span></span>';
             }
         }
     }

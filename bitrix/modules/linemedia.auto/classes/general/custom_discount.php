@@ -232,12 +232,12 @@ class LinemediaAutoCustomDiscount
 				/*
 				 * Минимальная базовая цена
 				 */
-				$discount['PROPS']['price_min'] = (float) $discount['PROPS']['price_min'];
+				$discount['PROPS']['price_min'] = (float) str_replace(",", ".", $discount['PROPS']['price_min']);
 
 				/*
 				 * Максимальная базовая цена
 				 */
-				$discount['PROPS']['price_max'] = (float) $discount['PROPS']['price_max'];
+				$discount['PROPS']['price_max'] = (float) str_replace(",", ".", $discount['PROPS']['price_max']);
 				
 				
 				/**

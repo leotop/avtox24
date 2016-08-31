@@ -43,7 +43,6 @@ class GuayaquilCatalogsList extends GuayaquilTemplate
 		} 
 
 		$html .= '</td></tr></table>';
-		$html .= '<div style="visibility: visible; display: block; height: 20px; text-align: right;"><a href="http://dev.laximo.ru" rel="follow" style="visibility: visible; display: inline; font-size: 10px; font-weight: normal; text-decoration: none;">guayaquil</a></div>';
 
 		return $html;
 	}

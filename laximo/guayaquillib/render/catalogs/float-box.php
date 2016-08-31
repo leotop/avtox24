@@ -23,8 +23,6 @@ class GuayaquilCatalogsList extends GuayaquilTemplate
 			$html .= $this->DrawItem($row, $link);
 		}
 
-		$html .= '<br style="clear:both;"><div style="visibility: visible; display: block; height: 20px; text-align: right;"><a href="http://dev.laximo.ru" rel="follow" style="visibility: visible; display: inline; font-size: 10px; font-weight: normal; text-decoration: none;">guayaquil</a></div>';
-
 		return $html;
 	}
 

@@ -11,15 +11,15 @@ include('extender.php');
 // Include soap request class
 include('guayaquillib'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'requestAm.php');
 
-$brand = @$_GET['brand'] ? $_GET['brand'] : null;
-$oem = @$_GET['oem'];
-$options = @$_GET['options'];
+$brand = htmlspecialchars(@$_GET['brand']) ? htmlspecialchars($_GET['brand']) : null;
+$oem = htmlspecialchars(@$_GET['oem']);
+$options = htmlspecialchars(@$_GET['options']);
 
 if ($options) {
     $options = implode($options, ',');
 }
 
-$replacementtypes = @$_GET['replacementtypes'];
+$replacementtypes = htmlspecialchars(@$_GET['replacementtypes']);
 $replacementtypes = implode($replacementtypes, ',');
 
 $request = new GuayaquilRequestAM('ru_RU');

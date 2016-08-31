@@ -1,36 +1,43 @@
-<?php
-echo '<h1>'.CommonExtender::LocalizeString('Search by wizard').'</h1>';
+<script src="<?echo 'guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.js'?>"></script>
 
-include('guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.php');
+  <?
+        echo '<h3>'.CommonExtender::LocalizeString('Search by wizard').'</h3>';  ?>
+    <div class="formExampleText">Задайте один или несколько параметров для детального подбора</div>
 
-class WizardExtender extends CommonExtender
-{
-    function FormatLink($type, $dataItem, $catalog, $renderer)
-    {
-        if ($type == 'vehicles')
-            return 'vehicles.php?ft=findByWizard2&c='.$catalog.'&ssd='.$renderer->wizard->row['ssd'];
-        else
-            return 'wizard2.php?c='.$catalog.'&ssd=$ssd$';
-    }
-}
+<div id="wizard-wrap">    
+  
+    <div class="wizardSearchWrapper">
+        <?
 
-class GuayaquilWizard2 extends GuayaquilWizard
-{
-	function DrawConditionDescription($catalog, $condition)
-	{
-		return '';
-	}
+            include('guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.php');
 
-	function DrawVehiclesListLink($catalog, $wizard)
-	{
-		return '';
-	}
-}
+            class WizardExtender extends CommonExtender
+            {
+                function FormatLink($type, $dataItem, $catalog, $renderer)
+                {
+                    if ($type == 'vehicles')
+                        return 'vehicles.php?ft=findByWizard2&c='.$catalog.'&ssd='.$renderer->wizard->row['ssd'];
+                    else
+                        return 'wizard2.php?c='.$catalog.'&ssd=$ssd$';
+                }
+            }
 
-$renderer = new GuayaquilWizard2(new WizardExtender());
-echo $renderer->Draw($_GET['c'], $wizard);
+            class GuayaquilWizard2 extends GuayaquilWizard
+            {
+                function DrawConditionDescription($catalog, $condition)
+                {
+                    return '';
+                }
 
-echo '<br><br>';
+                function DrawVehiclesListLink($catalog, $wizard)
+                {
+                    return '';
+                }
+            }
 
-?>
+            $renderer = new GuayaquilWizard2(new WizardExtender());
+            echo $renderer->Draw($_GET['c'], $wizard);   
 
+        ?>
+    </div>
+</div>    

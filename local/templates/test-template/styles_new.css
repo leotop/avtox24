@@ -786,3 +786,215 @@
 #g_container.resized .details-tree #viewport {
     height: 1598px !important;
 }
+
+div.search_form input.search.short {
+    width: 238px;
+}
+
+div.search_form input.search.short:first-child {
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+.frameSearchSeparator {
+    color: #fff;
+    display: inline-block;
+    font-size: 20px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 5px 0 0;
+}
+
+
+.catalogSearchWrapper {
+    border-top: 2px solid #f18022;
+    padding: 40px 0 0;
+}
+
+.catalogSearchWrapper > div:first-child {
+    float: left; 
+    width:580px
+}
+
+.catalogSearchWrapper > div:last-child {
+    float: right; 
+    width: 580px
+}
+
+.catalogSearchWrapper h3 {
+    font-family: 'Noto Sans' !important;
+    font-size: 22px;
+    color: #000 !important;
+    font-weight: normal;
+    margin: 0;
+    width: 100%;
+    text-align:  left;
+}
+
+.formExampleText {
+    font-family: 'Noto Sans' !important;
+    font-size:16px;
+    color: #808080; 
+    margin: 0 0 30px 0 ;
+    width:100%;
+    text-align: left;
+}
+
+
+.catalogSearchFormWrapper {
+    padding: 0 0 35px;
+    border-bottom: 1px solid #cdcdcd;
+    margin: 0 0 30px 0;
+}
+
+.catalogSearchFormWrapper form {
+    margin: 0 !important;
+}
+
+.catalogSearchFormWrapper input[type="text"] {
+    border: 2px solid #bbbbbb !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    color: #333333 !important;
+    box-shadow: none !important;
+    padding: 0 15px !important;
+    box-sizing: border-box;
+    font-family: 'Noto Sans' !important;
+    font-size: 14px;
+    margin: 0 !important;
+    width: 480px !important;
+}
+
+.catalogSearchFormWrapper input[type="text"]:focus {
+    border: 2px solid #29aae5 !important;
+    color: #29aae5 !important;        
+}
+
+.catalogSearchFormWrapper.framesearch input[type="text"] {
+    width: 230px !important;
+    border-color: #656565 !important;
+    color: #656565 !important;
+}
+
+.catalogSearchFormWrapper.framesearch .inputSeparator {
+    float: left;
+    font-size: 22px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 5px;
+    overflow: hidden;
+}
+
+.catalogSearchFormWrapper input[type="submit"] {
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    background: #656565;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    display: inline-block;
+    margin: 0 0 0 20px ;
+    padding: 0 !important;
+}
+
+.catalogSearchFormWrapper input[type="submit"]:hover {
+    background: #29aae5;
+    color: #fff;
+}
+
+.catalogSearchFormWrapper .g_input_error, .catalogSearchFormWrapper .g_input {
+    padding: 0 !important;
+    display: block;
+    float: left;
+}
+
+.wizardSearchWrapper {
+    width:580px;
+    background: #f1f2f3;
+    box-sizing: border-box;
+    padding: 25px 30px;
+    border-radius: 5px;
+}
+
+.wizardSearchWrapper table td {
+    display:block;
+    position: relative;
+}
+
+.wizardSearchWrapper table td select {
+    width: 100% !important;
+    border: 2px solid #b3b3b3;
+    color: #515151;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Noto Sans';
+    height: 40px;
+    line-height: 40px;
+    margin: 0 0 20px;
+    padding: 0 15px;
+    font-size: 14px;
+    position: relative;
+    display: block;
+}
+
+.wizardSearchWrapper table td .selectOpenButton {
+    position: absolute;
+    display:block;
+    width:40px;
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid #b3b3b3;
+    right: 0;
+    top:1px;
+    border-radius: 0 5px 5px 0;
+    box-sizing: border-box;
+    background: #f1f2f3;
+    text-align: center;
+    color: #b3b3b3;
+    font-size:20px;
+    cursor: pointer;
+}
+
+.wizardSearchWrapper .wizardSelectWrapper select:focus, .wizardSearchWrapper table td select:focus + .selectOpenButton  {
+    border-color: #f18022;
+    color: #f18022;
+    background: #fff;
+}
+
+.wizardSearchWrapper .wizardSelectWrapper:hover select, .wizardSearchWrapper .wizardSelectWrapper:hover .selectOpenButton {
+    border-color: #8e8e8e;
+    color: #000;
+    background: #fff;
+}
+
+.remove_param {
+    position:absolute;
+    right: 0;
+    top: -40px;
+}
+
+.wizardConditionName {
+    font-size: 17px;
+    color: #343434;
+    font-family: 'Noto Sans';
+    padding: 0 0 20px;
+    font-weight: bold;
+}
+
+.wizardSearchWrapper .gWizardVehicleLink {
+    width: 100%;
+    color: #fff;
+    height:45px;
+    line-height: 45px;
+    font-size:14px;
+    font-family: 'Noto Sans';
+    text-align: center;
+    display: block;
+    background: #f18022;
+    border-radius: 5px;
+    text-decoration: none !important;
+}
+
+

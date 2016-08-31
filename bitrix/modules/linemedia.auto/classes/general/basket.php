@@ -553,6 +553,7 @@ class LinemediaAutoBasket
         $arFields = array_merge_recursive(
             array(
                 "PRODUCT_ID"            => $part_id,
+                "PRODUCT_XML_ID"        => $part_id,
                 "FUSER_ID"              => $this->getFuserId(),
                 "PRICE"                 => $price,
                 "CURRENCY"              => $currency,

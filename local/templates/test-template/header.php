@@ -180,15 +180,7 @@
                             ),
                             false
                         );?> </div>
-                    <h3 style="text-align: center; font-weight: normal !important;"> 
-                        <br />
-                    </h3>
-
-                    <h3 style="text-align: center; font-weight: normal !important;"><img src="/upload/medialibrary/7bf/7bfb408d1422a1f9c4af04a05d442398.png" title="dostavka.png" border="0" alt="dostavka.png" width="205" height="125"  /></h3>
-
-                    <div>
-                        <br />
-                    </div>
+                    
 
                 </div>          
                 <!-- Телефон -->
@@ -209,9 +201,7 @@
                             <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/sms.png" height="32" title="i.jpg"></a>
                             <a href="tel:+79264150010"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/viber.png" height="32" title="i.jpg"></a>
                             <a href="skype:avtox24.ru?chat"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/skype.png" height="32" title="i.jpg"></a>
-                            <a href="mailto:info@avtox24.ru"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/email.png" height="32" title="i.jpg"></a>
-
-
+                            <a href="mailto:info@avtox24.ru"><img class="" width="50" alt="phone" src="<?=SITE_TEMPLATE_PATH?>/images/email.png" height="32" title="i.jpg"></a>    
                         </div>
                     </h3>
                 </div>
@@ -294,6 +284,7 @@
                             <li class="active" data-search-tab-index="1">Номер детали</li>
                             <li data-search-tab-index="2">VIN-номер</li>
                             <li data-search-tab-index="3"><a href="/laximo/catalogs.php">Марка</a></li>
+                            <li data-search-tab-index="4">Номер кузова</li>
                         </ul>
                     </div>    
 
@@ -343,18 +334,34 @@
                                     <div id="search">  
                                         <form class="navbar-form" action="/laximo/vehicles.php" method="GET">
                                             <div class="input-append">
-                                                <input id="title-search-input" class="search" type="text" placeholder="Поиск детали по VIN, например WAUBH54B11N111054" autocomplete="off" maxlength="50" size="40" value="<?=$_GET["vin"]?>" name="vin">
+                                                <input id="title-search-input" class="search" type="text" placeholder="Поиск детали по VIN, например WAUBH54B11N111054" autocomplete="off" maxlength="50" size="40" value="<?=htmlspecialcharsbx($_GET["vin"])?>" name="vin">
                                                 <input type="hidden" name="ft" value="findByVIN"/>
                                                 <input class="btn btn-warning" type="submit" value="Искать">
                                             </div>
                                         </form>
                                     </div>
-                                </div>         
+                                </div>  
+                                
+                                
+                                 <div class="span7 search-tab-content" data-search-tab="4">                                     
+                                    <div id="search">  
+                                        <form class="navbar-form" action="/laximo/vehicles.php" method="GET">
+                                            <div class="input-append">
+                                                <input id="title-search-input" class="search short" type="text" placeholder="Код кузова, например XZU423" autocomplete="off" maxlength="50" size="40" value="<?=htmlspecialcharsbx($_GET["frame"])?>" name="frame"> 
+                                                <span class="frameSearchSeparator">-</span>  
+                                                <input id="title-search-input" class="search short" type="text" placeholder="Номер кузова, например 0001026" autocomplete="off" maxlength="50" size="40" value="<?=htmlspecialcharsbx($_GET["frameNo"])?>" name="frameNo">   
+                                                <input type="hidden" name="ft" value="findByFrame"/>
+                                                <input class="btn btn-warning" type="submit" value="Искать">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>       
 
                             </div>
                         </div>
 
-                        <div class="span3">                             <?$APPLICATION->IncludeComponent(
+                        <div class="span3">                             
+                        <?$APPLICATION->IncludeComponent(
                                 "bitrix:sale.basket.basket", 
                                 "lm_header", 
                                 array(
@@ -386,27 +393,7 @@
 
             <!-- Главное меню -->
 
-            <div class="row main-menu mobile-type">                  
-                <div class="span12">                     <?$APPLICATION->IncludeComponent(
-                        "bitrix:menu", 
-                        "main_lm", 
-                        array(
-                            "ROOT_MENU_TYPE" => "main",
-                            "MENU_CACHE_TYPE" => "N",
-                            "MENU_CACHE_TIME" => "3600",
-                            "MENU_CACHE_USE_GROUPS" => "Y",
-                            "MENU_CACHE_GET_VARS" => array(
-                            ),
-                            "MAX_LEVEL" => "1",
-                            "CHILD_MENU_TYPE" => "left",
-                            "USE_EXT" => "Y",
-                            "DELAY" => "N",
-                            "ALLOW_MULTI_SELECT" => "N",
-                            "COMPONENT_TEMPLATE" => "main_lm"
-                        ),
-                        false
-                    );?>                 </div>
-            </div>
+           
         </div>
     </div>
 
@@ -415,8 +402,6 @@
     <?endif;?>
 <?//if ($curPage !== SITE_DIR."index.php"):?>      
 <!-- Content -->
-
-<div class="row-fluid content_top"></div>
 
 <div class="row-fluid content_row">          
 <div class="container">              

@@ -141,7 +141,7 @@ class AutoTradeRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
 			}
 
 			$this->parts["analog_type_$analogType"][] = array(
-				'id'                => 'rossko',
+				'id'                => self::$title,
 				'article'           => LinemediaAutoPartsHelper::clearArticle($part['article']),
 				'brand_title'       => strtoupper($part['brand_name']),
 				'title'             => $part['name'],

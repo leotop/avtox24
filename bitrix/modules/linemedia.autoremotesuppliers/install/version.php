@@ -11,8 +11,8 @@
  */
 
 $arModuleVersion = array(
-    "VERSION" => "1.1.47",
-    "VERSION_DATE" => "2016-07-20 15:32:23"
+    "VERSION" => "1.1.48",
+    "VERSION_DATE" => "2016-08-15 14:44:49"
 );
 
-define('LINEMEDIA_AUTO_REMOTE_SUPPLIERS_VERSION', '1.1.47');
+define('LINEMEDIA_AUTO_REMOTE_SUPPLIERS_VERSION', '1.1.48');

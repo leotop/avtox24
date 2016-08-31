@@ -94,6 +94,7 @@ $classes = array(
      * Таблицы
      */
     'LinemediaProductsTable'                => "classes/$DBType/LinemediaProductsTable.php",
+    'CarsDictionaryTable'                   => "classes/$DBType/carsdictionary.php",
 
     /*
      * Импортёр
@@ -180,8 +181,6 @@ $classes = array(
     */
     'CLMAdminResult'						=> 'classes/general/admin_lib.php',
 
-
-
     /*Доступы к элементам linemedia*/
     'LinemediaAutoRightsEntity'				=> 'classes/general/rights_entity.php',
 
@@ -199,6 +198,9 @@ $classes = array(
 
     /* Фильтр представления заказов */
     'LinemediaAutoOrdersViewFilter'         => 'classes/general/orders_view_filter.php',
+
+    /* Применимость товаров */
+    'LinemediaAutoAppliance'                => 'classes/general/appliance.php',
 );
 
 /*Работа с группами пользователей*/

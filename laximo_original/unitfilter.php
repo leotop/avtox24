@@ -47,9 +47,9 @@ else
 		echo '<h1>'.CommonExtender::FormatLocalizedString('UnitName', (string)$unit['name']).'</h1>';
 
     $renderer = new GuayaquilFilter(new GuayaquilExtender3());
-    $renderer->vehicle_id = $_GET['vid'];
-    $renderer->categoryid = $_GET['cid'];
-    $renderer->ssd = $_GET['ssd'];
+    $renderer->vehicle_id = htmlspecialchars($_GET['vid']);
+    $renderer->categoryid = htmlspecialchars($_GET['cid']);
+    $renderer->ssd = htmlspecialchars($_GET['ssd']);
     echo $renderer->Draw($_GET['c'], $filter_data, $_GET['ssd'], $unit);
 
 }
@@ -58,8 +58,8 @@ else
 <script type="text/javascript">
     function ProcessFilters(skip)
     {
-        var url = '<?php echo 'vehicle.php?&c='.$_GET['c'].'&vid='.$_GET['vid'].'&cid='.$_GET['cid'].'&ssd=$'?>';
-        var ssd = '<?php echo $_GET['ssd']?>';
+        var url = '<?php echo 'vehicle.php?&c='.htmlspecialchars($_GET['c']).'&vid='.htmlspecialchars($_GET['vid']).'&cid='.htmlspecialchars($_GET['cid']).'&ssd=$'?>';
+        var ssd = '<?php echo htmlspecialchars($_GET['ssd'])?>';
         var col = jQuery('#guayaquilFilterForm .g_filter');
         var hasErrors = false;
         col.each(function(){

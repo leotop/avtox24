@@ -25,7 +25,7 @@
             }
 
             return $link;
-        }	
+        }    
     }
 
     // Create request object
@@ -71,7 +71,7 @@
 
             <div class="laximo-car-info-item">
                 <span class="prop_name">VIN:</span>
-                <span class="prop_value"><?=trim($_GET["vin"])?></span>
+                <span class="prop_value"><?=trim(htmlspecialcharsbx($_GET["vin"]))?></span>
             </div>
 
             <div class="laximo-car-info-item">

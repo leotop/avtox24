@@ -65,7 +65,7 @@ if($GLOBALS['USER']->IsAuthorized()){
 		),
 		"REMAPPING" => "Y",
 		"SHOW_BLOCKS" => "results",
-		"MERGE_GROUPS" => "Y",
+		"MERGE_GROUPS" => "N",
 		"ANTI_BOTS" => "Y",
 		"SORT" => "delivery",
 		"ORDER" => "asc",
@@ -82,7 +82,9 @@ if($GLOBALS['USER']->IsAuthorized()){
 		"ORIGINAL_CATALOGS_FOLDER" => "/auto/original/",
 		"RENDER_LIMIT_SEARCH" => "Y",
 		"COMPONENT_TEMPLATE" => "template1",
-		"SEO_BLOCK" => "Y"
+		"SEO_BLOCK" => "Y",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
 );?> 

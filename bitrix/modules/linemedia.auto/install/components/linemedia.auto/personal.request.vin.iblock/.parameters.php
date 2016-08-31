@@ -68,5 +68,12 @@ $arComponentParameters = array(
                 "DEFAULT"=>'default',
                 'VALUES' => $sets_ids,
         ),
+        "REDIRECT_NEW_TICKET_PAGE" => Array(
+            "NAME" => GetMessage("LM_AUTO_VIN_REDIRECT_NEW_TICKET_PAGE"),
+            "TYPE" => "STRING",
+            "MULTIPLE" => "N",
+            "PARENT" => "BASE",
+            "DEFAULT" => "Y"
+        ),
 	)
 );

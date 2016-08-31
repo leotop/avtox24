@@ -60,8 +60,8 @@ else
 <script type="text/javascript">
     function ProcessFilters(skip)
     {
-        var url = '<?php echo 'vehicle.php?&c='.$_GET['c'].'&vid='.$_GET['vid'].'&cid='.$_GET['cid'].'&ssd=$'?>';
-        var ssd = '<?php echo $_GET['ssd']?>';
+        var url = '<?php echo 'vehicle.php?&c='.htmlspecialcharsbx($_GET['c']).'&vid='.htmlspecialcharsbx($_GET['vid']).'&cid='.htmlspecialcharsbx($_GET['cid']).'&ssd=$'?>';
+        var ssd = '<?php echo htmlspecialcharsbx($_GET['ssd'])?>';
         var col = jQuery('#guayaquilFilterForm .g_filter');
         var hasErrors = false;
         col.each(function(){

@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>'.CommonExtender::LocalizeString('SearchByVIN').'</h1>';
+echo '<h3>'.CommonExtender::LocalizeString('SearchByVIN').'</h3>';
 
 include('guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'catalog'.DIRECTORY_SEPARATOR.'vinsearchform.php');
 
@@ -14,9 +14,5 @@ class VinSearchExtender extends CommonExtender
 
 $renderer = new GuayaquilVinSearchForm(new VinSearchExtender());
 echo $renderer->Draw(array_key_exists('c', $_GET) ? $_GET['c'] : '', $cataloginfo, @$formvin);
-
-echo '<br><br>';
-
+            
 ?>
-
-

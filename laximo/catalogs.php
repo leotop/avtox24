@@ -11,7 +11,7 @@ $APPLICATION->SetTitle("AvtoX24.ru");
 // Include soap request class
 include('guayaquillib/data/requestOem.php');
 // Include catalog list view
-include('guayaquillib/render/catalogs/2coltable.php');
+include('guayaquillib/render/catalogs/3coltable.php');
 
 include('extender.php');
 

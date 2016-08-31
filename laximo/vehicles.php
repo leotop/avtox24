@@ -3,7 +3,7 @@
     $APPLICATION->SetPageProperty("description", "Более 80 000 0000 товаров на сайте.");
     $APPLICATION->SetPageProperty("tags", "оригинал, неоригинал, запчасти, доставка по Росиии");
     $APPLICATION->SetPageProperty("keywords_inner", "Оригинальные и неоригинальные  запчасти");
-    $APPLICATION->SetPageProperty("title", "Поиск деталей по VIN");
+    $APPLICATION->SetPageProperty("title", "Результаты поиска");
 ?>
 <?php
     // Include soap request class
@@ -62,7 +62,7 @@
             else
                 echo CommonExtender::FormatLocalizedString('FINDFAILED', $_GET['frame'] . '-' . $_GET['frameNo']);
         } else {
-            echo '<h2>' . CommonExtender::LocalizeString('Cars') . ' по запросу "'.$_GET["vin"].'"</h2><br>';
+            echo '<h2>' . CommonExtender::LocalizeString('Cars') .'</h2><br>';
         ?>
         <div class="vin-search-results-wrap">
             <?

@@ -1,9 +1,9 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("description", "Áîëåå 80 000 0000 òîâàðîâ íà ñàéòå.");
-$APPLICATION->SetPageProperty("tags", "îðèãèíàë, íåîðèãèíàë, çàï÷àñòè, äîñòàâêà ïî Ðîñèèè");
-$APPLICATION->SetPageProperty("keywords_inner", "Îðèãèíàëüíûå è íåîðèãèíàëüíûå  çàï÷àñòè");
-$APPLICATION->SetPageProperty("title", "Àâòîçàï÷àñòè äëÿ èíîìàðîê");
+$APPLICATION->SetPageProperty("description", "Ð‘Ð¾Ð»ÐµÐµ 80 000 0000 Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² Ð½Ð° ÑÐ°Ð¹Ñ‚Ðµ.");
+$APPLICATION->SetPageProperty("tags", "Ð¾Ñ€Ð¸Ð³Ð¸Ð½Ð°Ð», Ð½ÐµÐ¾Ñ€Ð¸Ð³Ð¸Ð½Ð°Ð», Ð·Ð°Ð¿Ñ‡Ð°ÑÑ‚Ð¸, Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ° Ð¿Ð¾ Ð Ð¾ÑÐ¸Ð¸Ð¸");
+$APPLICATION->SetPageProperty("keywords_inner", "ÐžÑ€Ð¸Ð³Ð¸Ð½Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð¸ Ð½ÐµÐ¾Ñ€Ð¸Ð³Ð¸Ð½Ð°Ð»ÑŒÐ½Ñ‹Ðµ  Ð·Ð°Ð¿Ñ‡Ð°ÑÑ‚Ð¸");
+$APPLICATION->SetPageProperty("title", "ÐÐ²Ñ‚Ð¾Ð·Ð°Ð¿Ñ‡Ð°ÑÑ‚Ð¸ Ð´Ð»Ñ Ð¸Ð½Ð¾Ð¼Ð°Ñ€Ð¾Ðº");
 $APPLICATION->SetTitle("AvtoX24.ru");
 ?>
 <?php

@@ -29,13 +29,13 @@ class GuayaquilOperationSearchForm extends GuayaquilTemplate
     function DrawCheckScript($operation)
     {
         $html = '<script type="text/javascript">
-		function checkCustomForm' . $operation['name'] . '(form, submit_btn) {
-		    var testResult = true;
+        function checkCustomForm' . $operation['name'] . '(form, submit_btn) {
+            var testResult = true;
 
-		    jQuery(form).find(":input").each(function() {
-		        if (jQuery(this).data("regexp")) {
-		            var regexp=jQuery(this).data("regexp");
-		            var value = jQuery(this).val();
+            jQuery(form).find(":input").each(function() {
+                if (jQuery(this).data("regexp")) {
+                    var regexp=jQuery(this).data("regexp");
+                    var value = jQuery(this).val();
                     var expr = new RegExp(regexp, \'i\');
                     if (expr.test(value))
                     {
@@ -44,16 +44,16 @@ class GuayaquilOperationSearchForm extends GuayaquilTemplate
                         jQuery(this).attr(\'class\',\'g_input_error\');
                         testResult = false;
                     }
-		        }
-		    });
+                }
+            });
 
-		    if (testResult) {
+            if (testResult) {
                 jQuery(submit_btn).attr(\'disabled\', \'1\');
             }
 
             return testResult;
         }
-		</script> ';
+        </script> ';
 
         return $html;
     }
@@ -68,17 +68,16 @@ class GuayaquilOperationSearchForm extends GuayaquilTemplate
             parse_url($link, PHP_URL_PATH);
 
         $html = '
+        <div class="formExampleText">'.CommonExtender::LocalizeString('inputmodel').' INFINITI FX35/FX45</div>
         <form name="findByCustom" method="GET" action="' . $actionUrl . '" onSubmit="return checkCustomForm' . $operation['name'] . '(this);">
-            <table border=0>';
+            ';
 
         foreach ($operation->field as $field) {
             $name = (string)$field['name'];
-            $html .= '<tr><td>' . $field['description'] . '</td><td><input name="data[' . $name . ']" data-regexp="' . $field['pattern'] . '" value="' . @$data[$name] . '"></td></tr>';
+            $html .= '<input name="data[' . $name . ']" data-regexp="' . $field['pattern'] . '" value="' . @$data[$name] . '" type="text">';
         }
 
-        $html .= '
-             </table>
-             <input type = "submit" value = "' . $this->GetLocalizedString('Search') . '"/>';
+        $html .= '<input type = "submit" value = "' . $this->GetLocalizedString('Search') . '"/>';
 
         $query = explode('&', html_entity_decode(parse_url($link, PHP_URL_QUERY)));
 

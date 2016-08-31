@@ -179,6 +179,7 @@ class LinemediaAutoDownloaderEmailProtocol extends LinemediaAutoProtocol impleme
                     }
                 }
                 */
+				
 				if(isset($structure->parts) && count($structure->parts)) {
 				
 					for($i = 0; $i < count($structure->parts); $i++) {
@@ -220,6 +221,11 @@ class LinemediaAutoDownloaderEmailProtocol extends LinemediaAutoProtocol impleme
 						} else {
 							unset($attachments[$i]);
 						}
+						//бывает, что в dparameters от mail.ru приходит пустой Content-Disposition: filename
+						if(empty($attachments[$i]['filename'])){
+							$attachments[$i]['filename'] = $attachments[$i]['name'];
+						}
+						
 					}
 				}
 				
@@ -231,8 +237,7 @@ class LinemediaAutoDownloaderEmailProtocol extends LinemediaAutoProtocol impleme
 				
 				foreach($attachments AS $attachment) {
 					// =?UTF-8?B?0JvQldCe0JzQoSDQntCe0J5fMDMwOTIwMTQ=?=
-					$attachment['filename'] = iconv_mime_decode($attachment['filename'], ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'); 
-					
+					$attachment['filename'] = iconv_mime_decode($attachment['filename'], ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
 					
 					if($this->attachment_name) {
 						$regex = str_replace('*', '(.+?)', $this->attachment_name);
@@ -272,7 +277,6 @@ class LinemediaAutoDownloaderEmailProtocol extends LinemediaAutoProtocol impleme
 					fclose($fp);
 					
 					self::log('Attachment downloaded: ' . $temp_filename);
-					
 					// мы возвращаем только один аттач
 					return $temp_filename;
 					
