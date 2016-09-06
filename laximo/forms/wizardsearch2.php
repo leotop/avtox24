@@ -1,11 +1,11 @@
-<script src="<?echo 'guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.js'?>"></script>
+<?include('guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard_js.php');?>
 
-  <?
-        echo '<h3>'.CommonExtender::LocalizeString('Search by wizard').'</h3>';  ?>
-    <div class="formExampleText">Задайте один или несколько параметров для детального подбора</div>
+<?echo '<h3>'.CommonExtender::LocalizeString('Search by wizard').'</h3>';?>
+
+<div class="formExampleText">Задайте один или несколько параметров для детального подбора</div>
 
 <div id="wizard-wrap">    
-  
+
     <div class="wizardSearchWrapper">
         <?
 

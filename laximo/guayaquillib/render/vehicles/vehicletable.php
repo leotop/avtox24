@@ -124,12 +124,12 @@ class GuayaquilVehiclesList extends GuayaquilTemplate
     {
         foreach ($row->attributes() as $key => $value){
             if (strtolower($key) == $column){
-                return '<span class = "item">'. (string)$name . ':' . '<span style="display:inline-block; max-width:1000px; float:right">' . (string)$value . '</span></span>';
+                return '<span class = "item"><b>'. (string)$name . ':</b>' . ' <span style="max-width:1000px;">' . (string)$value . '</span></span><hr />';
             }
         }
         foreach ($row->attribute as $attr){
             if (strtolower($attr->attributes()->key) == $column){
-                return '<span class = "item">'. (string)$name . ':' . '<span style=" display:inline-block; max-width:1000px; float:right">' . (string)$attr->attributes()->value . '</span></span>';
+                return '<span class = "item"><b>'. (string)$name . ':</b>' . ' <span style=" max-width:1000px; ">' . (string)$attr->attributes()->value . '</span></span><hr />';
             }
         }
     }

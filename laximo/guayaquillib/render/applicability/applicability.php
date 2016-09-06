@@ -132,7 +132,7 @@ class GuayaquilApplicability extends GuayaquilTemplate
         $rowСode = "grow_" . $this->vehicleNo;
         $catalogCode = (string)$vehicle['catalog'];
 
-        $html = '<tr onmouseout="this.className=\'\';" onmouseover="this.className=\'over\';" onclick="jQuery(\'tr[name='.$rowСode.']\').toggle()" class="g_vehicle">';
+        $html = '<tr onmouseout="this.className=\'\';" onmouseover="this.className=\'over\';" onclick="$(\'tr[name='.$rowСode.']\').toggle()" class="g_vehicle">';
 
         $tooltip = '';
 

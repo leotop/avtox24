@@ -6,8 +6,10 @@
     $APPLICATION->SetPageProperty("title", "Автозапчасти для иномарок");
     $APPLICATION->SetTitle("AvtoX24.ru");
 ?>
-<script src="<?echo 'guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard.js'?>"></script>
+   
 <?php
+    //include js
+    include('guayaquillib'.DIRECTORY_SEPARATOR.'render'.DIRECTORY_SEPARATOR.'wizard2'.DIRECTORY_SEPARATOR.'wizard_js.php');   
     // Include soap request class
     include('guayaquillib'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'requestOem.php');
     // Include view class
@@ -47,7 +49,7 @@
     else
     {
         $wizard = $data[1];
-        $cataloginfo = $data[0]->row;
+        $cataloginfo = $data[0]->row;      
 
         echo '<h2>'.CommonExtender::LocalizeString('Search by wizard').' - '.$cataloginfo['name'].'</h2>';
     ?>

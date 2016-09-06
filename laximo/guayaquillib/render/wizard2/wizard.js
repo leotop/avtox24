@@ -1,8 +1,9 @@
 $(function(){
     linkHandler();
+    selectCustomize();
 })
 
-//ËÁ‚ÎÂ˜ÂÌËÂ Ô‡‡ÏÂÚÓ‚ ËÁ ÛÎ‡
+//–∏–∑–≤–ª–µ—á–µ–Ω–∏–µ –ø–∞—Ä–∞–º–µ—Ç—Ä–æ–≤ –∏–∑ —É—Ä–ª–∞
 function getUrlVars(url) {
     if (!url) {
         var url = window.location.href; 
@@ -18,9 +19,12 @@ function openWizard(ssd) {
 
     var url_params = getUrlVars();              
     url = "wizard2.php?c=" + url_params.c + "&ssd=" + ssd;
-    $("#wizard-wrap").load(url + " #wizard-wrap > *");
-    linkHandler();
-    history.replaceState(3, "", url);
+    $("#wizard-wrap").load(url + " #wizard-wrap > *", function(){          
+        linkHandler();
+        selectCustomize();
+        history.replaceState(3, "", url); 
+    });
+
 
 }
 
@@ -28,9 +32,19 @@ function linkHandler() {
     $("#wizard-wrap").on("click", ".remove_param", function(e){
         e.preventDefault();
         var url = $(this).attr("href");
-        $("#wizard-wrap").load(url + " #wizard-wrap > *");
-        history.replaceState(3, "", url);
+        $("#wizard-wrap").load(url + " #wizard-wrap > *", function(){          
+            history.replaceState(3, "", url); 
+            selectCustomize();
+        });
     })
+
+    
 }
 
-
+function selectCustomize() {
+    //–∫–∞—Å—Ç–æ–º–∏–∑–∞—Ü–∏—è select
+    $(".wizardSearchWrapper select").selectmenu({
+        change: function() {$(this).change()}
+        }
+    );
+}     

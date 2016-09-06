@@ -7,35 +7,35 @@
  */
 
 
-jQuery(document).ready (function() {
-    jQuery(".guayaquil_table tr.g_vehicle").tooltip({
+$(document).ready (function() {
+    $(".guayaquil_table tr.g_vehicle").tooltip({
         track: true,
         delay: 0,
         showURL: false,
         fade: 250,
         bodyHandler: function() {
-            var items = jQuery (this).find ('td.ttp .item');
+            var items = $ (this).find ('td.ttp .item');
             var tooltip = '';
-            jQuery.each (items, function () {
-                tooltip+=jQuery (this).html()+'<br/>';
+            $.each (items, function () {
+                tooltip+=$ (this).html()+'<br/>';
             });
             return tooltip;
         }
     });
-    jQuery(".guayaquil_table tr.g_unit").tooltip({
+    $(".guayaquil_table tr.g_unit").tooltip({
         track: true,
         delay: 0,
         showURL: false,
         fade: 250,
         bodyHandler: function() {
-            var items = jQuery (this).find ('.g_hint');
+            var items = $ (this).find ('.g_hint');
             var tooltip = '';
-            jQuery.each (items, function () {
+            $.each (items, function () {
 
                 if (tooltip != "")
                     tooltip += "<br>";
 
-                tooltip+=jQuery (this).html();
+                tooltip+=$ (this).html();
             });
             if (tooltip == "")
                 return null;

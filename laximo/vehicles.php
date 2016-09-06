@@ -64,6 +64,11 @@
         } else {
             echo '<h2>' . CommonExtender::LocalizeString('Cars') .'</h2><br>';
         ?>
+        <style>
+            #tooltip {
+                width: 1000px !important;
+            }
+        </style>
         <div class="vin-search-results-wrap">
             <?
                 // Create data renderer

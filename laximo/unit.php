@@ -59,6 +59,11 @@
 
 
     ?>
+    <style>
+    #tooltip {
+        width: 500px !important;
+    }
+    </style>
     <div id="pagecontent" class="laximo-wrapper"> 
 
         <h2><?echo xml_attribute($vehicle, 'brand');?>, год выпуска: <?echo xml_attribute($vehicle->attribute[10], 'value');?></h2>
@@ -111,7 +116,7 @@
         <script type="text/javascript">
             <?php
                 foreach ($pnc as $code)
-                    echo 'jQuery(\'.g_highlight[name='.$code.']\').addClass(\'g_highlight_lock\');';
+                    echo '$(\'.g_highlight[name='.$code.']\').addClass(\'g_highlight_lock\');';
             ?>
         </script>
         <?php }

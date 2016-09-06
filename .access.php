@@ -1,4 +1,6 @@
 <?
+$PERM["obrabotka-vin"]["*"]="D";
+$PERM["obrabotka-vin"]["G12"]="R";
 $PERM["online"]["*"]="R";
 $PERM["desktop_app"]["*"]="R";
 $PERM["catalog"]["G6"]="W";

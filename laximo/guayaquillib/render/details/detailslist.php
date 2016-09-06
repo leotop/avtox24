@@ -131,18 +131,18 @@ class GuayaquilDetailsList extends GuayaquilTemplate
         $html = "<script type=\"text/javascript\">\n";
         $html .= "var opennedimage = '" . $this->opennedimage . "'; \n";
         $html .= "var closedimage = '" . $this->closedimage . "'; \n";
-        $html .= "jQuery(document).ready(function($){ \n";
-        $html .= "jQuery('td.g_rowdatahint').tooltip({track: true, delay: 0, showURL: false, fade: 250, positionLeft: true, bodyHandler: g_getHint}); \n";
+        $html .= "$(document).ready(function($){ \n";
+        $html .= "$('td.g_rowdatahint').tooltip({track: true, delay: 0, showURL: false, fade: 250, positionLeft: true, bodyHandler: g_getHint}); \n";
 
-        $html .= "jQuery('img.g_addtocart').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '" . $this->GetLocalizedString("AddToCartHint") . "'; } }); \n";
+        $html .= "$('img.g_addtocart').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '" . $this->GetLocalizedString("AddToCartHint") . "'; } }); \n";
 
-        $html .= "jQuery('td[name=c_toggle] img').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '" . $this->GetLocalizedString("ToggleReplacements") . "'; } }); \n";
+        $html .= "$('td[name=c_toggle] img').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '" . $this->GetLocalizedString("ToggleReplacements") . "'; } }); \n";
 
-        $html .= "jQuery('img.c_rfull').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '<h3>" . $this->GetLocalizedString("ReplacementWay") . "</h3>" . $this->GetLocalizedString("ReplacementWayFull") . "'; } }); \n";
+        $html .= "$('img.c_rfull').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '<h3>" . $this->GetLocalizedString("ReplacementWay") . "</h3>" . $this->GetLocalizedString("ReplacementWayFull") . "'; } }); \n";
 
-        $html .= "jQuery('img.c_rforw').tooltip({track: true, delay: 0, showURL: false, fade: 250,    bodyHandler: function() { return '<h3>" . $this->GetLocalizedString("ReplacementWay") . "</h3>" . $this->GetLocalizedString("ReplacementWayForward") . "'; } }); \n";
+        $html .= "$('img.c_rforw').tooltip({track: true, delay: 0, showURL: false, fade: 250,    bodyHandler: function() { return '<h3>" . $this->GetLocalizedString("ReplacementWay") . "</h3>" . $this->GetLocalizedString("ReplacementWayForward") . "'; } }); \n";
 
-        $html .= "jQuery('img.c_rbackw').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '<h3>" . $this->GetLocalizedString("ReplacementWay") . "</h3>" . $this->GetLocalizedString("ReplacementWayBackward") . "'; } }); \n";
+        $html .= "$('img.c_rbackw').tooltip({track: true, delay: 0, showURL: false, fade: 250, bodyHandler: function() { return '<h3>" . $this->GetLocalizedString("ReplacementWay") . "</h3>" . $this->GetLocalizedString("ReplacementWayBackward") . "'; } }); \n";
         $html .= "});\n";
         $html .= "</script>\n";
 
@@ -231,7 +231,7 @@ class GuayaquilDetailsList extends GuayaquilTemplate
             case 'name':
                 $link = $this->FormatLink('detail', $detail, $this->catalog);
 
-                $html = '<a href="'.$link.'">';
+                $html = '<a href="'.$link.'" target="_blank">';
                 $name = $this->getProperty($detail, 'name', $isArray);
                 if (!strlen((string)$name)) {
                     $name = 'Наименование не указано';
@@ -260,7 +260,7 @@ class GuayaquilDetailsList extends GuayaquilTemplate
             case 'pricelink': 
              $link = $this->FormatLink('detail', $detail, $this->catalog);
 
-                $html = '<a href="'.$link.'">';
+                $html = '<a href="'.$link.'" target="_blank">';
                 $name = 'Цена';
                 $html .= $name .'</a>';
                 return $html;

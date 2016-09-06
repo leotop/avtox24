@@ -3,9 +3,9 @@ var glow_name = '';
 function glow(name){
 	glow_name = name.toUpperCase();
 
-	jQuery('.guayaquil_floatunitlist_box').removeClass('g_highlight_glow');
+	$('.guayaquil_floatunitlist_box').removeClass('g_highlight_glow');
 
-	jQuery('div[name="' + glow_name + '"]').parent().addClass('g_highlight_glow');
+	$('div[name="' + glow_name + '"]').parent().addClass('g_highlight_glow');
 	
 	window.location = '#_' + name;
 }
@@ -18,41 +18,41 @@ function hl(el, type){
 	if (glow_name == name)
 	{
 		if (type == 'in')
-			jQuery('.g_highlight_glow[name='+name+']').attr('class','g_highlight_over');
+			$('.g_highlight_glow[name='+name+']').attr('class','g_highlight_over');
 		else
-			jQuery('.g_highlight_over[name='+name+']').attr('class','g_highlight_glow');
+			$('.g_highlight_over[name='+name+']').attr('class','g_highlight_glow');
 	} 
 	else
 	{
 		if (type == 'in')
-			jQuery('.g_highlight[name='+name+']').attr('class','g_highlight_over');
+			$('.g_highlight[name='+name+']').attr('class','g_highlight_over');
 		else
-			jQuery('.g_highlight_over[name='+name+']').attr('class','g_highlight');
+			$('.g_highlight_over[name='+name+']').attr('class','g_highlight');
 	}
 }
 
-jQuery(document).ready(function($){
-	jQuery('.guayaquil_floatunitlist_box div').hover(
+$(document).ready(function($){
+	$('.guayaquil_floatunitlist_box div').hover(
 		function () {
-			jQuery('div[name="' + jQuery(this).attr('name') + '"]').parent().addClass('guayaquil_floatunitlist_box_hover');
+			$('div[name="' + $(this).attr('name') + '"]').parent().addClass('guayaquil_floatunitlist_box_hover');
 		},
 		function () {
-			jQuery('div[name="' + jQuery(this).attr('name') + '"]').parent().removeClass('guayaquil_floatunitlist_box_hover');
+			$('div[name="' + $(this).attr('name') + '"]').parent().removeClass('guayaquil_floatunitlist_box_hover');
 		}
 	);
 
-    jQuery(document).ready(function(){
-        jQuery('.guayaquil_zoom').colorbox({
+    $(document).ready(function(){
+        $('.guayaquil_zoom').colorbox({
                 href: function () {
-                    var url = jQuery(this).attr('full');
+                    var url = $(this).attr('full');
                     return url;
                 },
                 photo:true,
                 rel: "img_group",
                 opacity: 0.3,
                 title : function () {
-                    var title = jQuery(this).attr('title');
-                    var url = jQuery(this).attr('link');
+                    var title = $(this).attr('title');
+                    var url = $(this).attr('link');
                     return '<a href="' + url + '">' + title + '</a>';
                 },
                 current: 'Рис. {current} из {total}',
@@ -62,20 +62,20 @@ jQuery(document).ready(function($){
         )
     });
 
-	jQuery('.guayaquil_floatunitlist_box').tooltip({
+	$('.guayaquil_floatunitlist_box').tooltip({
 	    track: true,
 	    delay: 0,
 	    showURL: false,
 	    fade: 250,
 	    bodyHandler: function() {
-			var id = jQuery(this).attr('note');
+			var id = $(this).attr('note');
 
-            var items = jQuery('#unm'+id);
-            var tooltip = jQuery(items[0]).text();
+            var items = $('#unm'+id);
+            var tooltip = $(items[0]).text();
 
-			items = jQuery('#utt'+id);
+			items = $('#utt'+id);
 			if (items.length > 0)
-				tooltip = tooltip + '<br>' + jQuery(items[0]).text();
+				tooltip = tooltip + '<br>' + $(items[0]).text();
 
 			return tooltip;
 		}

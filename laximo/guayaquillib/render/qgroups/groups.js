@@ -28,8 +28,8 @@ function hasClass(elem, className) {
 var QuickGroups = {};
 QuickGroups.Search = function(value)
 {
-    var filtered_groups = jQuery('#qgFilteredGroups');
-    var tree = jQuery('#qgTree');
+    var filtered_groups = $('#qgFilteredGroups');
+    var tree = $('#qgTree');
 
     if (value.length < 3)
     {
@@ -51,13 +51,13 @@ QuickGroups.InnerSearch = function(value, current_path, item, filtered_groups)
     var items = item.children();
     items.each(function()
         {
-            var el = jQuery(this);
+            var el = $(this);
             if (el.hasClass('qgContent'))
             {
                 var text = el.text();
                 var text2 = text.replace(new RegExp('(' + value + ')', 'i'), '<span class="qgSelected">$1</span>');
                 if (text != text2)
-                    jQuery('<div class="qgFilteredGroup"><div class="qgCurrentPath">'+ current_path + '</div><div class="qgFilteredName">'+ el.html().replace(text, text2)+'</div></div>').appendTo(filtered_groups);
+                    $('<div class="qgFilteredGroup"><div class="qgCurrentPath">'+ current_path + '</div><div class="qgFilteredName">'+ el.html().replace(text, text2)+'</div></div>').appendTo(filtered_groups);
 
                 current_path = current_path + ' / ' + text;
             }

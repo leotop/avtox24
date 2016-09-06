@@ -81,9 +81,20 @@ abstract class LanguageTemplate implements IGuayaquilExtender {
         'wizard_model name' => 'Мoдель',
         'wizard_market' => 'Производитель',
         'wizard_engine' => 'Двигатель',
-        'wizard_transmission' => 'КПП',
+        'wizard_transmission' => 'Трансмиссия',
         'wizard_body' => 'Кузов',
-        'wizard_area' => 'Страна',
+        'wizard_area' => 'Рынок',
+        'wizard_рынок' => 'Рынок',
+        'wizard_модель' => 'Модель',
+        'wizard_год выпуска' => 'Год выпуска',
         'wizard_grade' => 'Комплектация',
+        'wizard_model year' => 'Год выпуска',
+        'wizard_type' => 'Тип автомобиля',
+        'wizard_series' => 'Серия',
+        'wizard_ограничение' => 'Ограничение',
+        'wizard_двигатель' => 'Двигатель',
+        'wizard_трансмиссия' => 'Трансмиссия',
+        'wizard_region' => 'Регион',
+        'wizard_catalog no' => 'Номер каталога'
     );
 }

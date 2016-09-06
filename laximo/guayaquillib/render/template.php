@@ -26,7 +26,7 @@ class GuayaquilTemplate
 		if (!isset($guayaquil_templateinitialized))
 		{
 			$this->AppendCSS(dirname(__FILE__).'/guayaquil.css');
-			$this->AppendJavaScript(dirname(__FILE__).'/jquery.js');
+			//$this->AppendJavaScript(dirname(__FILE__).'/jquery.js');
 			
 			$guayaquil_templateinitialized = 1;
 		}

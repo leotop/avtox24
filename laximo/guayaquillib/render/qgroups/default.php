@@ -83,7 +83,7 @@ class GuayaquilQuickGroupsList extends GuayaquilTemplate
 	function DrawSearchPanel()
 	{
         return '<input type="text" maxlength="20" size="50" id="qgsearchinput" value="'.$this->GetLocalizedString('ENTER_GROUP_NAME').'" title="'.$this->GetLocalizedString('ENTER_GROUP_NAME').'" onfocus=";if(this.value==\''.$this->GetLocalizedString('ENTER_GROUP_NAME').'\')this.value=\'\';" onblur="if(this.value.replace(\' \', \'\')==\'\')this.value=\''.$this->GetLocalizedString('ENTER_GROUP_NAME').'\';" onkeyup="QuickGroups.Search(this.value);">
-            <input type="button" value="'.$this->GetLocalizedString('RESET_GROUP_NAME').'" onclick="jQuery(\'#qgsearchinput\').attr(\'value\', \''.$this->GetLocalizedString('ENTER_GROUP_NAME').'\'); QuickGroups.Search(\'\');">
+            <input type="button" value="'.$this->GetLocalizedString('RESET_GROUP_NAME').'" onclick="$(\'#qgsearchinput\').attr(\'value\', \''.$this->GetLocalizedString('ENTER_GROUP_NAME').'\'); QuickGroups.Search(\'\');">
 
         <div id="qgFilteredGroups"></div>';
 	}

@@ -71,11 +71,11 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Новая тестовая версия", 
-		"/html/", 
+		"Обработка VIN", 
+		"/obrabotka-vin/index.php", 
 		Array(), 
 		Array(), 
-		"" 
+		"CSite::InGroup(array(1,11,12))" 
 	)
 );
 ?>

@@ -5,18 +5,18 @@
 
 ?>
 <script type="text/javascript">
-    jQuery(document).ready(function(){
-        jQuery('.guayaquil_zoom').colorbox({
+    $(document).ready(function(){
+        $('.guayaquil_zoom').colorbox({
             href: function () {
-                var url = jQuery(this).attr('full');
+                var url = $(this).attr('full');
                 return url;
             },
             photo:true,
             rel: "img_group",
             opacity: 0.3,
             title : function () {
-                var title = jQuery(this).attr('title');
-                var url = jQuery(this).attr('link');
+                var title = $(this).attr('title');
+                var url = $(this).attr('link');
                 return '<a href="' + url + '">' + title + '</a>';
             },
             current: 'Рис. {current} из {total}',
@@ -62,7 +62,7 @@
             $this->detailinfoimage = $this->Convert2uri(dirname(__FILE__).DIRECTORY_SEPARATOR.$this->detailinfoimage);
             $this->zoom_image = $this->Convert2uri(dirname(__FILE__).'/../images/zoom.png');
 
-            $this->AppendJavaScript(dirname(__FILE__).'/../jquery.colorbox.js');
+           // $this->AppendJavaScript(dirname(__FILE__).'/../jquery.colorbox.js');
             $this->AppendCSS(dirname(__FILE__).'/../colorbox.css');
         }
 

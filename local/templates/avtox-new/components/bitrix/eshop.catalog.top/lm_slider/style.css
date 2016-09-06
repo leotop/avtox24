@@ -1,0 +1,36 @@
+h5.title {position: absolute; z-index: 1; padding: 5px 10px; background: rgba(250,117,7,0.69);
+	-webkit-border-radius:  0 4px 4px 0;
+	-moz-border-radius:  0 4px 4px 0;
+	border-radius: 0 4px 4px 0;
+}
+
+h4 a.title_item {font-weight: normal; color: black; margin-top: 3px !important;}
+p.description {line-height: 14px; color: gray; font-size: 12px;}
+
+.carousel {width: 450px; height: 260px; background-color:white; padding: 20px;
+	-webkit-border-radius:  8px;
+	-moz-border-radius:  8px;
+	border-radius: 8px;
+}
+.carousel-indicators {top: 315px !important; left:210px !important;}
+
+
+table.item_t {height: 250px;}
+table.item_t td {vertical-align: top;}
+
+div.carousel div.buy {background-color: #e7f6fd; padding: 3px 10px 10px 10px; margin-bottom: 20px; text-align: center;
+	-webkit-border-radius:  6px;
+	-moz-border-radius:  6px;
+	border-radius: 6px;
+}
+
+div.carousel div.price .old-price {color:#e74c3c; text-decoration: line-through; font-size: 13px; font-weight: normal;}
+div.carousel div.price span {font-size: 16px; color: black; margin-right: 20px;}
+div.carousel div.price {display: inline-block; font-weight: bold; position: relative; top:8px; margin-left: 0 !important;}
+div.carousel div.buy a.btn {width: 100px; margin-bottom: 0; margin-top: 5px;}
+
+div.carousel a.more {font-size: 11px; text-decoration: underline;}
+
+.carousel-control {border: none !important; opacity:1 !important; top:50% !important;}
+.carousel-control.left {left: -40px !important;}
+.carousel-control.right {right: -40px !important;}

@@ -75,7 +75,7 @@ Array(
 </tr>
 <tr>
 	<td>
-		 &nbsp;<a href="http://avtox24.auto2d.com/catalog/type/9"><img width="357" alt="button4.png" src="/upload/medialibrary/84b/84bb12b4bb7db090d727e1da6cfefda3.png" height="52" title="button4.png"></a>
+		 &nbsp;<a href="http://avtox24.ru/laximo/catalogs.php"><img width="357" alt="button4.png" src="/upload/medialibrary/84b/84bb12b4bb7db090d727e1da6cfefda3.png" height="52" title="button4.png"></a>
 	</td>
 </tr>
 <tr>

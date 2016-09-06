@@ -14,7 +14,8 @@
         <?} else {?>
         loadDetailsInfo("qdetails.php?<?=$_SERVER["QUERY_STRING"]?>"); 
         <?}?>     
-</script>     
+</script>    
+<script src="/laximo/guayaquillib/render/jquery.colorbox.js"></script> 
 <?php
 
     // Include soap request class

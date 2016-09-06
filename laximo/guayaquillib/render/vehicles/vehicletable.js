@@ -7,17 +7,17 @@
  */
 
 
-jQuery(document).ready (function() {
-jQuery(".guayaquil_table tr").tooltip({
+$(document).ready (function() {
+$(".guayaquil_table tr").tooltip({
     track: true,
     delay: 0,
     showURL: false,
     fade: 250,
     bodyHandler: function() {
-        var items = jQuery (this).find ('td.ttp .item');
+        var items = $(this).find ('td.ttp .item');
         var tooltip = '';
-        jQuery.each (items, function () {
-            tooltip+=jQuery (this).html()+'<br/>';
+        $.each (items, function () {
+            tooltip+= $(this).html()+'<br/>';
         });
         return tooltip;
     }

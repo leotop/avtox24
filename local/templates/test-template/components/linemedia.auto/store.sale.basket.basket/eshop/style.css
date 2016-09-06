@@ -1,5 +1,0 @@
-.inline-filter.cart-filter { margin: 10px 0; }
-table.cart-items { border-collapse: collapse; font-family: Tahoma,Arial,Helvetica; font-size: 11px; width: 100%; margin: 10px 0; }
-.cart-items thead tr td { font-weight: normal; background: #DEDEDE; padding: 3px;border:1px solid silver;}
-.cart-items tbody tr td { text-align:left; padding: 2px 5px; border-top:1px solid silver;border-bottom:1px solid silver;border-left:1px solid #DEDEDE;border-right:1px solid #DEDEDE;}
-.cart-items tbody tr td.cart-item-quantity input[type="text"] { width: 60px !important; }
