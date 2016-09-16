@@ -57,20 +57,6 @@ $aMenuLinks = Array(
 		"\$USER->IsAuthorized()" 
 	),
 	Array(
-		"Форум", 
-		"/forum/forum2/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Блог", 
-		"/blog/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
 		"Обработка VIN", 
 		"/obrabotka-vin/index.php", 
 		Array(), 

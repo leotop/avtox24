@@ -79,6 +79,7 @@ class KoronaAutoRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
     public function search()
 	{
 		$query = urlencode($this->query);
+        $warehouse = $this->profile_options['warehouse'] ?: GetMessage('Moscow');
 
 		try {
 			$search_parts = $this->browser->get($this->url_search . '?apiUid=' . $this->profile_options['apiUid'] . '&dataType=' . $this->data_type . '&q=' . $query);
@@ -87,11 +88,11 @@ class KoronaAutoRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
 		}
 
 		$search_parts = json_decode($search_parts, true);
-		
+
 		if ($search_parts['error']) {
 			throw new Exception($search_parts['error']);
 		}
-		
+
 		$search_parts = $search_parts['product'];
 
 		if ($this->brand_title != '') {
@@ -119,13 +120,13 @@ class KoronaAutoRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
 					$price = 0;
 
 					foreach($search_part_info['stock'] as $stock) {
-						if ($stock['warehouse']['name'] == GetMessage('MOSCOW')) {
+						if ($stock['warehouse']['name'] == $warehouse) {
 							$quantity = $stock['warehouse']['quantity'];
 						}
 					}
 
 					foreach($search_part_info['prices'] as $stock) {
-						if ($stock['warehouse']['name'] == GetMessage('MOSCOW') &&
+						if ($stock['warehouse']['name'] == $warehouse &&
 							$stock['warehouse']['currency'] == 'RUB') {
 							$price = $stock['warehouse']['value'];
 						}
@@ -134,7 +135,7 @@ class KoronaAutoRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
 					if ($price == 0) {
 						continue;
 					}
-					
+
 					$parts[$key][] = array(
 						'id'                => 'KoronaAuto',
 						'article'           => LinemediaAutoPartsHelper::clearArticle($search_part_info['factory_number']),
@@ -148,7 +149,7 @@ class KoronaAutoRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
 						'weight'            => $search_part_info['weight']*1000,
 						'extra'              => array(
 							'part_id' => $search_part['id'],
-							'article_original' => $search_part['factory_number']
+							'article_original' => $search_part['factory_number'],
 						)
 					);
 				}
@@ -252,6 +253,11 @@ class KoronaAutoRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
 				'title' => GetMessage('apiUid'),
 				'type'  => 'string',
 			),
+            'warehouse'   => array(
+                'title'   => GetMessage('warehouse'),
+                'default' => GetMessage('Moscow'),
+                'type'    => 'string',
+            )
 		);
 	}
 }
