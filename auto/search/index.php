@@ -36,13 +36,8 @@ if($GLOBALS['USER']->IsAuthorized()){
     }
 }
 ?>
-<? 
-global $USER;
-if ($USER->IsAuthorized()) {
-	$template = "SERPs_template";
-} else {
-	$template = ".default";
-}
+<?
+$template = "SERPs_template";
 ?>
 <?$APPLICATION->IncludeComponent(
 	"linemedia.auto:search.results", 
