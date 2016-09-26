@@ -41,7 +41,7 @@ $template = "SERPs_template";
 ?>
 <?$APPLICATION->IncludeComponent(
 	"linemedia.auto:search.results", 
-	$template, 
+	"SERPs_template", 
 	array(
 		"ACTION_VAR" => "act",
 		"QUERY" => $_REQUEST["q"],
@@ -71,7 +71,7 @@ $template = "SERPs_template";
 		"ANTI_BOTS" => "Y",
 		"SORT" => "delivery",
 		"ORDER" => "asc",
-		"LIMIT" => "15",
+		"LIMIT" => "25",
 		"SHOW_ANALOGS" => "Y",
 		"NO_SHOW_WORDFORMS" => "N",
 		"SHOW_ANALOGS_STATISTICS" => "N",
@@ -83,7 +83,7 @@ $template = "SERPs_template";
 		"BUY_ARTICLE_URL" => "/auto/search/?part_id=#PART_ID#",
 		"ORIGINAL_CATALOGS_FOLDER" => "/auto/original/",
 		"RENDER_LIMIT_SEARCH" => "Y",
-		"COMPONENT_TEMPLATE" => ".default",
+		"COMPONENT_TEMPLATE" => "SERPs_template",
 		"SEO_BLOCK" => "Y",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
