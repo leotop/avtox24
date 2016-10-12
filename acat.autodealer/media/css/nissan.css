@@ -1,0 +1,30 @@
+.tab, .tab_active{
+    width: 245px;
+}
+#detailsList .NisBttnInfo{
+    width: 50px;
+}
+#detailsList .NisDetailNumber{
+    width: 160px;
+}
+#detailsList .NisDetailQuantity{
+    width: 80px;
+}
+#detailsList .NisBasket{
+    width: 125px;
+}
+#NISGroups,#NISSubGroups{
+    text-align: center;
+}
+.dataTables_wrapper label {
+    font-size: 15pt;
+    font-weight: bold;
+}
+.dataTables_wrapper label input{
+    background-color: #FBA4A4;
+}
+.spare_parts,.search2failds.low{
+    font-size: 18px;
+    background-color: #FFFFFF;
+}
+.wd80 { max-width: 80%; }

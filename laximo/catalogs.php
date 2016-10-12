@@ -10,6 +10,7 @@ $APPLICATION->SetTitle("AvtoX24.ru");
 
 // Include soap request class
 include('guayaquillib/data/requestOem.php');
+
 // Include catalog list view
 include('guayaquillib/render/catalogs/3coltable.php');
 
@@ -36,10 +37,8 @@ if (Config::$useLoginAuthorizationMethod) {
 
 // Append commands to request
 $request->appendListCatalogs();
-
 // Execute request
 $data = $request->query();
-
 // Check errors
 if ($request->error != '') {
     echo $request->error;

@@ -161,6 +161,7 @@ if (isset($_REQUEST[$arParams['ACTION_VAR']]) && $_REQUEST[$arParams['ACTION_VAR
                         'bg_wht' => $_REQUEST['extra']['bg_wht'][$key],
                         'article_original' => $_REQUEST['extra']['article_original'][$key],
                     );
+                    file_put_contents($_SERVER['DOCUMENT_ROOT'].'/add2basket.log', print_r($extra, true).PHP_EOL.print_r($_REQUEST, true));
                 } else {
                     $extra = (array) $_REQUEST['extra'][$key];
                 }

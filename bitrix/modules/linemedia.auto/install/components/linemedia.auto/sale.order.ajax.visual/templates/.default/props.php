@@ -161,15 +161,10 @@ $bHideProps = false;
 <br />
 <div class="title">
 	<?=GetMessage("SOA_TEMPL_BUYER_INFO")?>
-	<?if ($bHideProps && $_POST["showProps"] != "Y"):?>
-		<a href="#" onClick="fGetBuyerProps(this);return false;"><?=GetMessage('SOA_TEMPL_BUYER_SHOW');?></a>
-	<?elseif ($bHideProps && $_POST["showProps"] == "Y"):?>
-		<a href="#" onClick="fGetBuyerProps(this);return false;"><?=GetMessage('SOA_TEMPL_BUYER_HIDE');?></a>
-	<?endif;?>
-	<input type="hidden" name="showProps" id="showProps" value="N" />
+	<input type="hidden" name="showProps" id="showProps" value="N"/>
 </div>
 
-<table class="sale_order_table props" id="sale_order_props" <?=($bHideProps && $_POST["showProps"] != "Y")?"style='display:none;'":''?>>
+<table class="sale_order_table props" id="sale_order_props">
 <?
 PrintPropsForm($arResult["ORDER_PROP"]["USER_PROPS_N"], $arParams["TEMPLATE_LOCATION"]);
 PrintPropsForm($arResult["ORDER_PROP"]["USER_PROPS_Y"], $arParams["TEMPLATE_LOCATION"]);

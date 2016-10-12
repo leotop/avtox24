@@ -1026,7 +1026,7 @@ LinemediaAutoDebug::add('SORT:' . $sort_by . ' ' . $sort_order, false, LM_AUTO_D
 // получим количество записей
 $rowsCount = 0;
 
-$dbData = $database->Query("SELECT COUNT( * ) FROM `b_lm_orders_view` WHERE $where_str");
+$dbData = $database->Query("SELECT COUNT( * ) FROM `b_lm_orders_view` WHERE ORDER_ID IS NOT NULL");
 
 if($arFields = $dbData->Fetch()) {
     $rowsCount = array_pop($arFields);
@@ -1055,7 +1055,7 @@ if($where_str == 1) {
 
     $start = $limit * ($page - 1);
 
-    $dbData = $database->Query("SELECT * FROM `b_lm_orders_view` WHERE $where_str ORDER BY `$sort_by` $sort_order LIMIT $start, $limit;");
+    $dbData = $database->Query("SELECT * FROM `b_lm_orders_view` WHERE ORDER_ID IS NOT NULL GROUP BY ID ORDER BY `$sort_by` $sort_order LIMIT $start, $limit;");
 
     // преобразуем список в экземпл€р класса CAdminResult
     $rsData = new CAdminResult($dbData, $sTableID);
@@ -1083,7 +1083,7 @@ if($where_str == 1) {
 
     //  $where_str .= ' AND '.$supplierWhere;
 
-    $dbData = $database->Query("SELECT * FROM `b_lm_orders_view` WHERE $where_str ORDER BY `$sort_by` $sort_order");
+    $dbData = $database->Query("SELECT * FROM `b_lm_orders_view` WHERE $where_str AND ORDER_ID IS NOT NULL ORDER BY `$sort_by` $sort_order");
     // преобразуем список в экземпл€р класса CAdminResult
     $rsData = new CAdminResult($dbData, $sTableID);
     // аналогично CDBResult инициализируем постраничную навигацию.

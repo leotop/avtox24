@@ -71,7 +71,7 @@ if ($REQUEST_METHOD == 'POST' && $_POST['Update'] == 'Y' && check_bitrix_sessid(
     include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/account-save.php');
     include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/wholesale-save.php');
     include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/statuses-group-save.php');
-    include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/experimental-save.php');
+//    include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/experimental-save.php');
     include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/group-currency-save.php');
 
 
@@ -176,13 +176,13 @@ $aTabs = array(
         'ICON'  => 'passwords',
         'TITLE' => GetMessage('LM_AUTO_STATUSES_GROUP_TITLE_SET')
     ),
-    array(
+/*    array(
         'DIV'   => 'experimental',
         'TAB'   => GetMessage('LM_AUTO_EXPEIMENTAL_SET'),
         'ICON'  => 'passwords',
         'TITLE' => GetMessage('LM_AUTO_EXPEIMENTAL_TITLE_SET')
     ),
-    array(
+*/    array(
         'DIV'   => 'group-currency',
         'TAB'   => GetMessage('LM_AUTO_GROUP_CURRENCY_SET'),
         'ICON'  => 'passwords',
@@ -331,10 +331,10 @@ function addGroupCurrency() {
     $oTabControl->EndTab();
     
     /* EXPERIMENTAL SETTINGS */
-    $oTabControl->BeginNextTab();
+/*    $oTabControl->BeginNextTab();
     include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/experimental.php');
     $oTabControl->EndTab();
-
+*/
     /* GROUP CURRENCY SETTINGS */
     $oTabControl->BeginNextTab();
     include ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/linemedia.auto/options/group-currency.php');

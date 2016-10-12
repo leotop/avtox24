@@ -83,7 +83,7 @@ class LinemediaAutoWordForm
 
                     // создаем новую структуру нормализованных брендов
                     $group_normal = self::normalize($form['group']);
-                    $brand_normal = self::normalize($form['brand_title']);
+					$brand_normal = self::normalize($form['brand_title']);
 
                     $this->normalized['brands'][$brand_normal] = $group_normal;
 

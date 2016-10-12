@@ -111,6 +111,8 @@ class ArmtekRemoteSupplier extends LinemediaAutoRemoteSuppliersSupplier
         //????????? ?????? ??????
         if($response['STATUS'] != 200) {
             throw new Exception($response['MESSAGES']);
+        } elseif ($response['RESP']['MSG']) {
+            throw new Exception($response['RESP']['MSG']);
         }
 
         $parts = $response['RESP'];

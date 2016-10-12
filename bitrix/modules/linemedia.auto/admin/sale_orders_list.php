@@ -29,6 +29,7 @@ if(!defined('LM_AUTO_ADMIN_PAGE_REQUIRE')) {
 }
 
 $autoBranches = CModule::IncludeModule("linemedia.autobranches") ? true : false;
+$autoBranches = $autoBranches && COption::GetOptionString("linemedia.auto", 'LM_AUTO_MAIN_EXPERIMENTAL_ORDER_LIST', 'N') == "Y" && COption::GetOptionString("linemedia.auto", 'LM_AUTO_MAIN_EXPERIMENTAL_ORDER_SPLIT', 'N') == "Y";
 IncludeModuleLangFile(__FILE__);
 
 

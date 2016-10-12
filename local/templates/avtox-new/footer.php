@@ -207,71 +207,8 @@
 </script>
 <noscript><div><img src="//mc.yandex.ru/watch/26006397" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter linemedia -->
-
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-42834144-2', 'mosavtomag.ru');
-    ga('send', 'pageview');
-
-</script>
-
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-42834144-3', 'xn--80aaff5bclcym.xn--p1ai');
-    ga('send', 'pageview');
-
-</script>
-
 <!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter33431328 = new Ya.Metrika({ id:33431328, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true, ecommerce:"dataLayer" }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><!-- /Yandex.Metrika counter -->
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-42834144-4', 'auto');
-    ga('send', 'pageview');
-
-</script>
-<!-- START ME-TALK -->
-<script type='text/javascript'>
-    (function() {
-        var s = document.createElement('script');
-        s.type ='text/javascript';
-        s.id = 'supportScript';
-        s.charset = 'utf-8';
-        s.async = true;
-        s.src = '//me-talk.ru/support/support.js?h=d69fb0a94e3348422767ef6ae9e55e22';
-        var sc = document.getElementsByTagName('script')[0];
-
-        var callback = function(){
-            /*
-            Здесь вы можете вызывать API. Например, чтобы изменить отступ по высоте:
-            supportAPI.setSupportTop(200);
-            */
-        };
-
-        s.onreadystatechange = s.onload = function(){
-            var state = s.readyState;
-            if (!callback.done && (!state || /loaded|complete/.test(state))) {
-                callback.done = true;
-                callback();
-            }
-        };
-
-        if (sc) sc.parentNode.insertBefore(s, sc);
-        else document.documentElement.firstChild.appendChild(s);
-    })();
-</script>
-<!-- END ME-TALK -->
 <? $APPLICATION->IncludeComponent("beono:flashmessage", ".default", array(), "", array("HIDE_ICONS"=>"Y"));?> 
 <!-- Traffic tracking code -->
 <script type="text/javascript">
@@ -285,5 +222,10 @@
         s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(a, s);
     })(window, 'begun_analytics_params');
 </script>
+<?if (!substr_count($APPLICATION->GetCurDir(), "acat.autodealer")) {?>
+    <div class="mango-callback" data-settings='{"type":"", "id": "MTAwMDMwODg=","autoDial" : "0", "lang" : "ru-ru", "host":"lk.mango-office.ru/", "errorMessage": "В данный момент наблюдаются технические проблемы и совершение звонка невозможно"}'>
+    </div>
+    <script>!function(t){function e(){i=document.querySelectorAll(".button-widget-open");for(var e=0;e<i.length;e++)"true"!=i[e].getAttribute("init")&&(options=JSON.parse(i[e].closest('.'+t).getAttribute("data-settings")),i[e].setAttribute("onclick","alert('"+options.errorMessage+"(0000)'); return false;"))}function o(t,e,o,n,i,r){var s=document.createElement(t);for(var a in e)s.setAttribute(a,e[a]);s.readyState?s.onreadystatechange=o:(s.onload=n,s.onerror=i),r(s)}function n(){for(var t=0;t<i.length;t++){var e=i[t];if("true"!=e.getAttribute("init")){options=JSON.parse(e.getAttribute("data-settings"));var o=new MangoWidget({host:window.location.protocol+'//'+options.host,id:options.id,elem:e,message:options.errorMessage});o.initWidget(),e.setAttribute("init","true"),i[t].setAttribute("onclick","")}}}host=window.location.protocol+"//lk.mango-office.ru/";var i=document.getElementsByClassName(t);o("link",{rel:"stylesheet",type:"text/css",href:host+"widget/widget-button.css"},function(){},function(){},e,function(t){document.documentElement.insertBefore(t,document.documentElement.firstChild)}),o("script",{type:"text/javascript",src:host+"js/widget/m.c.w-min.js"},function(){("complete"==this.readyState||"loaded"==this.readyState)&&n()},n,e,function(t){document.documentElement.appendChild(t)})}("mango-callback");</script>
+    <?}?>
 </body>
 </html>

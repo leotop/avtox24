@@ -112,7 +112,7 @@ if (intval($deal_id) > 0) {
 		}
 		if ($client_phone) {
 			try {
-			    sendSMS($client_phone, $message);
+			    //sendSMS($client_phone, $message);
 			} catch (Exception $e) {
 			    actionLog($e->getMessage(), dirname(__FILE__) . "/logs/errors.log");
 			}

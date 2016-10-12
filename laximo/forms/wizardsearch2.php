@@ -35,6 +35,29 @@
                 }
             }
 
+
+            // Create request object
+            $request = new GuayaquilRequestOEM($_GET['c'], $_GET['ssd'], Config::$catalog_data);
+            if (Config::$useLoginAuthorizationMethod) {
+                $request->setUserAuthorizationMethod(Config::$userLogin, Config::$userKey);
+            }
+
+            // Append commands to request
+            $request->appendGetWizard2($_GET['ssd']);
+
+            // Execute request
+            $data = $request->query();
+
+            // Check errors
+            if ($request->error != '')
+            {
+                echo $request->error;
+            }
+            else
+            {
+            $wizard = $data[0];
+            }
+
             $renderer = new GuayaquilWizard2(new WizardExtender());
             echo $renderer->Draw($_GET['c'], $wizard);   
 

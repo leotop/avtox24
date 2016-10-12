@@ -1,0 +1,9 @@
+.cardLink{
+    width:25%;
+    height:120px;
+    font-size:18px;
+    text-align: center;
+}
+.cardLink img{
+    width: 150px;
+}

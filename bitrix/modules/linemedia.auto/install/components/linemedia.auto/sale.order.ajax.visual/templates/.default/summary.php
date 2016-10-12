@@ -15,7 +15,7 @@
 	<tr>
         <?= !in_array('IMAGE', $arParams['COLUMNS_LIST']) ? '<th>'.GetMessage("SOA_TEMPL_SUM_PICTURE").'</th>' : '';?>
         <?= !in_array('NAME', $arParams['COLUMNS_LIST']) ? '<th>'.GetMessage("SOA_TEMPL_SUM_NAME").'</th>' : '';?>
-        <?= !in_array('PROPS', $arParams['COLUMNS_LIST']) && (bool) $paramString ? '<th>'.GetMessage("SOA_TEMPL_SUM_PROPS").'</th>' : '';?>
+        <th><?=GetMessage("SOA_TEMPL_SUM_PROPS")?></th>
         <?= !in_array('DISCOUNT', $arParams['COLUMNS_LIST']) ? '<th>'.GetMessage("SOA_TEMPL_SUM_DISCOUNT").'</th>' : '';?>
         <?= !in_array('WEIGHT', $arParams['COLUMNS_LIST']) ? '<th>'.GetMessage("SOA_TEMPL_SUM_WEIGHT").'</th>' : '';?>
         <?= !in_array('QUANTITY', $arParams['COLUMNS_LIST']) ? '<th>'.GetMessage("SOA_TEMPL_SUM_QUANTITY").'</th>' : '';?>
@@ -32,10 +32,8 @@
 		<tr>
 
 			<?= !in_array('IMAGE', $arParams['COLUMNS_LIST']) ? '<td>'.fillPicture($arBasketItems, $arParams).'</td>' : ''?>
-			<?= !in_array('NAME', $arParams['COLUMNS_LIST']) ? '<td><div class="col-xs-6">'.$arBasketItems["NAME"].'</div><div class="col-xs-6">'.$paramString.'</div></td>' : ''?>
-		<!--
-			<?= !in_array('PROPS', $arParams['COLUMNS_LIST']) && (bool) $paramString ? '<td>'.$paramString.'</td>' : ''?>
-		-->
+			<?= !in_array('NAME', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["NAME"].'</td>' : ''?>
+			<td><?=$paramString?></td>
 			<?= !in_array('DISCOUNT', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["DISCOUNT_PRICE_PERCENT_FORMATED"].'</td>' : ''?>
 			<?= !in_array('WEIGHT', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["WEIGHT_FORMATED"].'</td>' : ''?>
 			<?= !in_array('QUANTITY', $arParams['COLUMNS_LIST']) ? '<td>'.$arBasketItems["QUANTITY"].'</td>' : ''?>
@@ -50,17 +48,17 @@
 	<tfoot style="width: auto">
 	<? if (!in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST'])) {?>
 	<tr class="">
-		<td colspan="<?= 6 - count($arParams['COLUMNS_LIST']) - $decreaseCol ?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_WEIGHT_SUM")?></td>
+		<td colspan="<?= 7 - count($arParams['COLUMNS_LIST']) - $decreaseCol ?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_WEIGHT_SUM")?></td>
 		<td class="price"><?=$arResult["ORDER_WEIGHT_FORMATED"]?></td>
 	</tr>
 	<?}?>
 	<tr>
-		<td colspan="<?= 6 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_SUMMARY")?></td>
+		<td colspan="<?= 7 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_SUMMARY")?></td>
 		<td class="price"><?=LinemediaAutoPrice::userPrice($arResult["ORDER_PRICE_FORMATED"])?></td>
 	</tr>
 	<? if (doubleval($arResult["DISCOUNT_PRICE"]) > 0) { ?>
 		<tr>
-			<td colspan="<?= 6 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST'])) ?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_DISCOUNT")?><?if (strLen($arResult["DISCOUNT_PERCENT_FORMATED"])>0):?> (<?echo $arResult["DISCOUNT_PERCENT_FORMATED"];?>)<?endif;?>:</td>
+			<td colspan="<?= 7 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST'])) ?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_DISCOUNT")?><?if (strLen($arResult["DISCOUNT_PERCENT_FORMATED"])>0):?> (<?echo $arResult["DISCOUNT_PERCENT_FORMATED"];?>)<?endif;?>:</td>
 			<td class="price"><?echo LinemediaAutoPrice::userPrice($arResult["DISCOUNT_PRICE_FORMATED"])?></td>
 		</tr>
 		<?
@@ -69,7 +67,7 @@
 		foreach ($arResult["arTaxList"] as $val) {
 			?>
 			<tr>
-				<td colspan="<?= 6 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=$val["NAME"]?> <?=$val["VALUE_FORMATED"]?>:</td>
+				<td colspan="<?= 7 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=$val["NAME"]?> <?=$val["VALUE_FORMATED"]?>:</td>
 				<td class="price"><?=LinemediaAutoPrice::userPrice($val["VALUE_MONEY_FORMATED"])?></td>
 			</tr>
 			<?
@@ -79,7 +77,7 @@
 	{
 		?>
 		<tr>
-			<td colspan="<?= 6 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_DELIVERY")?></td>
+			<td colspan="<?= 7 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_DELIVERY")?></td>
 			<td class="price"><?=LinemediaAutoPrice::userPrice($arResult["DELIVERY_PRICE_FORMATED"])?></td>
 		</tr>
 		<?
@@ -88,20 +86,21 @@
 	{
 		?>
 		<tr>
-			<td colspan="<?= 6 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_PAYED")?></td>
+			<td colspan="<?= 7 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_PAYED")?></td>
 			<td class="price"><?=LinemediaAutoPrice::userPrice($arResult["PAYED_FROM_ACCOUNT_FORMATED"])?></td>
 		</tr>
 		<?
 	}
 	?>
 	<tr class="last">
-		<td colspan="<?= 6 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_IT")?></td>
+		<td colspan="<?= 7 - $decreaseCol - (in_array('OVERALL_WEIGHT', $arParams['COLUMNS_LIST']) ? count($arParams['COLUMNS_LIST']) - 1 : count($arParams['COLUMNS_LIST']))?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_IT")?></td>
 		<td class="price"><?=LinemediaAutoPrice::userPrice($arResult["ORDER_TOTAL_PRICE_FORMATED"])?></td>
 	</tr>
 </tfoot>
 </table>
 
-<br /><br />
+<br /><br /> 
+
 <div class="title"><?=GetMessage("SOA_TEMPL_SUM_ADIT_INFO")?></div>
 
 <table class="sale_order_table">

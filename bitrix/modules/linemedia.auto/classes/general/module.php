@@ -188,7 +188,7 @@ class LinemediaAutoModule
 
             exec("ps {$previous_pid}",$output);
 
-            if (count($output) >= 2) { //процесс запущен, нужно именно 2! ибо если процесса нет значение будет 1
+            if (count($output) >= 2 && strpos($output[1], 'cron_events.php') !== false) { //процесс запущен, нужно именно 2! ибо если процесса нет значение будет 1
                 $result++;
             } else {
                 unset($previous_pids[$pid_key]);
