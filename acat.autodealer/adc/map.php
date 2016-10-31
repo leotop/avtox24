@@ -153,7 +153,8 @@ A2D::$searchWhere['hide']  = "_displayNone";                    /// Если н�
                 </a>
             </td>
             <td>
-                <a target="_blank" onclick="alert('Можно задать ссылку на процентку')">Узнать цену</a>
+                <?/*<a target="_blank" onclick="alert('Можно задать ссылку на процентку')">Узнать цену</a>*/?>
+                <?=A2D::callBackLink($sDetail->detail_num,A2D::$callback, "Узнать цену")?>
             </td>
         </tr>
         <?php }?>

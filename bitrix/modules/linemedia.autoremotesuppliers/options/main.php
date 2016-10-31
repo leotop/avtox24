@@ -26,3 +26,14 @@ IncludeModuleLangFile(__FILE__);
         <input type="checkbox" name="LM_AUTO_REMOTE_SUPPLIERS_USE_CROSSES" value="Y" <?= (COption::GetOptionString('linemedia.autoremotesuppliers', 'LM_AUTO_REMOTE_SUPPLIERS_USE_CROSSES', 'N') == 'Y') ? ('checked="checked"') : ('') ?> />
     </td>
 </tr>
+
+<tr>
+    <td width="50%" valign="top">
+        <label for="LM_AUTO_REMOTE_SUPPLIERS_USE_PATH_PHPINI_FILE">
+            <?= GetMessage('LM_AUTO_REMOTE_SUPPLIERS_USE_PATH_PHPINI_FILE') ?>:
+        </label>
+    </td>
+    <td valign="top">
+        <input type="checkbox" name="LM_AUTO_REMOTE_SUPPLIERS_USE_PATH_PHPINI_FILE" value="Y" <?= (COption::GetOptionString('linemedia.autoremotesuppliers', 'LM_AUTO_REMOTE_SUPPLIERS_USE_PATH_PHPINI_FILE', 'N') == 'Y') ? ('checked="checked"') : ('') ?> />
+    </td>
+</tr>

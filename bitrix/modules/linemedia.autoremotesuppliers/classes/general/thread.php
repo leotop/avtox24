@@ -63,9 +63,10 @@ class LinemediaAutoSuppliersThread
             }
 	    	
 	    	$args = join(' ', $args);
-
-
-            $command = 'timeout '.$job['timeout'].' php ' . $filename . ' ' . $args . ' 2>&1';
+			
+			$phpini_path = 
+				(COption::GetOptionString('linemedia.autoremotesuppliers', 'LM_AUTO_REMOTE_SUPPLIERS_USE_PATH_PHPINI_FILE', 'N') == 'Y' ) ? "-c  " . php_ini_loaded_file() . " " : "";
+            $command = 'timeout '.$job['timeout'].' php ' . $phpini_path . $filename . ' ' . $args . ' 2>&1';
 		
 		    LinemediaAutoDebug::add('popen: ' . $command);
 		    $this->handlers[$code] = popen($command, 'r');

@@ -13,3 +13,4 @@
 
 $MESS['LM_AUTO_REMOTE_SUPPLIERS_CACHE'] = 'Период кеширования ответов от всех удалённых поставщиков (в минутах)';
 $MESS['LM_AUTO_REMOTE_SUPPLIERS_USE_CROSSES'] = 'Использовать кроссы сторонних поставщиков';
+$MESS['LM_AUTO_REMOTE_SUPPLIERS_USE_PATH_PHPINI_FILE'] = 'Указывать путь к конфигурационному файлу (php.ini)';
